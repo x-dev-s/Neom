@@ -1,5 +1,7 @@
-import SalesChart from "@/components/UI/Chart1";
-import OpChart from "@/components/UI/OpChart";
+import { TrendLine } from "@/components/UI/Dashboard/AreaChart";
+import SalesChart from "@/components/UI/Dashboard/Chart1";
+import OpChart from "@/components/UI/Dashboard/OpChart";
+import { PvPower } from "@/components/UI/Dashboard/PvPower";
 
 const dataEurope = [
   {    date: 'Jan 23',    Successful: 12,    Refunded: 0,    'Early fraud warning': 1,  },  {    date: 'Feb 23',    Successful: 24,    Refunded: 1,    'Early fraud warning': 1,  },  {    date: 'Mar 23',    Successful: 48,    Refunded: 4,    'Early fraud warning': 4,  },  {    date: 'Apr 23',    Successful: 24,    Refunded: 2,    'Early fraud warning': 3,  },  {    date: 'May 23',    Successful: 34,    Refunded: 0,    'Early fraud warning': 0,  },  {    date: 'Jun 23',    Successful: 26,    Refunded: 0,    'Early fraud warning': 0,  },  {    date: 'Jul 23',    Successful: 12,    Refunded: 0,    'Early fraud warning': 0,  },  {    date: 'Aug 23',    Successful: 38,    Refunded: 2,    'Early fraud warning': 0,  },  {    date: 'Sep 23',    Successful: 23,    Refunded: 1,    'Early fraud warning': 0,  },  {    date: 'Oct 23',    Successful: 20,    Refunded: 0,    'Early fraud warning': 0,  },  {    date: 'Nov 23',    Successful: 24,    Refunded: 0,    'Early fraud warning': 0,  },  {    date: 'Dec 23',    Successful: 21,    Refunded: 8,    'Early fraud warning': 1,  },
@@ -91,31 +93,33 @@ export default function Dashboard() {
                     <div className="w-dvw lg:w-[65%] flex flex-col gap-3">
                         {/* First Row - Two Columns */}
                         <div className="w-full h-full flex flex-wrap md:flex-nowrap gap-3">
-                            <div className="w-full h-full md:w-1/2 bg-white rounded-2xl flex items-center justify-center">
+                            <div className="w-full h-full md:w-1/2  bg-white overflow-hidden rounded-2xl flex items-center justify-center">
                                 <SalesChart data={data} />
                             </div>
-                            <div className="w-full md:w-1/2 bg-white rounded-2xl flex items-center justify-center">
-                                <OpChart summary={summary} />
+                            <div className="w-full md:w-1/2  bg-white overflow-hidden rounded-2xl flex items-center justify-center">
+                                <PvPower />
                             </div>
                         </div>
 
                         {/* Second Row - Two Columns (35% - 65%) */}
                         <div className="w-full h-full flex flex-wrap md:flex-nowrap gap-3">
-                            <div className="w-full md:w-[35%] min-h-96 bg-white rounded-2xl flex items-center justify-center"></div>
-                            <div className="w-full md:w-[65%] min-h-96 bg-white rounded-2xl flex items-center justify-center"></div>
+                            <div className="w-full md:w-[35%] min-h-96  bg-white overflow-hidden rounded-2xl flex items-center justify-center"></div>
+                            <div className="w-full md:w-[65%] min-h-96  bg-white overflow-hidden rounded-2xl flex items-center justify-center">
+                              <TrendLine />
+                            </div>
                         </div>
 
                         {/* Third Row - Three Columns */}
                         <div className="w-full h-full flex flex-wrap md:flex-nowrap gap-3">
-                            <div className="w-full md:w-1/3 min-h-72 bg-white rounded-2xl flex items-center justify-center"></div>
-                            <div className="w-full md:w-1/3 min-h-72 bg-white rounded-2xl flex items-center justify-center"></div>
-                            <div className="w-full md:w-1/3 min-h-72 bg-white rounded-2xl flex items-center justify-center"></div>
+                            <div className="w-full md:w-1/3 min-h-72  bg-white overflow-hidden rounded-2xl flex items-center justify-center"></div>
+                            <div className="w-full md:w-1/3 min-h-72  bg-white overflow-hidden rounded-2xl flex items-center justify-center"></div>
+                            <div className="w-full md:w-1/3 min-h-72  bg-white overflow-hidden rounded-2xl flex items-center justify-center"></div>
                         </div>
                     </div>
 
                     {/* Right Section - 35% */}
                     <div className="w-dvw lg:w-[35%] flex flex-wrap md:flex-nowrap flex-col md:flex-row lg:flex-col items-center gap-3">
-                        <div className="w-full md:w-1/2 lg:w-full h-[500px] bg-white rounded-2xl flex items-center justify-center">
+                        <div className="w-full md:w-1/2 lg:w-full h-[500px]  bg-white overflow-hidden rounded-2xl flex items-center justify-center">
                             <div className="w-full h-full flex items-center justify-center relative p-4">
                                 <div id="bus" className="h-[450px] w-1 bg-[#0DC61C]"></div>
                                 <Card className={"absolute top-3 left-3"} inverted={true} left={true} imgSrc="/images/solar.png" P={0} Q={50} O={80} />
@@ -125,7 +129,7 @@ export default function Dashboard() {
                                 <Card className={"absolute bottom-3 right-3"} inverted={false} left={false} imgSrc="/images/generator.png" P={100} Q={50} O={80} />
                             </div>
                         </div>
-                        <div className="w-full md:w-1/2 lg:w-full min-h-96 bg-white rounded-2xl flex items-center justify-center"></div>
+                        <div className="w-full md:w-1/2 lg:w-full min-h-96  bg-white overflow-hidden rounded-2xl flex items-center justify-center"></div>
                     </div>
                 </div>
             </div>
