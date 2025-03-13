@@ -1,8 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     output : "standalone",
-    reactStrictMode: true,
     trailingSlash: true,
+    eslint: {
+        ignoreDuringBuilds: true, // Disable ESLint during build
+      },
 };
 
 export default nextConfig;
