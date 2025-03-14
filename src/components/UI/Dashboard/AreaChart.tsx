@@ -89,7 +89,6 @@ export const TrendLine = () => {
           <h2 className="font-semibold text-tremor-content dark:text-dark-tremor-content">Trend Analysis</h2>
           <AreaChart
             key={"trend"}
-            type="default"
             className="h-full w-full sm:block"
             data={chartdata}
             index="date"
