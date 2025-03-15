@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #E8F3FC;
+  --foreground: #000000;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #E8F3FC;
+    --foreground: #000000;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* @layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+} */
+
+.text-tremor{
+  font-size: 12px;
+  text-decoration-color: black;
+}
+
+.dashed-line {
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient( to right, #0DC61C 0px, #0DC61C 10px, transparent 10px, transparent 20px );
+  animation: dashMove 1s linear infinite;
+}
+
+.dashed-line-inverted {
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient( to right, #0DC61C 0px, #0DC61C 10px, transparent 10px, transparent 20px );
+  animation: dashMove_Inverted 1s linear infinite;
+}
+
+@keyframes dashMove {
+  from {
+      background-position: 0;
+  }
+
+  to {
+      background-position: -20px;
+  }
+}
+
+@keyframes dashMove_Inverted {
+  from {
+      background-position: -20px;
+  }
+
+  to {
+      background-position: 0;
+  }
+}
