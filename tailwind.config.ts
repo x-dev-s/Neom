@@ -10,6 +10,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        // 👇 Add CSS variables
+        sans: ["var(--font-text)"],
+        mono: ["var(--font-heading)"],
+        serif: ["var(--font-serif)"],
+      },
+      fontSize: {
+        md: ["1rem", "1.5"],
+      },
       keyframes: {
         hide: {
           from: { opacity: "1" },

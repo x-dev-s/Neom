@@ -52,73 +52,18 @@ function powerFormatter(number: number): string {
     compactDisplay: 'short', // Display as "K" for thousand, "M" for million, etc.
   });
 
-  return `${formatter.format(number)} W`; // Append "W" for watts
+  return `${formatter.format(number)}W`; // Append "W" for watts
 }
-
-// Custom Tooltip Component
-// const CustomTooltip: React.FC<CustomTooltipProps> = ({ payload, active, label }) => {
-//   if (!active || !payload) return null;
-
-//   return (
-//     <div className="rounded-tremor-default border border-tremor-border bg-tremor-background text-tremor-default shadow-tremor-dropdown dark:border-dark-tremor-border dark:bg-dark-tremor-background dark:shadow-dark-tremor-dropdown">
-//       <div className="border-b border-tremor-border px-4 py-2 dark:border-dark-tremor-border">
-//         <p className="font-medium text-tremor-content dark:text-dark-tremor-content">
-//           {label}
-//         </p>
-//       </div>
-//       <div className="px-4 py-2">
-//         <div className="flex items-center justify-between space-x-8">
-//           <p className="font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
-//             Potential savings
-//           </p>
-//           <span
-//             className={classNames(
-//               payload[0].payload?.['Potential savings'] < 0
-//                 ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-400/10 dark:text-emerald-400'
-//                 : 'bg-red-100 text-red-800 dark:bg-red-400/10 dark:text-red-400',
-//               'inline-flex rounded px-2 py-0.5 text-tremor-label font-medium',
-//             )}
-//           >
-//             {payload[0].payload?.['Potential savings']}&#37;
-//           </span>
-//         </div>
-//         <div className="mt-2 space-y-1">
-//           {payload.map((category, idx) => (
-//             <div
-//               key={idx}
-//               className="flex items-center justify-between space-x-8"
-//             >
-//               <div className="flex items-center space-x-2">
-//                 <span
-//                   className={`h-1 w-3 shrink-0 rounded-sm bg-W{category.color}-500`}
-//                   aria-hidden={true}
-//                 />
-//                 <p className="text-tremor-content dark:text-dark-tremor-content">
-//                   {category.dataKey}
-//                 </p>
-//               </div>
-//               <span className="font-medium tabular-nums text-tremor-content-strong dark:text-dark-tremor-content-strong">
-//                 {powerFormatter(category.value)}
-//               </span>
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
 
 // Main Component
 const AChart: React.FC<ExampleProps> = () => {
   return (
     <Card className="sm:mx-auto sm:max-w-2xl">
       <div className="sm:mx-auto sm:max-w-7xl">
-        <h3 className="font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
+        <h3 className="font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong">
           Genset Loads vs. PV
         </h3>
         <p className="text-tremor-default leading-6 text-tremor-content dark:text-dark-tremor-content">
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-          nonumy eirmod tempor invidunt
         </p>
         <ul role="list" className="mt-10 grid grid-cols-2 gap-6 lg:grid-cols-4">
           {summary.map((item, index) => (
@@ -154,7 +99,6 @@ const AChart: React.FC<ExampleProps> = () => {
           showGradient={false}
           yAxisWidth={55}
           valueFormatter={powerFormatter}
-          // customTooltip={CustomTooltip}
           className="mt-10 hidden h-72 sm:block"
         />
         <AreaChart
@@ -166,7 +110,6 @@ const AChart: React.FC<ExampleProps> = () => {
           showYAxis={false}
           startEndOnly={true}
           valueFormatter={powerFormatter}
-          // customTooltip={CustomTooltip}
           className="mt-6 h-72 sm:hidden"
         />
       </div>

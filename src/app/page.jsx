@@ -195,9 +195,9 @@ return (
               <p className="text-right w-10">%</p>
           </div>
       </div> */}
-          <div className="flex items-center justify-around bg-gray-200 shadow-lg rounded-2xl mb-4 p-2">
-              <p className="text-left font-semibold w-12">{P}</p>
-              <p className="text-right w-10"></p>
+          <div className="flex items-center justify-around bg-gray-200 shadow-lg rounded-2xl mb-4 gap-3 p-2">
+              <p className="text-left font-semibold">{P}</p>
+              <p className="text-right w-10">kW</p>
           </div>
           <img src={imgSrc} alt="Card Image" className="w-20 h-20 object-contain" />
       </div>

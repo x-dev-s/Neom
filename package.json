@@ -32,8 +32,11 @@
     "@react-stately/datepicker": "^3.13.0",
     "@remixicon/react": "^4.6.0",
     "@tremor/react": "^3.18.7",
+    "axios": "^1.8.3",
+    "bcryptjs": "^3.0.2",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
+    "jose": "^6.0.10",
     "mssql": "^11.0.1",
     "mysql2": "^3.13.0",
     "next": "14.2.23",
@@ -43,7 +46,8 @@
     "react-dom": "^18",
     "recharts": "^2.15.1",
     "tailwind-merge": "^3.0.2",
-    "tailwind-variants": "^1.0.0"
+    "tailwind-variants": "^1.0.0",
+    "universal-cookie": "^8.0.0"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.10",

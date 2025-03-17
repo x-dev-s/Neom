@@ -3,7 +3,7 @@ import { ThemeProvider } from "next-themes"
 import { Inter, Archivo_Black, Anton } from "next/font/google"
 import "./globals.css"
 import { siteConfig } from "@/app/siteConfig"
-import { Sidebar } from "@/components/UI/navigation/Sidebar"
+import { Sidebar } from "@/components/UI/Navigation/Sidebar"
 
 const sans = Inter({ 
   subsets: ["latin"],
@@ -28,7 +28,7 @@ const serif = Anton({
 export const metadata = {
   metadataBase: new URL(`https://neom.vercel.app`),
   title: "Neom PV Diesel Automation",
-  description: "Shop a range of latest gadgets and accessories of your favorite brands.",
+  description: "",
   robots: {
     index: true,
     follow: true,
@@ -50,7 +50,7 @@ export const metadata = {
     locale: 'en_US',
     url: `https://neom.vercel.app`,
     title: "Neom PV Diesel Automation",
-    description: "Shop a range of latest gadgets and accessories of your favorite brands.",
+    description: "",
     images: [
       {
         url: `https://neom.vercel.app/images/logo_bg.png`,
@@ -79,11 +79,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${sans.className} overflow-y-scroll scroll-auto antialiased selection:bg-indigo-100 selection:text-indigo-700 dark:bg-gray-950`}
+        className={`${sans.variable} ${mono.variable} ${serif.variable} font-sans overflow-y-scroll scroll-auto antialiased text-xs selection:bg-indigo-100 selection:text-indigo-700 dark:bg-gray-950`}
         suppressHydrationWarning
       >
         <div className="mx-auto max-w-screen-2xl">
-          <ThemeProvider defaultTheme="system" attribute="class">
+          <ThemeProvider defaultTheme="light" attribute="class">
             <Sidebar />
             <main className="lg:pl-60">{children}</main>
           </ThemeProvider>
