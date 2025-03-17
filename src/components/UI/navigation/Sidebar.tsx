@@ -1,5 +1,5 @@
 "use client"
-import { siteConfig } from "@/app/siteConfig"
+import { siteConfig } from "@/components/UI/Navigation/siteConfig"
 import { cx, focusRing } from "@/lib/utils"
 import {
   RiHome2Line
