@@ -79,7 +79,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${sans.variable} ${mono.variable} ${serif.variable} font-sans overflow-y-scroll scroll-auto antialiased text-xs selection:bg-indigo-100 selection:text-indigo-700 dark:bg-gray-950`}
+        className={`${sans.variable} ${mono.variable} ${serif.variable} font-sans overflow-y-scroll scroll-auto antialiased text-sm selection:bg-indigo-100 selection:text-indigo-700 dark:bg-gray-950`}
         suppressHydrationWarning
       >
         <div className="mx-auto max-w-screen-2xl">

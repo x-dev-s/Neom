@@ -20,6 +20,10 @@ const config: Config = {
         md: ["1rem", "1.5"],
       },
       keyframes: {
+        spin : {
+          from: { transform: "rotate(0deg)" },
+          to: { transform: "rotate(360deg)" },
+        },        
         hide: {
           from: { opacity: "1" },
           to: { opacity: "0" },
@@ -72,6 +76,7 @@ const config: Config = {
       },
     },
     animation: {
+      spin: "spin 1s linear infinite",
       hide: "hide 150ms cubic-bezier(0.16, 1, 0.3, 1)",
       slideDownAndFade: "slideDownAndFade 150ms cubic-bezier(0.16, 1, 0.3, 1)",
       slideLeftAndFade: "slideLeftAndFade 150ms cubic-bezier(0.16, 1, 0.3, 1)",
