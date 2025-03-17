@@ -46,7 +46,7 @@ const navigation = [
 //   },
 // ] as const
 
-export function Sidebar() {
+export default function Sidebar() {
   const pathname = usePathname()
   const isActive = (itemHref: string) => {
     if (itemHref === siteConfig.baseLinks.settings.general) {
