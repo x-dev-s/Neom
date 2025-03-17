@@ -1,8 +1,6 @@
-import { Metadata } from "next"
 import { ThemeProvider } from "next-themes"
 import { Inter, Archivo_Black, Anton } from "next/font/google"
 import "./globals.css"
-import { siteConfig } from "@/app/siteConfig"
 import { Sidebar } from "@/components/UI/Navigation/Sidebar"
 
 const sans = Inter({ 
@@ -26,9 +24,9 @@ const serif = Anton({
 });
 
 export const metadata = {
-  metadataBase: new URL(`https://neom.vercel.app`),
-  title: "Neom PV Diesel Automation",
-  description: "",
+  metadataBase: new URL(`${process.env.WEBSITE_URL}`),
+  title: process.env.WEBSITE_NAME,
+  description: process.env.WEBSITE_DESCRIPTION,
   robots: {
     index: true,
     follow: true,
@@ -43,18 +41,18 @@ export const metadata = {
     },
   },
   alternates: {
-    canonical: `https://neom.vercel.app`,
+    canonical: `${process.env.WEBSITE_URL}`,
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: `https://neom.vercel.app`,
-    title: "Neom PV Diesel Automation",
-    description: "",
+    url: `${process.env.WEBSITE_URL}`,
+    title: process.env.WEBSITE_NAME,
+    description: process.env.WEBSITE_DESCRIPTION,
     images: [
       {
-        url: `https://neom.vercel.app/images/logo_bg.png`,
-        alt: "Neom PV Diesel Automation",
+        url: `${process.env.WEBSITE_URL}/images/logo.png`,
+        alt: process.env.WEBSITE_NAME,
         width: 800,
         height: 600,
         type: 'image/png',
