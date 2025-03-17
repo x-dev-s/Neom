@@ -2,8 +2,7 @@ import { Metadata } from "next"
 import { ThemeProvider } from "next-themes"
 import { Inter, Archivo_Black, Anton } from "next/font/google"
 import "./globals.css"
-import { siteConfig } from "@/app/siteconfig"
-
+import { siteConfig } from "@/app/siteConfig"
 import { Sidebar } from "@/components/UI/navigation/Sidebar"
 
 const sans = Inter({ 

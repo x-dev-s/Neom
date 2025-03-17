@@ -20,6 +20,12 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.bg-tremor-brand{
+  background-color: #4F46E5;
+  text-decoration-style: white;
+  border-radius: 5px;
+}
+
 /* @layer utilities {
   .text-balance {
     text-wrap: balance;
