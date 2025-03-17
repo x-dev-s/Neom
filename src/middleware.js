@@ -3,7 +3,7 @@ import { verifyJwtToken } from "@/utils/auth";
 
 const AUTH_PAGES = ["/login/", "/register/", "/forgotpassword/"];
 
-const isAuthPages = (url) => AUTH_PAGES.some((page) => page.match(url));
+const isAuthPages = (url) => AUTH_PAGES.some((page) => page === url);
 
 export async function middleware(request) {
 
@@ -11,9 +11,6 @@ export async function middleware(request) {
   const { value: token } = cookies.get("session") ?? { value: null };
   const hasVerifiedToken = token && (await verifyJwtToken(token));
   const isAuthPageRequested = isAuthPages(nextUrl.pathname);
-
-  console.log("isAuthPageRequested", isAuthPageRequested);
-  console.log("hasVerifiedToken", hasVerifiedToken);
 
   if (isAuthPageRequested) {
     if (!hasVerifiedToken) {
