@@ -3,7 +3,7 @@ const nextConfig = {
     output : "standalone",
     trailingSlash: true,
     eslint: {
-        ignoreDuringBuilds: true, // Disable ESLint during build
+        ignoreDuringBuilds: false, // Disable ESLint during build
       },
 };
 
