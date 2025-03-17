@@ -1,7 +1,7 @@
 import { ThemeProvider } from "next-themes"
 import { Inter, Archivo_Black, Anton } from "next/font/google"
 import "./globals.css"
-import Sidebar from "@/components/UI/Navigation/Sidebar"
+import Sidebar from "@/components/UI/Navigation/Sidebar";
 
 const sans = Inter({ 
   subsets: ["latin"],
