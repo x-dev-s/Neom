@@ -1,6 +1,7 @@
 import { ThemeProvider } from "next-themes"
 import { Inter, Archivo_Black, Anton } from "next/font/google"
 import "./globals.css"
+import { siteConfig } from "@/components/UI/Navigation/siteConfig";
 import Sidebar from "@/components/UI/Navigation/Sidebar";
 
 const sans = Inter({ 
