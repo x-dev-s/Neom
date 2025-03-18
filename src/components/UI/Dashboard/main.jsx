@@ -103,7 +103,7 @@ const data = [
 
 export default function Dashboard() {
     return (
-      <div className="min-h-dvw bg-[#E8F3FC] flex justify-center items-center p-4">
+      <div className="min-h-dvw flex justify-center items-center p-4">
       <div className="w-full h-full max-w-7xl overflow-hidden">
           {/* Flex Layout */}
           <div className="w-full flex flex-wrap lg:flex-nowrap gap-3">

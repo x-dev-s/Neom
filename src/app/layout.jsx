@@ -84,7 +84,7 @@ export default function RootLayout({
         <div className="mx-auto max-w-screen-2xl">
           <ThemeProvider defaultTheme="light" attribute="class">
             <Sidebar />
-            <main className="lg:pl-60">{children}</main>
+            <main className="lg:pl-52 bg-blue-50">{children}</main>
           </ThemeProvider>
         </div>
       </body>
