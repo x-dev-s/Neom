@@ -1,7 +1,7 @@
 
-import SalesChart from "./Chart1";
+import SalesChart from "./GensetBar";
 // import OpChart from "./OpChart";
-import { PvPower } from "./PvPower";
+import { PvPower } from "./PvBar";
 import  AChart  from "./AreaChart";
 import Kpi1 from "./kpi1";
 import TrackerComponent from "./tracker";

@@ -4,14 +4,13 @@ import { NextResponse } from "next/server";
 
 export async function POST(request) {
     const { name, email, password } = await request.json()
-    console.log(name, email, password)
 
     const connection = await connectToDatabase();
     const [rows] = await connection.execute('SELECT * FROM User'); // Replace with your table name
     const response = Response.json(rows);
     const Users = await response.json()
     const existingUser = Users.find(
-      (user) => user.email === credentials.email
+      (user) => user.email === email
     );
 
   if (existingUser) {
