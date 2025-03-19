@@ -27,6 +27,9 @@ export default function DailyYieldBar() {
   const fetchData = async () => {
     try {
       const response = await fetch("/api/DailyYieldBar");
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
+      }
       const result = await response.json();
       const formattedData = {
         generator1: result.generator1.map((item) => ({

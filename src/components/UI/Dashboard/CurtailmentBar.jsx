@@ -24,8 +24,11 @@ export default function CurtailmentBar() {
   const fetchData = async () => {
     try {
       const response = await fetch("/api/CurtailmentBar");
-      const result = await response.json();
-      setData(result);
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
+      }
+      const data = await response.json();
+      setData(data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -79,7 +82,6 @@ export default function CurtailmentBar() {
           categories={["Max. Power Yield", "Curtailed Power Yield", "Actual Power Yield"]}
           colors={["blue", "violet", "cyan"]}
           valueFormatter={(value) => `${value?.toFixed(2)} kWh`}
-          stack={false}
           showLegend={false}
           showYAxis={false}
           yAxisWidth={100}
