@@ -4,8 +4,7 @@ import DailyYieldBar from "./DailyYieldBar";
 import CurtailmentBar from "./CurtailmentBar";
 import PowerTrend from "./PowerTrend";
 import TotalYieldDoughnut from "./TotalYieldDoughnut";
-import Kpi1 from "./kpi1";
-import TrackerComponent from "./tracker";
+import MeteoKpi from "./MeteoKpi";
 import StockTracker from './StockTracker';
 
 const Tdata = [
@@ -109,7 +108,7 @@ export default function Dashboard() {
         {/* Flex Layout */}
         <div className="w-full flex flex-wrap lg:flex-nowrap gap-3">
           {/* Left Section - 65% */}
-          <div className="w-dvw lg:w-[65%] flex flex-col gap-3">
+          <div className="w-dvw lg:w-[100%] flex flex-col gap-3">
             {/* First Row - Two Columns */}
             <div className="w-full h-full flex flex-wrap md:flex-nowrap gap-3">
               <div className="w-full h-auto md:h-full md:w-1/2 bg-white overflow-hidden rounded-2xl flex items-center justify-center">
@@ -132,40 +131,26 @@ export default function Dashboard() {
 
             {/* Third Row - Three Columns */}
             <div className="w-full h-full flex flex-wrap md:flex-nowrap gap-3">
-              <div className="w-full md:w-1/3 min-h-24 h-auto md:h-full bg-white overflow-hidden rounded-2xl flex items-center justify-center">
-                {/* <TrackerComponent 
-                      title="PV System Status"
-                      location="NEOM-1"
-                      lastSync="Current Date"
-                      status="Operational"
-                      data={Tdata}
-                      /> */}
-              </div>
-              <div className="w-full md:w-1/3 min-h-24 h-auto md:h-full  bg-white overflow-hidden rounded-2xl flex items-center justify-center">
-                {/* <Kpi1/> */}
-              </div>
-              <div className="w-full md:w-1/3 min-h-24 h-auto md:h-full  bg-white overflow-hidden rounded-2xl flex items-center justify-center">
-                {/* <Kpi1/> */}
-              </div>
+              <MeteoKpi />
             </div>
           </div>
 
           {/* Right Section - 35% */}
-          <div className="w-dvw lg:w-[35%] flex flex-wrap md:flex-nowrap flex-col md:flex-row lg:flex-col items-center gap-3">
+          {/* <div className="w-dvw lg:w-[35%] flex flex-wrap md:flex-nowrap flex-col md:flex-row lg:flex-col items-center gap-3">
             <div className="w-full md:w-1/2 lg:w-full h-[500px]  bg-white overflow-hidden rounded-2xl flex items-center justify-center">
-              {/* <div className="w-full h-full flex items-center justify-center relative p-4">
+              <div className="w-full h-full flex items-center justify-center relative p-4">
                           <div id="bus" className="h-[450px] w-1 bg-[#0DC61C]"></div>
                           <Card className={"absolute top-3 left-3"} inverted={true} left={true} imgSrc="/images/solar.png" P={0} Q={50} O={80} />
                           <Card className={"absolute bottom-3 left-3"} inverted={false} left={true} imgSrc="/images/building.png" P={100} Q={50} O={80} />
                           <Card className={"absolute top-3 right-3"} inverted={false} left={false} imgSrc="/images/generator.png" P={100} Q={50} O={80} />
                           <Card className={"absolute top-[36%] right-3"} inverted={false} left={false} imgSrc="/images/generator.png" P={100} Q={50} O={80} />
                           <Card className={"absolute bottom-3 right-3"} inverted={false} left={false} imgSrc="/images/generator.png" P={100} Q={50} O={80} />
-                      </div> */}
+                      </div>
             </div>
             <div className="w-full md:w-1/2 lg:w-full min-h-96  bg-white overflow-hidden rounded-2xl flex items-center justify-center">
-              {/* <StockTracker data={Ldata} summary={Lsummary} /> */}
+              <StockTracker data={Ldata} summary={Lsummary} />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

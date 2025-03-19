@@ -97,3 +97,13 @@ export async function fetchTotalPowerData() {
         return null;
     }
 }
+
+export async function fetchMeteoKpiData(){
+    try {
+        const connection = await connectToDatabase();
+        const [rows] = await connection.execute(`SELECT DATE_FORMAT(Timestamp, '%e/%c/%Y %l:%i %p') AS 'Timestamp', AmbientTemp AS "Ambient Temperature", AmbientHumidity AS "Ambient Humidity", SlopeTransientIrradiation AS "Slope Transient Irradiation" FROM All_Data WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL 1 DAY)`)
+        return Response.json(rows);
+    } catch (error) {
+        return null;
+    }
+}

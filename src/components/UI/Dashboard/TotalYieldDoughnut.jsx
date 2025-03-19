@@ -77,7 +77,7 @@ export default function TotalYieldDoughnut() {
                     data={summary}
                     category="value"
                     index="name"
-                    showTooltip={false}
+                    customTooltip={customTooltip}
                     valueFormatter={(value) => `${value.toFixed(2)} kW`}
                     colors={['blue', 'violet', 'indigo', 'fuchsia']}
                 />
@@ -111,3 +111,37 @@ export default function TotalYieldDoughnut() {
         </>
     );
 }
+
+const customTooltip = (props) => {
+    const status = {
+        'PV': 'bg-blue-500',
+        'Generator 1': 'bg-violet-500',
+        'Generator 2': 'bg-indigo-500',
+        'Generator 3': 'bg-fuchsia-500',
+    };
+    const { payload, active, label } = props;
+    if (!active || !payload) return null;
+    const categoryPayload = payload[0];
+  
+    if (!categoryPayload) return null;
+    return (
+      <div className="flex w-full min-w-52 bg-white rounded-lg items-center justify-between space-x-4 rounded-tremor-default border border-tremor-border bg-tremor-background px-2.5 py-2 text-tremor-default shadow-tremor-dropdown dark:border-dark-tremor-border dark:bg-dark-tremor-background dark:shadow-dark-tremor-dropdown">
+        <div className="flex items-center space-x-2 truncate">
+          <span
+            className={classNames(
+                status[categoryPayload.name],
+                'size-2.5 shrink-0 rounded-sm',
+            )}
+            aria-hidden={true}
+          />
+          <p className="truncate text-tremor-content dark:text-dark-tremor-content">
+            {categoryPayload.name}
+          </p>
+        </div>
+        <p className="font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
+            {`${categoryPayload.value.toFixed(2)} kW`}
+        </p>
+      </div>
+    );
+  };
+  
