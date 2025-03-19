@@ -4,7 +4,20 @@ import { useEffect, useState, useCallback } from 'react';
 import { AreaChart, Card } from '@tremor/react';
 
 let data = [];
-let categories = [];
+let categories = [
+  {
+    name: 'Ambient Temperature',
+    valueFormatter: (number) => `${number.toFixed(2)} °C`,
+  },
+  {
+    name: 'Ambient Humidity',
+    valueFormatter: (number) => `${number.toFixed(2)} %RH`,
+  },
+  {
+    name: 'Slope Transient Irradiation',
+    valueFormatter: (number) => `${number.toFixed(2)} W/m²`,
+  },
+];;
 
 const customTooltipHandler = (props, setselectedChartData) => {
   if (props.active) {
@@ -21,10 +34,17 @@ const customTooltipHandler = (props, setselectedChartData) => {
 function CustomChart({ item }) {
   const [selectedChartData, setselectedChartData] = useState(null);
   const payload = selectedChartData?.payload[0];
-
+  if (data.length === 0) {
+    return (
+      <div className="flex justify-center items-center h-full min-h-72 w-full">
+        <div className="w-10 h-10 border-t-2 border-b-2 border-gray-900 rounded-full animate-spin"></div>
+      </div>
+    );
+  }
   const formattedValue = payload
     ? item.valueFormatter(payload?.payload[item.name])
     : item.valueFormatter(data[data.length - 1]?.[item.name] || 0);
+    
 
   return (
     <Card className='h-auto md:h-full'>
@@ -82,37 +102,8 @@ export default function MeteoKpi() {
   }, []);
 
   useEffect(() => {
-    if (Array.isArray(result) && result.length > 0) {
       data = result;
-      categories = [
-        {
-          name: 'Ambient Temperature',
-          valueFormatter: (number) => `${number.toFixed(2)} °C`,
-        },
-        {
-          name: 'Ambient Humidity',
-          valueFormatter: (number) => `${number.toFixed(2)} %RH`,
-        },
-        {
-          name: 'Slope Transient Irradiation',
-          valueFormatter: (number) => `${number.toFixed(2)} W/m²`,
-        },
-      ];
-    }
   }, [result]);
-
-  if (categories.length === 0) {
-    return (
-      <div className="w-full min-h-72 h-full flex flex-wrap md:flex-nowrap gap-3">
-        {[...Array(3)].map((_, index) => (
-          <div key={index} className="w-full md:w-1/3 min-h-24 h-auto md:h-full bg-white overflow-hidden rounded-2xl flex items-center justify-center">
-            <div className="w-10 h-10 border-t-2 border-b-2 border-gray-900 rounded-full animate-spin"></div>
-          </div>
-        ))
-        }
-      </div>
-    );
-  }
 
   return (
     <dl className="w-full h-full flex flex-wrap md:flex-nowrap gap-3">
