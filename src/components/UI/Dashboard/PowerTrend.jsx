@@ -45,7 +45,7 @@ export default function PowerTrend() {
 
   if (!data) {
     return (
-      <div className="flex justify-center items-center h-full min-h-24 w-full">
+      <div className="flex justify-center items-center h-full min-h-72 w-full">
         <div className="w-10 h-10 border-t-2 border-b-2 border-gray-900 rounded-full animate-spin"></div>
       </div>
     );
@@ -141,6 +141,7 @@ export default function PowerTrend() {
           showLegend={false}
           showGradient={false}
           showYAxis={false}
+          customTooltip={Tooltip}
           valueFormatter={powerFormatter}
           className="mt-6 h-72 sm:hidden"
         />

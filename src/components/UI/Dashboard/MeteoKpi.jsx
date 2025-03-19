@@ -24,7 +24,7 @@ function CustomChart({ item }) {
 
   const formattedValue = payload
     ? item.valueFormatter(payload?.payload[item.name])
-    : item.valueFormatter(data[data.length-1]?.[item.name] || 0);
+    : item.valueFormatter(data[data.length - 1]?.[item.name] || 0);
 
   return (
     <Card className='h-auto md:h-full'>
@@ -60,7 +60,7 @@ function CustomChart({ item }) {
 export default function MeteoKpi() {
   const [result, setResult] = useState([]);
 
-  const fetchData = useCallback(async () => {
+  const fetchData = async () => {
     try {
       const response = await fetch('/api/MeteoKpi');
       if (response.ok) {
@@ -72,13 +72,14 @@ export default function MeteoKpi() {
     } catch (error) {
       console.error('Error fetching data:', error);
     }
-  }, []);
+  };
 
   useEffect(() => {
     fetchData();
-    const intervalId = setInterval(fetchData, 300000);
-    return () => clearInterval(intervalId); // Cleanup the interval on component unmount
-  }, [fetchData]);
+    setInterval(() => {
+      fetchData();
+    }, 300000);
+  }, []);
 
   useEffect(() => {
     if (Array.isArray(result) && result.length > 0) {
@@ -99,6 +100,19 @@ export default function MeteoKpi() {
       ];
     }
   }, [result]);
+
+  if (categories.length === 0) {
+    return (
+      <div className="w-full min-h-72 h-full flex flex-wrap md:flex-nowrap gap-3">
+        {[...Array(3)].map((_, index) => (
+          <div key={index} className="w-full md:w-1/3 min-h-24 h-auto md:h-full bg-white overflow-hidden rounded-2xl flex items-center justify-center">
+            <div className="w-10 h-10 border-t-2 border-b-2 border-gray-900 rounded-full animate-spin"></div>
+          </div>
+        ))
+        }
+      </div>
+    );
+  }
 
   return (
     <dl className="w-full h-full flex flex-wrap md:flex-nowrap gap-3">

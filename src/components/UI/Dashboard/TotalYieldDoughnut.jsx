@@ -33,7 +33,7 @@ export default function TotalYieldDoughnut() {
 
     if (data.length === 0) {
         return (
-          <div className="flex justify-center items-center h-full min-h-24 w-full">
+          <div className="flex justify-center items-center h-full min-h-72 w-full">
             <div className="w-10 h-10 border-t-2 border-b-2 border-gray-900 rounded-full animate-spin"></div>
           </div>
         );
