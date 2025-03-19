@@ -1,4 +1,4 @@
-import { connectToDatabase } from "../../../lib/db";
+import { fetchAllUsers } from '@/app/server';
 import bcrypt from "bcryptjs"
 import { NextResponse } from 'next/server';
 import { login } from "../../../../lib";
@@ -7,9 +7,7 @@ import { cookies } from "next/headers";
 export async function POST(request) {
   const credentials = await request.json();
   try {
-    const connection = await connectToDatabase();
-    const [rows] = await connection.execute('SELECT * FROM User'); // Replace with your table name
-    const response = Response.json(rows);
+    const response = await fetchAllUsers();
     const Users = await response.json()
     const user = Users.find(
       (user) => user.Email === credentials.email

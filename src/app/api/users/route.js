@@ -1,10 +1,9 @@
 // app/api/data/route.js
-import { connectToDatabase } from "../../../lib/db";
+import { fetchAllUsers } from '@/app/server';
 export async function GET() {
   try {
-    const connection = await connectToDatabase();
-    const [rows] = await connection.execute('SELECT * FROM User'); // Replace with your table name
-    return Response.json(rows);
+    const response = await fetchAllUsers();
+    return response;
   } catch (error) {
     return Response.json(
       { message: 'Error fetching data', error: error.message },

@@ -14,7 +14,7 @@ import {
 import { UserProfileDesktop, UserProfileMobile } from "./UserProfile"
 
 const navigation = [
-  { name: "Overview", href: siteConfig.baseLinks.overview, icon: RiHome2Line },
+  { name: "Dashboard", href: siteConfig.baseLinks.overview, icon: RiHome2Line },
   // { name: "Details", href: siteConfig.baseLinks.details, icon: RiListCheck },
   // {
   //   name: "Settings",
@@ -57,9 +57,16 @@ export default function Sidebar() {
   return (
     <>
       {/* sidebar (lg+) */}
-      <nav className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-50 lg:flex-col">
+      <nav className="hidden lg:fixed lg:inset-y-0 lg:z-40 lg:flex lg:w-[208px] lg:flex-col">
         <aside className="flex grow flex-col gap-y-6 overflow-y-auto border-r border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-950">
-          <WorkspacesDropdownDesktop />
+          {/* <WorkspacesDropdownDesktop /> */}
+          {/* <div className="flex items-center justify-center w-full">
+            <img src="/images/logo.png" alt="logo" className="w-32 object-contain" />
+            <p className="text-xl font-serif font-bold text-center text-gray-900 dark:text-gray-50">
+              Neom PV Diesel Automation
+            </p>
+          </div>
+          <hr className="border-t border-gray-200 dark:border-gray-800" /> */}
           <nav
             aria-label="core navigation links"
             className="flex flex-1 flex-col space-y-10"
@@ -118,7 +125,7 @@ export default function Sidebar() {
       </nav>
       {/* top navbar (xs-lg) */}
       <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center justify-between border-b border-gray-200 bg-white px-2 shadow-sm sm:gap-x-6 sm:px-4 lg:hidden dark:border-gray-800 dark:bg-gray-950">
-        <WorkspacesDropdownMobile />
+        {/* <WorkspacesDropdownMobile /> */}
         <div className="flex items-center gap-1 sm:gap-2">
           <UserProfileMobile />
           <MobileSidebar />

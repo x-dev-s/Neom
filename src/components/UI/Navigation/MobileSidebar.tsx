@@ -21,7 +21,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 const navigation = [
-  { name: "Overview", href: siteConfig.baseLinks.overview, icon: RiHome2Line },
+  { name: "Dashboard", href: siteConfig.baseLinks.overview, icon: RiHome2Line },
   { name: "Details", href: siteConfig.baseLinks.details, icon: RiListCheck },
   {
     name: "Settings",
@@ -77,9 +77,6 @@ export default function MobileSidebar() {
           </Button>
         </DrawerTrigger>
         <DrawerContent className="sm:max-w-lg">
-          <DrawerHeader>
-            <DrawerTitle>Retail Analytics</DrawerTitle>
-          </DrawerHeader>
           <DrawerBody>
             <nav
               aria-label="core mobile navigation links"
@@ -109,7 +106,7 @@ export default function MobileSidebar() {
                   </li>
                 ))}
               </ul>
-              <div>
+              {/* <div>
                 <span className="text-sm font-medium leading-6 text-gray-500 sm:text-xs">
                   Shortcuts
                 </span>
@@ -135,7 +132,7 @@ export default function MobileSidebar() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </div> */}
             </nav>
           </DrawerBody>
         </DrawerContent>

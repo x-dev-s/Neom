@@ -3,10 +3,14 @@
 import { Button } from "@/components/Button"
 import { cx, focusRing } from "@/lib/utils"
 import { RiMore2Fill } from "@remixicon/react"
+import {useUser} from "@/hooks/useUser"
 
 import { DropdownUserProfile } from "./DropdownUserProfile"
+import { useEffect } from "react"
 
 export const UserProfileDesktop = () => {
+  const user = useUser();
+
   return (
     <DropdownUserProfile>
       <Button
@@ -22,9 +26,9 @@ export const UserProfileDesktop = () => {
             className="flex size-8 shrink-0 items-center justify-center rounded-full border border-gray-300 bg-white text-xs text-gray-700 dark:border-gray-800 dark:bg-gray-950 dark:text-gray-300"
             aria-hidden="true"
           >
-            EH
+            {user?.Name.split(" ").map((n) => n[0]).join("")}
           </span>
-          <span>Ehtesham Lodhi</span>
+          <span>{user?.Name}</span>
         </span>
         <RiMore2Fill
           className="size-4 shrink-0 text-gray-500 group-hover:text-gray-700 group-hover:dark:text-gray-400"
@@ -36,6 +40,7 @@ export const UserProfileDesktop = () => {
 }
 
 export const UserProfileMobile = () => {
+  const user = useUser();
   return (
     <DropdownUserProfile align="end">
       <Button
@@ -49,7 +54,7 @@ export const UserProfileMobile = () => {
           className="flex size-7 shrink-0 items-center justify-center rounded-full border border-gray-300 bg-white text-xs text-gray-700 dark:border-gray-800 dark:bg-gray-950 dark:text-gray-300"
           aria-hidden="true"
         >
-          EH
+          {user?.Name.split(" ").map((n) => n[0]).join("")}
         </span>
       </Button>
     </DropdownUserProfile>

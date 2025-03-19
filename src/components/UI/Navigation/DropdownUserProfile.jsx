@@ -1,5 +1,6 @@
-"use client"
-import { logout } from "../../../../lib"
+"use client";
+import { logout } from "../../../../lib";
+import { useUser } from "@/hooks/useUser";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,40 +14,38 @@ import {
   DropdownMenuSubMenuContent,
   DropdownMenuSubMenuTrigger,
   DropdownMenuTrigger,
-} from "@/components/Dropdown"
+} from "@/components/Dropdown";
 import {
   RiArrowRightUpLine,
   RiComputerLine,
   RiMoonLine,
   RiSunLine,
-} from "@remixicon/react"
-import { useTheme } from "next-themes"
-import * as React from "react"
-
-export type DropdownUserProfileProps = {
-  children: React.ReactNode
-  align?: "center" | "start" | "end"
-}
+} from "@remixicon/react";
+import { useTheme } from "next-themes";
+import React, { useState, useEffect } from "react";
 
 export function DropdownUserProfile({
   children,
   align = "start",
-}: DropdownUserProfileProps) {
-  const [mounted, setMounted] = React.useState(false)
-  const { theme, setTheme } = useTheme()
-  React.useEffect(() => {
-    setMounted(true)
-  }, [])
+}) {
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const user = useUser();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   if (!mounted) {
-    return null
+    return null;
   }
+
   return (
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>{children}</DropdownMenuTrigger>
         <DropdownMenuContent align={align}>
-          <DropdownMenuLabel>ehteshamlodhi@powermatix.tech</DropdownMenuLabel>
+          <DropdownMenuLabel>{user?.Email}</DropdownMenuLabel>
           <DropdownMenuGroup>
             <DropdownMenuSubMenu>
               <DropdownMenuSubMenuTrigger>Theme</DropdownMenuSubMenuTrigger>
@@ -54,7 +53,7 @@ export function DropdownUserProfile({
                 <DropdownMenuRadioGroup
                   value={theme}
                   onValueChange={(value) => {
-                    setTheme(value)
+                    setTheme(value);
                   }}
                 >
                   <DropdownMenuRadioItem
@@ -94,15 +93,19 @@ export function DropdownUserProfile({
           <DropdownMenuSeparator />
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem><a className="w-full" type="button" onClick={handleLogout}>Sign out</a></DropdownMenuItem>
+            <DropdownMenuItem>
+              <a className="w-full" type="button" onClick={handleLogout}>
+                Sign out
+              </a>
+            </DropdownMenuItem>
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
     </>
-  )
+  );
 }
 
 const handleLogout = async () => {
   await logout();
-  window.location.assign('/login');
-}
+  window.location.assign("/login");
+};

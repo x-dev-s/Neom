@@ -1,12 +1,9 @@
-import { connectToDatabase } from "../../../lib/db";
+import { fetchAllUsers } from '@/app/server';
 import { verifyJwtToken } from "@/utils/auth";
 import { NextResponse } from 'next/server';
 export const dynamic = 'force-dynamic'
 export async function GET(request) {
     try {
-        const connection = await connectToDatabase();
-        const [rows] = await connection.execute('SELECT * FROM User'); // Replace with your table name
-        const Users = Response.json(rows);
         let token = request.url.split('?')[1];
         if (!token) {
             return new NextResponse("User not logged in", { status: 401 });
@@ -16,9 +13,14 @@ export async function GET(request) {
         if (!tokendata) {
             return new NextResponse("Invalid Token", { status: 400 });
         }
-        const user = await Users.filter((user) => user.email === tokendata.user.email);
+        const response = await fetchAllUsers();
+        const Users = await response.json();
+        const user = await Users.find(
+            (user) => user.ID == tokendata.user.id
+        );
         if (user) {
-            return new NextResponse(JSON.stringify(tokendata.user), { status: 200 });
+            delete user.Password;
+            return new NextResponse(JSON.stringify(user), { status: 200 });
         }
         else {
             return new NextResponse("Unknown User", { status: 400 });

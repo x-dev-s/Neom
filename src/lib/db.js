@@ -12,7 +12,7 @@ const config = {
 export async function connectToDatabase() {
   try {
     const connection = await mysql.createConnection(config);
-    console.log('Connected to MySQL');
+    await connection.query("SET time_zone = '+03:00'");
     return connection;
   } catch (error) {
     console.error('Error connecting to MySQL:', error);

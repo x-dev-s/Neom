@@ -1,8 +1,8 @@
-import { fetchGensetData } from "../../server";
+import { fetchDailyYieldData } from "../../server";
 
 export async function GET() {
     try {
-      const data = await fetchGensetData();
+      const data = await fetchDailyYieldData();
       return data;
     } catch (error) {
       return Response.json(
