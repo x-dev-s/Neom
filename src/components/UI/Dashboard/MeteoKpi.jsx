@@ -20,8 +20,6 @@ let categories = [
 
 export default function MeteoKpi() {
   const [data, setData] = useState([]);
-  const [selectedChartData, setselectedChartData] = useState(null);
-  const payload = selectedChartData?.payload[0];
 
   const fetchData = async () => {
     try {
@@ -59,10 +57,10 @@ export default function MeteoKpi() {
               </dt>
               <dd className="mt-1 flex items-center justify-between">
                 <span className="text-tremor-title font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
-                  {payload ? item.valueFormatter(payload?.payload[item.name]) : item.valueFormatter(data[data.length - 1]?.[item.name] || 0)}
+                  {item.valueFormatter(data[data.length - 1]?.[item.name] || 0)}
                 </span>
                 <span className="text-xs text-tremor-default text-tremor-content dark:text-dark-tremor-content">
-                  {payload ? `${payload?.payload?.Timestamp}` : `${data[data.length - 1]?.Timestamp}`}
+                  {`${data[data.length - 1]?.Timestamp}`}
                 </span>
               </dd>
               <AreaChart
@@ -75,9 +73,7 @@ export default function MeteoKpi() {
                 showGradient={false}
                 startEndOnly={true}
                 className="-mb-2 mt-3 h-24"
-                customTooltip={(props) => {
-                  customTooltipHandler(props, setselectedChartData);
-                }}
+                showTooltip={false}
               />
             </Card>
           )}
