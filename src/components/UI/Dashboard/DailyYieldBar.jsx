@@ -138,7 +138,6 @@ export default function DailyYieldBar() {
                   categories={["Daily Power Yield"]}
                   colors={["blue", "violet"]}
                   valueFormatter={(value) => `${value.toFixed(2)} kWh`}
-                  stack={false}
                   showLegend={false}
                   showYAxis={false}
                   yAxisWidth={100}

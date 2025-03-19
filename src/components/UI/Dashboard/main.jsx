@@ -3,6 +3,7 @@ import DailyYieldBar from "./DailyYieldBar";
 // import OpChart from "./OpChart";
 import CurtailmentBar from "./CurtailmentBar";
 import PowerTrend from "./PowerTrend";
+import TotalYieldDoughnut from "./TotalYieldDoughnut";
 import Kpi1 from "./kpi1";
 import TrackerComponent from "./tracker";
 import StockTracker from './StockTracker';
@@ -121,10 +122,10 @@ export default function Dashboard() {
 
             {/* Second Row - Two Columns (35% - 65%) */}
             <div className="w-full h-full flex flex-wrap md:flex-nowrap gap-3">
-              <div className="w-full md:w-[35%] min-h-96 bg-white overflow-hidden rounded-2xl flex items-center justify-center">
-
+              <div className="w-full md:w-[40%] bg-white overflow-hidden rounded-2xl flex items-center justify-center">
+                <TotalYieldDoughnut />
               </div>
-              <div className="w-full md:w-[65%] h-auto md:h-full  bg-white overflow-hidden rounded-2xl flex items-center justify-center">
+              <div className="w-full md:w-[60%] h-auto md:h-full  bg-white overflow-hidden rounded-2xl flex items-center justify-center">
                 <PowerTrend />
               </div>
             </div>

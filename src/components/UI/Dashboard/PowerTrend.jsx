@@ -89,7 +89,7 @@ export default function PowerTrend() {
 
   // Main Component
   return (
-    <Card className="sm:mx-auto sm:max-w-2xl">
+    <Card className="sm:mx-auto sm:max-w-2xl h-auto md:h-full">
       <div className="sm:mx-auto sm:max-w-7xl">
         <h3 className="font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong">
           Active Power Trend

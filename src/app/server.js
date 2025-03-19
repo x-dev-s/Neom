@@ -54,7 +54,7 @@ export async function fetchDailyYieldData() {
     }
 }
 
-export async function fetchAreaData() {
+export async function fetchPowerTrendData() {
     try {
         const connection = await connectToDatabase();
         const [rows] = await connection.execute(`SELECT DATE_FORMAT(Timestamp, '%e/%c/%Y %l:%i %p') AS 'Timestamp', TotalLoad AS "Total Load", TotalActivePower_I AS "PV Power", TotalActivePower_G AS "Genset Power" FROM All_Data WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL 1 DAY)`)// Replace with your table name
@@ -84,6 +84,16 @@ export async function fetchCurtailmentData() {
         return Response.json(data); // Return the computed data as JSON
     } catch (error) {
         console.error(error); // Log the error for debugging
+        return null;
+    }
+}
+
+export async function fetchTotalPowerData() {
+    try {
+        const connection = await connectToDatabase();
+        const [rows] = await connection.execute(`SELECT TotalActivePower_I AS "PV", TotalActivePower_G1 AS "Generator 1", TotalActivePower_G2 AS "Generator 2", TotalActivePower_G3 AS "Generator 3", TotalLoad AS "Total Load" FROM All_Data ORDER BY Timestamp DESC LIMIT 1`);
+        return Response.json(rows);
+    } catch (error) {
         return null;
     }
 }
