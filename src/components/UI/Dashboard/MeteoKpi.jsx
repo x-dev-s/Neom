@@ -37,6 +37,7 @@ export default function MeteoKpi() {
 
   useEffect(() => {
     fetchData();
+    setInterval(fetchData, 300000);
   }, []);
 
   return (

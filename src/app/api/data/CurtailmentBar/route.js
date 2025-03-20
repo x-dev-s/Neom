@@ -1,5 +1,5 @@
 import { fetchCurtailmentData } from "../../../server";
-
+export const dynamic = 'force-dynamic';
 export async function GET() {
     try {
       const data = await fetchCurtailmentData();

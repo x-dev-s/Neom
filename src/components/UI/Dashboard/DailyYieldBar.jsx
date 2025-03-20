@@ -57,6 +57,7 @@ export default function DailyYieldBar() {
 
   useEffect(() => {
     fetchData();
+    setInterval(fetchData, 300000);
   }, []);
 
   if (!data) {

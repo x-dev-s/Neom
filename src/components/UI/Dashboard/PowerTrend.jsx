@@ -38,6 +38,7 @@ export default function PowerTrend() {
 
   useEffect(() => {
     fetchData();
+    setInterval(fetchData, 300000);
   }, []);
 
   if (!data) {

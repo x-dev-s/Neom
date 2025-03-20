@@ -1,5 +1,6 @@
 // app/api/data/route.js
 import { connectToDatabase } from "../../../../lib/db";
+export const dynamic = 'force-dynamic';
 export async function GET() {
   try {
     const connection = await connectToDatabase();

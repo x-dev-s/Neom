@@ -26,6 +26,7 @@ export default function TotalYieldDoughnut() {
     
     useEffect(() => {
         fetchData();
+        setInterval(fetchData, 300000);
     }, []);
 
     if (data.length === 0) {

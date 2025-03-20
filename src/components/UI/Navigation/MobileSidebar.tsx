@@ -17,12 +17,17 @@ import {
   RiMenuLine,
   RiSettings5Line,
 } from "@remixicon/react"
+import { FaSolarPanel } from "react-icons/fa6";
+import { TiWeatherCloudy } from "react-icons/ti";
+import { GiPowerGenerator } from "react-icons/gi";
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 const navigation = [
-  { name: "Dashboard", href: siteConfig.baseLinks.overview, icon: RiHome2Line },
-  { name: "Details", href: siteConfig.baseLinks.details, icon: RiListCheck },
+  { name: "Dashboard", href: siteConfig.baseLinks.dashboard, icon: RiHome2Line },
+  { name: "PV", href: siteConfig.baseLinks.pv.self, icon: FaSolarPanel },
+  { name: "Meteo", href: siteConfig.baseLinks.meteo, icon: TiWeatherCloudy },
+  { name: "Genset", href: siteConfig.baseLinks.genset.self, icon: GiPowerGenerator },
   {
     name: "Settings",
     href: siteConfig.baseLinks.settings.general,

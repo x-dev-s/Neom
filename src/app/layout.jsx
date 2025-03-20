@@ -3,8 +3,8 @@ import { Inter, Archivo_Black, Anton } from "next/font/google"
 import "./globals.css"
 import Sidebar from "@/components/UI/Navigation/Sidebar";
 
-//export const dynamic = 'force-dynamic';
-export const revalidate = 300 // revalidate at most every hour
+export const dynamic = 'force-dynamic';
+export const revalidate = 150 // revalidate at most every hour
 
 const sans = Inter({ 
   subsets: ["latin"],
@@ -80,7 +80,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${sans.variable} ${mono.variable} ${serif.variable} font-sans overflow-y-scroll flex flex-col items-center justify-center h-dvh scroll-auto bg-blue-50 antialiased text-sm selection:bg-indigo-100 selection:text-indigo-700 dark:bg-gray-950`}
+        className={`${sans.variable} ${mono.variable} ${serif.variable} font-sans overflow-y-scroll flex flex-col items-center justify-center min-h-dvh scroll-auto bg-blue-50 antialiased text-sm selection:bg-indigo-100 selection:text-indigo-700 dark:bg-gray-950`}
         suppressHydrationWarning
       >
         <div className="m-auto max-w-screen-2xl w-full">

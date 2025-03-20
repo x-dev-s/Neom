@@ -36,6 +36,7 @@ export default function CurtailmentBar() {
 
   useEffect(() => {
     fetchData();
+    setInterval(fetchData, 300000);
   }, []);
 
   if (!data) {

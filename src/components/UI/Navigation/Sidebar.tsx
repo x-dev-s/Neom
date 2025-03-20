@@ -2,49 +2,54 @@
 import { siteConfig } from "@/components/UI/Navigation/siteConfig"
 import { cx, focusRing } from "@/lib/utils"
 import {
-  RiHome2Line
+  RiHome2Line,
+  RiListCheck,
+  RiSettings5Line,
+  RiLinkM,
 } from "@remixicon/react"
+import { FaSolarPanel } from "react-icons/fa6";
+import { TiWeatherCloudy } from "react-icons/ti";
+import { GiPowerGenerator } from "react-icons/gi";
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import MobileSidebar from "./MobileSidebar"
-import {
-  WorkspacesDropdownDesktop,
-  WorkspacesDropdownMobile,
-} from "./SidebarWorkspacesDropdown"
 import { UserProfileDesktop, UserProfileMobile } from "./UserProfile"
 
 const navigation = [
-  { name: "Dashboard", href: siteConfig.baseLinks.overview, icon: RiHome2Line },
-  // { name: "Details", href: siteConfig.baseLinks.details, icon: RiListCheck },
-  // {
-  //   name: "Settings",
-  //   href: siteConfig.baseLinks.settings.general,
-  //   icon: RiSettings5Line,
-  // },
+  { name: "Dashboard", href: siteConfig.baseLinks.dashboard, icon: RiHome2Line },
+  { name: "PV", href: siteConfig.baseLinks.pv.self, icon: FaSolarPanel },
+  { name: "Meteo", href: siteConfig.baseLinks.meteo, icon: TiWeatherCloudy },
+  { name: "Genset", href: siteConfig.baseLinks.genset.self, icon: GiPowerGenerator },
+  { name: "Details", href: siteConfig.baseLinks.details, icon: RiListCheck },
+  {
+    name: "Settings",
+    href: siteConfig.baseLinks.settings.general,
+    icon: RiSettings5Line,
+  },
 ] as const
 
-// const shortcuts = [
-//   {
-//     name: "Add new user",
-//     href: "/settings/users",
-//     icon: RiLinkM,
-//   },
-//   {
-//     name: "Workspace usage",
-//     href: "/settings/billing#billing-overview",
-//     icon: RiLinkM,
-//   },
-//   {
-//     name: "Cost spend control",
-//     href: "/settings/billing#cost-spend-control",
-//     icon: RiLinkM,
-//   },
-//   {
-//     name: "Overview – Rows written",
-//     href: "/overview#usage-overview",
-//     icon: RiLinkM,
-//   },
-// ] as const
+const shortcuts = [
+  {
+    name: "Add new user",
+    href: "/settings/users",
+    icon: RiLinkM,
+  },
+  {
+    name: "Workspace usage",
+    href: "/settings/billing#billing-overview",
+    icon: RiLinkM,
+  },
+  {
+    name: "Cost spend control",
+    href: "/settings/billing#cost-spend-control",
+    icon: RiLinkM,
+  },
+  {
+    name: "Overview – Rows written",
+    href: "/overview#usage-overview",
+    icon: RiLinkM,
+  },
+] as const
 
 export default function Sidebar() {
   const pathname = usePathname()
@@ -94,7 +99,7 @@ export default function Sidebar() {
               <span className="text-xs font-medium leading-6 text-gray-500">
                 {/* Shortcuts */}
               </span>
-              {/* <ul aria-label="shortcuts" role="list" className="space-y-0.5">
+              <ul aria-label="shortcuts" role="list" className="space-y-0.5">
                 {shortcuts.map((item) => (
                   <li key={item.name}>
                     <Link
@@ -115,7 +120,7 @@ export default function Sidebar() {
                     </Link>
                   </li>
                 ))}
-              </ul> */}
+              </ul>
             </div>
           </nav>
           <div className="mt-auto">
