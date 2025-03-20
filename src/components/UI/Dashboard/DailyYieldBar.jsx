@@ -26,7 +26,7 @@ export default function DailyYieldBar() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("/api/DailyYieldBar");
+      const response = await fetch("/api/data/DailyYieldBar");
       if (!response.ok) {
         throw new Error("Failed to fetch data");
       }
@@ -57,11 +57,6 @@ export default function DailyYieldBar() {
 
   useEffect(() => {
     fetchData();
-    const interval = setInterval(() => {
-      fetchData();
-    }, 300000); // 5 minutes in milliseconds
-
-    return () => clearInterval(interval); // Cleanup interval on component unmount
   }, []);
 
   if (!data) {
@@ -124,7 +119,7 @@ export default function DailyYieldBar() {
         <TabGroup>
           <TabList className="mt-8">
             {summary.map((tab) => (
-              <Tab key={tab.name} className="font-medium selected:text-blue-500 aria-selected:text-blue-500 aria-selected:border-b-2 border-blue-500">
+              <Tab key={tab.name} className="font-medium text-xs selected:text-blue-500 aria-selected:text-blue-500 aria-selected:border-b-2 border-blue-500">
                 {tab.name}
               </Tab>
             ))}

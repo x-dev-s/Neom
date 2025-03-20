@@ -25,7 +25,7 @@ export default function PowerTrend() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('/api/PowerTrend');
+      const response = await fetch('/api/data/PowerTrend');
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }
@@ -38,9 +38,6 @@ export default function PowerTrend() {
 
   useEffect(() => {
     fetchData();
-    setInterval(() => {
-      fetchData();
-    }, 300000);
   }, []);
 
   if (!data) {

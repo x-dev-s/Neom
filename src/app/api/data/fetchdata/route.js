@@ -1,14 +1,13 @@
 // app/api/data/route.js
-import { fetchAllUsers } from '@/app/server';
-import { NextResponse } from 'next/server';
-
+import { connectToDatabase } from "../../../../lib/db";
 export async function GET() {
   try {
-    const response = await fetchAllUsers();
-    return NextResponse.json(data, { status: 200 });
+    const connection = await connectToDatabase();
+    const [rows] = await connection.execute('SELECT * FROM All_Data'); // Replace with your table name
+    return Response.json(rows);
   } catch (error) {
-    return NextResponse.json(
-      { message: 'Error fetching users', error: error.message },
+    return Response.json(
+      { message: 'Error fetching data', error: error.message },
       { status: 500 }
     );
   }

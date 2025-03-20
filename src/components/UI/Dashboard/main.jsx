@@ -108,7 +108,7 @@ export default function Dashboard() {
         {/* Flex Layout */}
         <div className="w-full flex flex-wrap lg:flex-nowrap gap-3">
           {/* Left Section - 65% */}
-          <div className="w-dvw lg:w-[100%] flex flex-col gap-3">
+          <div className="w-full flex flex-col gap-3">
             {/* First Row - Two Columns */}
             <div className="w-full h-full flex flex-wrap md:flex-nowrap gap-3">
               <div className="w-full h-auto md:h-full md:w-1/2 bg-white overflow-hidden rounded-2xl flex items-center justify-center">

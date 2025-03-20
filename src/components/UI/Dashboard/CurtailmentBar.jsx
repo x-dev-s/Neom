@@ -23,7 +23,7 @@ export default function CurtailmentBar() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("/api/CurtailmentBar");
+      const response = await fetch("/api/data/CurtailmentBar");
       if (!response.ok) {
         throw new Error("Failed to fetch data");
       }
@@ -36,11 +36,6 @@ export default function CurtailmentBar() {
 
   useEffect(() => {
     fetchData();
-    const interval = setInterval(() => {
-      fetchData();
-    }, 300000); // 5 minutes in milliseconds
-
-    return () => clearInterval(interval); // Cleanup interval on component unmount
   }, []);
 
   if (!data) {

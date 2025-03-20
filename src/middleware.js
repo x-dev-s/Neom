@@ -35,4 +35,4 @@ export async function middleware(request) {
   return NextResponse.next();
 
 }
-export const config = { matcher: ["/login/", "/register/", "/forgotpassword/", "/"] };
+export const config = { matcher: ["/login/", "/register/", "/forgotpassword/", "/", "/api/data/:path*"] };

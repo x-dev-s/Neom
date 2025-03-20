@@ -1,8 +1,8 @@
-import { fetchPowerTrendData } from "../../server";
+import { fetchMeteoKpiData } from "../../../server";
 
 export async function GET() {
   try {
-    const data = await fetchPowerTrendData();
+    const data = await fetchMeteoKpiData();
     return Response.json(await data.json());
   } catch (error) {
     return Response.json(

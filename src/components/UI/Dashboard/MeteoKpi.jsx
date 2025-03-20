@@ -23,7 +23,7 @@ export default function MeteoKpi() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('/api/MeteoKpi');
+      const response = await fetch('/api/data/MeteoKpi');
       if (response.ok) {
         const result = await response.json();
         setData(result);
@@ -37,9 +37,6 @@ export default function MeteoKpi() {
 
   useEffect(() => {
     fetchData();
-    setInterval(() => {
-      fetchData();
-    }, 300000);
   }, []);
 
   return (
