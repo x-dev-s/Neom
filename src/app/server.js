@@ -20,20 +20,20 @@ export async function fetchAllData() {
     return null;
   }
 }
-export async function fetchDailyYieldData() {
+export async function fetchDailyYieldData(span) {
   try {
     const connection = await connectToDatabase();
     const [generator1] = await connection.execute(
-      `SELECT DATE(Timestamp) AS day, SUM(TotalActivePower_G1 * (5 / 60)) AS "Daily Power Yield" FROM All_Data WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) GROUP BY day`
+      `SELECT DATE(Timestamp) AS day, SUM(TotalActivePower_G1 * (5 / 60)) AS "Daily Power Yield" FROM All_Data WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL ${parseInt(span)-1} DAY) GROUP BY day`
     );
     const [generator2] = await connection.execute(
-      `SELECT DATE(Timestamp) AS day, SUM(TotalActivePower_G2 * (5 / 60)) AS "Daily Power Yield" FROM All_Data WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) GROUP BY day`
+      `SELECT DATE(Timestamp) AS day, SUM(TotalActivePower_G2 * (5 / 60)) AS "Daily Power Yield" FROM All_Data WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL ${parseInt(span)-1} DAY) GROUP BY day`
     );
     const [generator3] = await connection.execute(
-      `SELECT DATE(Timestamp) AS day, SUM(TotalActivePower_G3 * (5 / 60)) AS "Daily Power Yield" FROM All_Data WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) GROUP BY day`
+      `SELECT DATE(Timestamp) AS day, SUM(TotalActivePower_G3 * (5 / 60)) AS "Daily Power Yield" FROM All_Data WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL ${parseInt(span)-1} DAY) GROUP BY day`
     );
     const [pv] = await connection.execute(
-      `SELECT DATE(Timestamp) AS day, DailyPowerYield_I AS "Daily Power Yield" FROM All_Data WHERE HOUR(Timestamp) = 23 AND Timestamp >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) GROUP BY day`
+      `SELECT DATE(Timestamp) AS day, DailyPowerYield_I AS "Daily Power Yield" FROM All_Data WHERE HOUR(Timestamp) = 23 AND Timestamp >= DATE_SUB(CURDATE(), INTERVAL ${parseInt(span)-1} DAY) GROUP BY day`
     );
     const [latestPV] = await connection.execute(
       `SELECT Timestamp AS day, DailyPowerYield_I AS "Daily Power Yield" FROM All_Data WHERE 1 ORDER BY Timestamp DESC LIMIT 1`
@@ -70,13 +70,13 @@ export async function fetchPowerTrendData(start, end) {
   }
 }
 
-export async function fetchCurtailmentData() {
+export async function fetchCurtailmentData(span = 7) {
   try {
     const connection = await connectToDatabase();
 
     // Combine all three queries into one
     const [rows] = await connection.execute(
-      `SELECT DATE(Timestamp) AS day, SUM(TotalCurrentCapacity * (5 / 60)) AS "Max. Power Yield", SUM(TotalCurtailedPower * (5 / 60)) AS "Curtailed Power Yield", (SELECT DailyPowerYield_I FROM All_Data WHERE HOUR(Timestamp) = 23 AND DATE(Timestamp) = DATE(AD.Timestamp) LIMIT 1) AS "Actual Power Yield" FROM All_Data AD WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) GROUP BY day`
+      `SELECT DATE(Timestamp) AS day, SUM(TotalCurrentCapacity * (5 / 60)) AS "Max. Power Yield", SUM(TotalCurtailedPower * (5 / 60)) AS "Curtailed Power Yield", (SELECT DailyPowerYield_I FROM All_Data WHERE HOUR(Timestamp) = 23 AND DATE(Timestamp) = DATE(AD.Timestamp) LIMIT 1) AS "Actual Power Yield" FROM All_Data AD WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL ${parseInt(span)-1} DAY) GROUP BY day`
     );
     const [latestPV] = await connection.execute(
       `SELECT Timestamp AS day, DailyPowerYield_I AS "Actual Power Yield" FROM All_Data WHERE 1 ORDER BY Timestamp DESC LIMIT 1`

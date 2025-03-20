@@ -28,42 +28,11 @@ const navigation = [
   { name: "PV", href: siteConfig.baseLinks.pv.self, icon: FaSolarPanel },
   { name: "Meteo", href: siteConfig.baseLinks.meteo, icon: TiWeatherCloudy },
   { name: "Genset", href: siteConfig.baseLinks.genset.self, icon: GiPowerGenerator },
-  {
-    name: "Settings",
-    href: siteConfig.baseLinks.settings.general,
-    icon: RiSettings5Line,
-  },
-] as const
-
-const shortcuts = [
-  {
-    name: "Add new user",
-    href: "/settings/users",
-    icon: RiLinkM,
-  },
-  {
-    name: "Workspace usage",
-    href: "/settings/billing#billing-overview",
-    icon: RiLinkM,
-  },
-  {
-    name: "Cost spend control",
-    href: "/settings/billing#cost-spend-control",
-    icon: RiLinkM,
-  },
-  {
-    name: "Overview – Rows written",
-    href: "/overview#usage-overview",
-    icon: RiLinkM,
-  },
 ] as const
 
 export default function MobileSidebar() {
   const pathname = usePathname()
   const isActive = (itemHref: string) => {
-    if (itemHref === siteConfig.baseLinks.settings.general) {
-      return pathname.startsWith("/settings")
-    }
     return pathname === itemHref || pathname.startsWith(itemHref)
   }
   return (
@@ -73,10 +42,10 @@ export default function MobileSidebar() {
           <Button
             variant="ghost"
             aria-label="open sidebar"
-            className="group flex items-center rounded-md p-2 text-sm font-medium hover:bg-gray-100 data-[state=open]:bg-gray-100 data-[state=open]:bg-gray-400/10 hover:dark:bg-gray-400/10"
+            className="flex p-2 rounded-md text-sm data-[state=open]:bg-gray-100 data-[state=open]:bg-gray-400/10 font-medium group hover:bg-gray-100 hover:dark:bg-gray-400/10 items-center"
           >
             <RiMenuLine
-              className="size-6 shrink-0 sm:size-5"
+              className="shrink-0 size-6 sm:size-5"
               aria-hidden="true"
             />
           </Button>
@@ -102,7 +71,7 @@ export default function MobileSidebar() {
                         )}
                       >
                         <item.icon
-                          className="size-5 shrink-0"
+                          className="shrink-0 size-5"
                           aria-hidden="true"
                         />
                         {item.name}
@@ -111,33 +80,6 @@ export default function MobileSidebar() {
                   </li>
                 ))}
               </ul>
-              {/* <div>
-                <span className="text-sm font-medium leading-6 text-gray-500 sm:text-xs">
-                  Shortcuts
-                </span>
-                <ul aria-label="shortcuts" role="list" className="space-y-0.5">
-                  {shortcuts.map((item) => (
-                    <li key={item.name}>
-                      <Link
-                        href={item.href}
-                        className={cx(
-                          pathname === item.href || pathname.includes(item.href)
-                            ? "text-indigo-600 dark:text-indigo-400"
-                            : "text-gray-700 hover:text-gray-900 dark:text-gray-400 hover:dark:text-gray-50",
-                          "flex items-center gap-x-2.5 rounded-md px-2 py-1.5 font-medium transition hover:bg-gray-100 sm:text-sm hover:dark:bg-gray-900",
-                          focusRing,
-                        )}
-                      >
-                        <item.icon
-                          className="size-4 shrink-0"
-                          aria-hidden="true"
-                        />
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div> */}
             </nav>
           </DrawerBody>
         </DrawerContent>

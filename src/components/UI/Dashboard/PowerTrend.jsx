@@ -4,7 +4,7 @@ import { AreaChart as TremorAreaChart } from '@tremor/react';
 import { useEffect, useState } from 'react';
 import { Card } from "@/components/Card";
 import { TfiReload } from "react-icons/tfi";
-import { MdOutlineFileDownload } from "react-icons/md";
+import { FiDownload } from "react-icons/fi";
 import exportFromJSON from 'export-from-json';
 
 // Power Generation Formatter
@@ -167,19 +167,19 @@ export default function PowerTrend() {
               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm0-2a6 6 0 100-12 6 6 0 000 12z" clipRule="evenodd"/>
             </svg>
           </button> */}
-          <div className="flex flex-wrap justify-center w-full gap-1 items-center">
+          <div className="flex flex-wrap justify-stretch w-full gap-1 items-center">
             <input type="datetime-local" min={"2025-03-16T00:00"} max={end} onChange={
               (e) => setStart(e.target.value)
-            } value={start || new Date(Date.now() - 86400000 - new Date().getTimezoneOffset() * 36000).toISOString().slice(0, 16).replace('T', ' ')} className="flex-1 bg-transparent p-2 rounded-md text-gray-600 text-sm w-40 dark:bg-gray-800 dark:text-gray-400" />
+            } value={start || new Date(Date.now() - 86400000 - new Date().getTimezoneOffset() * 36000).toISOString().slice(0, 16).replace('T', ' ')} className="flex-1 bg-transparent p-2 rounded-md text-gray-600 text-sm w-28 basis-28 dark:bg-gray-800 dark:text-gray-400" />
             <span className="text-gray-600 dark:text-gray-400 font-bold">-</span>
             <input type="datetime-local" min={start} max={new Date().toISOString().slice(0, 16)} onChange={
               (e) => setEnd(e.target.value)
-            } value={end || new Date(Date.now() - new Date().getTimezoneOffset() * 36000).toISOString().slice(0, 16).replace('T', ' ')} className="flex-1 bg-transparent p-2 rounded-md text-gray-600 text-sm w-40 dark:bg-gray-800 dark:text-gray-400" />
-            <span className="flex bg-blue-500 h-full justify-center p-2 rounded-md text-white cursor-pointer dark:bg-blue-500 dark:text-white items-center" onClick={fetchData}>
+            } value={end || new Date(Date.now() - new Date().getTimezoneOffset() * 36000).toISOString().slice(0, 16).replace('T', ' ')} className="flex-1 bg-transparent p-2 rounded-md text-gray-600 text-sm w-28 basis-28 dark:bg-gray-800 dark:text-gray-400" />
+            <span className="flex flex-1 bg-blue-500 h-full justify-center p-2 rounded-md text-white cursor-pointer dark:bg-blue-500 dark:text-white items-center sm:flex-none" onClick={fetchData}>
               <TfiReload className="h-5 w-5" />
             </span>
-            <span className="flex bg-blue-500 h-full justify-center p-2 rounded-md text-white cursor-pointer dark:bg-blue-500 dark:text-white items-center" onClick={() => exportFromJSON({ data: data, fileName: `PowerTrend_${start.slice(0,10)}_${end.slice(0,10)}`, exportType: exportFromJSON.types.csv })}>
-              <MdOutlineFileDownload className="h-6 w-6" />
+            <span className="flex flex-1 bg-blue-500 h-full justify-center p-2 rounded-md text-white cursor-pointer dark:bg-blue-500 dark:text-white items-center sm:flex-none" onClick={() => exportFromJSON({ data: data, fileName: `PowerTrend_${start.slice(0,10)}_${end.slice(0,10)}`, exportType: exportFromJSON.types.csv })}>
+              <FiDownload className="h-5 w-5" />
             </span>
             </div>
       </div>

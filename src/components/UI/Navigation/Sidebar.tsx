@@ -20,43 +20,11 @@ const navigation = [
   { name: "PV", href: siteConfig.baseLinks.pv.self, icon: FaSolarPanel },
   { name: "Meteo", href: siteConfig.baseLinks.meteo, icon: TiWeatherCloudy },
   { name: "Genset", href: siteConfig.baseLinks.genset.self, icon: GiPowerGenerator },
-  { name: "Details", href: siteConfig.baseLinks.details, icon: RiListCheck },
-  {
-    name: "Settings",
-    href: siteConfig.baseLinks.settings.general,
-    icon: RiSettings5Line,
-  },
-] as const
-
-const shortcuts = [
-  {
-    name: "Add new user",
-    href: "/settings/users",
-    icon: RiLinkM,
-  },
-  {
-    name: "Workspace usage",
-    href: "/settings/billing#billing-overview",
-    icon: RiLinkM,
-  },
-  {
-    name: "Cost spend control",
-    href: "/settings/billing#cost-spend-control",
-    icon: RiLinkM,
-  },
-  {
-    name: "Overview – Rows written",
-    href: "/overview#usage-overview",
-    icon: RiLinkM,
-  },
-] as const
+]
 
 export default function Sidebar() {
   const pathname = usePathname()
   const isActive = (itemHref: string) => {
-    if (itemHref === siteConfig.baseLinks.settings.general) {
-      return pathname.startsWith("/settings")
-    }
     return pathname === itemHref || pathname.startsWith(itemHref)
   }
   return (
@@ -96,31 +64,6 @@ export default function Sidebar() {
               ))}
             </ul>
             <div>
-              <span className="text-gray-500 text-xs font-medium leading-6">
-                {/* Shortcuts */}
-              </span>
-              <ul aria-label="shortcuts" role="list" className="space-y-0.5">
-                {shortcuts.map((item) => (
-                  <li key={item.name}>
-                    <Link
-                      href={item.href}
-                      className={cx(
-                        pathname === item.href || pathname.startsWith(item.href)
-                          ? "text-indigo-600 dark:text-indigo-400"
-                          : "text-gray-700 hover:text-gray-900 dark:text-gray-400 hover:dark:text-gray-50",
-                        "flex items-center gap-x-2.5 rounded-md px-2 py-1.5 text-sm font-medium transition hover:bg-gray-100 hover:dark:bg-gray-900",
-                        focusRing,
-                      )}
-                    >
-                      <item.icon
-                        className="shrink-0 size-4"
-                        aria-hidden="true"
-                      />
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
             </div>
           </nav>
           <div className="mt-auto">
