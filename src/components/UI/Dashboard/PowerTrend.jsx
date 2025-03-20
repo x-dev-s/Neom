@@ -43,8 +43,8 @@ export default function PowerTrend() {
 
   if (!data) {
     return (
-      <div className="flex justify-center items-center h-full min-h-72 w-full">
-        <div className="w-10 h-10 border-t-2 border-b-2 border-gray-900 rounded-full animate-spin"></div>
+      <div className="flex h-full justify-center w-full items-center min-h-72">
+        <div className="border-b-2 border-gray-900 border-t-2 h-10 rounded-full w-10 animate-spin dark:border-gray-200"></div>
       </div>
     );
   }
@@ -87,15 +87,15 @@ export default function PowerTrend() {
 
   // Main Component
   return (
-    <Card className="sm:mx-auto sm:max-w-2xl h-auto md:h-full">
-      <div className="sm:mx-auto sm:max-w-7xl">
-        <h3 className="font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong">
+    <Card className="h-auto md:h-full sm:max-w-2xl sm:mx-auto">
+      <div className="sm:max-w-7xl sm:mx-auto">
+        <h3 className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
           Active Power Trend
         </h3>
-        <p className="text-tremor-default leading-6 text-tremor-content dark:text-dark-tremor-content"></p>
-        <ul role="list" className="mt-10 flex flex-wrap gap-6 items-center justify-around">
+        <p className="text-tremor-content text-tremor-default dark:text-dark-tremor-content leading-6"></p>
+        <ul role="list" className="flex flex-wrap justify-around gap-6 items-center mt-10">
           {summary.map((item, index) => (
-            <li key={index} className='basis-32 flex flex-col gap-3 items-center justify-center'>
+            <li key={index} className='flex flex-col justify-center basis-32 gap-3 items-center'>
               <div className="flex space-x-3">
                 {item.details.map((detail, detailIndex) => (
                   <span
@@ -104,11 +104,11 @@ export default function PowerTrend() {
                     aria-hidden={true}
                   />
                 ))}
-                <p className="text-tremor-title text-tremor-content-strong dark:text-dark-tremor-content-strong">
+                <p className="text-tremor-content-strong text-tremor-title dark:text-dark-tremor-content-strong">
                   {item.name}
                 </p>
               </div>
-              <p className="font-medium text-md text-tremor-default text-tremor-content dark:text-dark-tremor-content">
+              <p className="text-md text-tremor-content text-tremor-default dark:text-dark-tremor-content font-medium">
                 {item.details.map((detail) => `${detail.value.toFixed(2)} kW`).join(', ')}
               </p>
             </li>
@@ -127,7 +127,7 @@ export default function PowerTrend() {
           yAxisWidth={100}
           valueFormatter={powerFormatter}
           customTooltip={Tooltip}
-          className="mt-10 hidden h-72 sm:block bg-white"
+          className="h-72 dark:text-gray-400 hidden mt-10 sm:block"
         />
         <TremorAreaChart
           data={data}
@@ -141,7 +141,7 @@ export default function PowerTrend() {
           showYAxis={false}
           customTooltip={Tooltip}
           valueFormatter={powerFormatter}
-          className="mt-6 h-72 sm:hidden"
+          className="h-72 mt-6 sm:hidden"
         />
       </div>
     </Card>
@@ -164,8 +164,8 @@ const Tooltip = ({ payload, active, label }) => {
 
   return (
     <>
-      <div className="mt-1 w-60 space-y-1 rounded-md border border-gray-500/10 bg-white px-4 py-2 text-sm shadow-md dark:border-gray-400/20 dark:bg-gray-900">
-      <p className="flex items-center justify-between">
+      <div className="bg-white border border-gray-500/10 rounded-md shadow-md text-sm w-60 dark:bg-gray-900 dark:border-gray-400/20 mt-1 px-4 py-2 space-y-1">
+      <p className="flex justify-between items-center">
           <span className="font-medium">{label}</span>
         </p>
         <hr className="border-gray-500/10 dark:border-gray-400/20" />
@@ -178,12 +178,12 @@ const Tooltip = ({ payload, active, label }) => {
               )}
               aria-hidden={true}
             />
-            <div className="flex w-full justify-between">
+            <div className="flex justify-between w-full">
               <span className="text-gray-900 dark:text-gray-50">
                 {item.status}
               </span>
               <div className="flex items-center space-x-1">
-                <span className="font-medium text-gray-900 dark:text-gray-50">
+                <span className="text-gray-900 dark:text-gray-50 font-medium">
                   {`${item.value.toFixed(2)} kW`}
                 </span>
               </div>

@@ -31,8 +31,8 @@ export default function TotalYieldDoughnut() {
 
     if (data.length === 0) {
         return (
-          <div className="flex justify-center items-center h-full min-h-72 w-full">
-            <div className="w-10 h-10 border-t-2 border-b-2 border-gray-900 rounded-full animate-spin"></div>
+          <div className="flex h-full justify-center w-full items-center min-h-72">
+            <div className="border-b-2 border-gray-900 border-t-2 h-10 rounded-full w-10 animate-spin dark:border-gray-200"></div>
           </div>
         );
       }
@@ -54,7 +54,7 @@ export default function TotalYieldDoughnut() {
             name: 'Generator 2',
             value: data[0]["Generator 2"],
             share: data[0]["Generator 2"]/ data[0]["Total Load"] * 100,
-            color: 'bg-indigo-500'
+            color: 'bg-cyan-500'
         },
         {
             name: 'Generator 3',
@@ -66,18 +66,18 @@ export default function TotalYieldDoughnut() {
     
     return (
         <>
-            <Card className="sm:mx-auto sm:max-w-lg h-auto md:h-full">
-                <h3 className="text-tremor-default font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong">
+            <Card className="h-auto md:h-full sm:max-w-lg sm:mx-auto">
+                <h3 className="text-tremor-content-strong text-tremor-default dark:text-dark-tremor-content-strong font-semibold">
                     Total Active Power
                 </h3>
                 <DonutChart
-                    className="mt-8 h-52"
+                    className="h-52 mt-8"
                     data={summary}
                     category="value"
                     index="name"
                     customTooltip={customTooltip}
                     valueFormatter={(value) => `${value.toFixed(2)} kW`}
-                    colors={['blue', 'violet', 'indigo', 'fuchsia']}
+                    colors={['blue', 'violet', 'cyan', 'fuchsia']}
                 />
                 <List className="mt-2">
                     {summary.map((item) => (
@@ -90,15 +90,15 @@ export default function TotalYieldDoughnut() {
                                     )}
                                     aria-hidden={true}
                                 />
-                                <span className="truncate dark:text-dark-tremor-content-emphasis">
+                                <span className="dark:text-dark-tremor-content-emphasis truncate">
                                     {item.name}
                                 </span>
                             </div>
                             <div className="flex items-center space-x-2">
-                                <span className="font-medium tabular-nums text-tremor-content-strong dark:text-dark-tremor-content-strong">
+                                <span className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-medium tabular-nums">
                                     {`${item.value?.toFixed(2)} kW`}
                                 </span>
-                                <span className="rounded-tremor-small bg-tremor-background-subtle px-1.5 py-0.5 text-tremor-label font-medium tabular-nums text-tremor-content-emphasis dark:bg-dark-tremor-background-subtle dark:text-dark-tremor-content-emphasis">
+                                <span className="bg-tremor-background-subtle rounded-tremor-small text-tremor-content-emphasis text-tremor-label dark:bg-dark-tremor-background-subtle dark:text-dark-tremor-content-emphasis font-medium px-1.5 py-0.5 tabular-nums">
                                     {item.share.toFixed(2)}%
                                 </span>
                             </div>
@@ -114,7 +114,7 @@ const customTooltip = (props) => {
     const status = {
         'PV': 'bg-blue-500',
         'Generator 1': 'bg-violet-500',
-        'Generator 2': 'bg-indigo-500',
+        'Generator 2': 'bg-cyan-500',
         'Generator 3': 'bg-fuchsia-500',
     };
     const { payload, active, label } = props;
@@ -123,7 +123,7 @@ const customTooltip = (props) => {
   
     if (!categoryPayload) return null;
     return (
-      <div className="flex w-full min-w-52 bg-white rounded-lg items-center justify-between space-x-4 rounded-tremor-default border border-tremor-border bg-tremor-background px-2.5 py-2 text-tremor-default shadow-tremor-dropdown dark:border-dark-tremor-border dark:bg-dark-tremor-background dark:shadow-dark-tremor-dropdown">
+      <div className="flex bg-tremor-background bg-white border border-tremor-border justify-between rounded-lg rounded-tremor-default shadow-tremor-dropdown text-tremor-default w-full dark:bg-dark-tremor-background dark:bg-gray-900 dark:border-dark-tremor-border dark:border-gray-700 dark:shadow-dark-tremor-dropdown items-center min-w-52 px-2.5 py-2 space-x-4">
         <div className="flex items-center space-x-2 truncate">
           <span
             className={classNames(
@@ -132,11 +132,11 @@ const customTooltip = (props) => {
             )}
             aria-hidden={true}
           />
-          <p className="truncate text-tremor-content dark:text-dark-tremor-content">
+          <p className="text-tremor-content dark:text-dark-tremor-content truncate">
             {categoryPayload.name}
           </p>
         </div>
-        <p className="font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
+        <p className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-medium">
             {`${categoryPayload.value.toFixed(2)} kW`}
         </p>
       </div>

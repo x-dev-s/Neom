@@ -62,8 +62,8 @@ export default function DailyYieldBar() {
 
   if (!data) {
     return (
-      <div className="flex justify-center items-center h-full min-h-72 w-full">
-        <div className="w-10 h-10 border-t-2 border-b-2 border-gray-900 rounded-full animate-spin"></div>
+      <div className="flex h-full justify-center w-full items-center min-h-72">
+        <div className="border-b-2 border-gray-900 border-t-2 h-10 rounded-full w-10 animate-spin dark:border-gray-200"></div>
       </div>
     );
   }
@@ -113,14 +113,14 @@ export default function DailyYieldBar() {
 
   return (
     <>
-      <Card className="sm:mx-auto sm:max-w-lg h-full">
-        <h3 className="font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong">
+      <Card className="h-full sm:max-w-lg sm:mx-auto">
+        <h3 className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
         Daily Power Yield
         </h3>
         <TabGroup>
           <TabList className="mt-8">
             {summary.map((tab) => (
-              <Tab key={tab.name} className="font-medium text-xs selected:text-blue-500 aria-selected:text-blue-500 aria-selected:border-b-2 border-blue-500">
+              <Tab key={tab.name} className="border-blue-500 text-xs aria-selected:border-b-2 aria-selected:text-blue-500 font-medium selected:text-blue-500">
                 {tab.name}
               </Tab>
             ))}
@@ -138,7 +138,7 @@ export default function DailyYieldBar() {
                   showYAxis={false}
                   yAxisWidth={100}
                   showXAxis={true}
-                  className="mt-8 h-48"
+                  className="h-48 mt-8"
                 />
                 <List className="mt-2">
                   {generator.details.map((item) => (
@@ -153,7 +153,7 @@ export default function DailyYieldBar() {
                         />
                         <span>Today&apos;s Power Yield</span>
                       </div>
-                      <span className="font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
+                      <span className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-medium">
                         {item.value.toFixed(2)} kWh
                       </span>
                     </ListItem>

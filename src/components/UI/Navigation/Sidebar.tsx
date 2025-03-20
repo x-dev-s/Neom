@@ -62,16 +62,16 @@ export default function Sidebar() {
   return (
     <>
       {/* sidebar (lg+) */}
-      <nav className="hidden lg:sticky lg:inset-y-0 lg:z-40 lg:flex lg:w-[208px] grow lg:flex-col">
-        <aside className="flex grow flex-col gap-y-6 overflow-y-auto border-r border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-950">
+      <nav className="grow hidden lg:flex lg:flex-col lg:inset-y-0 lg:sticky lg:w-[208px] lg:z-40 max-h-dvh">
+        <aside className="flex flex-col bg-white border-gray-200 border-r p-4 dark:bg-gray-950 dark:border-gray-800 gap-y-6 grow overflow-y-auto">
           {/* <WorkspacesDropdownDesktop /> */}
-          {/* <div className="flex items-center justify-center w-full">
+          {/* <div className="flex justify-center w-full items-center">
             <img src="/images/logo.png" alt="logo" className="w-32 object-contain" />
-            <p className="text-xl font-serif font-bold text-center text-gray-900 dark:text-gray-50">
+            <p className="text-center text-gray-900 text-xl dark:text-gray-50 font-bold font-serif">
               Neom PV Diesel Automation
             </p>
           </div>
-          <hr className="border-t border-gray-200 dark:border-gray-800" /> */}
+          <hr className="border-gray-200 border-t dark:border-gray-800" /> */}
           <nav
             aria-label="core navigation links"
             className="flex flex-1 flex-col space-y-10"
@@ -89,14 +89,14 @@ export default function Sidebar() {
                       focusRing,
                     )}
                   >
-                    <item.icon className="size-4 shrink-0" aria-hidden="true" />
+                    <item.icon className="shrink-0 size-4" aria-hidden="true" />
                     {item.name}
                   </Link>
                 </li>
               ))}
             </ul>
             <div>
-              <span className="text-xs font-medium leading-6 text-gray-500">
+              <span className="text-gray-500 text-xs font-medium leading-6">
                 {/* Shortcuts */}
               </span>
               <ul aria-label="shortcuts" role="list" className="space-y-0.5">
@@ -113,7 +113,7 @@ export default function Sidebar() {
                       )}
                     >
                       <item.icon
-                        className="size-4 shrink-0"
+                        className="shrink-0 size-4"
                         aria-hidden="true"
                       />
                       {item.name}
@@ -129,9 +129,9 @@ export default function Sidebar() {
         </aside>
       </nav>
       {/* top navbar (xs-lg) */}
-      <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center justify-between border-b border-gray-200 bg-white px-2 shadow-sm sm:gap-x-6 sm:px-4 lg:hidden dark:border-gray-800 dark:bg-gray-950">
+      <div className="flex bg-white border-b border-gray-200 h-16 justify-between shadow-sm dark:bg-gray-950 dark:border-gray-800 items-center lg:hidden px-2 shrink-0 sm:gap-x-6 sm:px-4 sticky top-0 z-40">
         {/* <WorkspacesDropdownMobile /> */}
-        <div className="flex items-center gap-1 sm:gap-2">
+        <div className="flex gap-1 items-center sm:gap-2">
           <UserProfileMobile />
           <MobileSidebar />
         </div>

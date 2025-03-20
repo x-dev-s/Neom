@@ -41,23 +41,23 @@ export default function MeteoKpi() {
   }, []);
 
   return (
-    <dl className="w-full h-full flex flex-wrap md:flex-nowrap gap-3">
+    <dl className="flex flex-wrap h-full w-full gap-3 md:flex-nowrap">
       {categories.map((item) => (
-        <div key={item.name} className='w-full md:w-1/3 min-h-24 h-auto md:h-full bg-white overflow-hidden rounded-2xl flex items-center justify-center'>
+        <div key={item.name} className='flex bg-white h-auto justify-center rounded-2xl w-full dark:bg-gray-950 items-center md:h-full md:w-1/3 min-h-24 overflow-hidden'>
           {data.length === 0 ? (
-            <div className="flex justify-center items-center h-full min-h-72 w-full">
-              <div className="w-10 h-10 border-t-2 border-b-2 border-gray-900 rounded-full animate-spin"></div>
+            <div className="flex h-full justify-center w-full items-center min-h-72">
+              <div className="border-b-2 border-gray-900 border-t-2 h-10 rounded-full w-10 animate-spin dark:border-gray-200"></div>
             </div>
           ) : (
             <Card className='h-auto md:h-full'>
-              <dt className="font-semibold text-tremor-default text-tremor-content dark:text-dark-tremor-content mb-8">
+              <dt className="text-tremor-content text-tremor-default dark:text-dark-tremor-content font-semibold mb-8">
                 {item.name}
               </dt>
-              <dd className="mt-1 flex items-center justify-between">
-                <span className="text-tremor-title font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
+              <dd className="flex justify-between items-center mt-1">
+                <span className="text-tremor-content-strong text-tremor-title dark:text-dark-tremor-content-strong font-medium">
                   {item.valueFormatter(data[data.length - 1]?.[item.name] || 0)}
                 </span>
-                <span className="text-xs text-tremor-default text-tremor-content dark:text-dark-tremor-content">
+                <span className="text-tremor-content text-tremor-default text-xs dark:text-dark-tremor-content">
                   {`${data[data.length - 1]?.Timestamp}`}
                 </span>
               </dd>
@@ -70,7 +70,7 @@ export default function MeteoKpi() {
                 showGridLines={false}
                 showGradient={false}
                 startEndOnly={true}
-                className="-mb-2 mt-3 h-24"
+                className="h-24 -mb-2 dark:text-dark-tremor-content mt-3"
                 showTooltip={false}
               />
             </Card>

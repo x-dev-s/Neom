@@ -83,11 +83,11 @@ export default function RootLayout({
         className={`${sans.variable} ${mono.variable} ${serif.variable} font-sans overflow-y-scroll flex flex-col items-center justify-center min-h-dvh scroll-auto bg-blue-50 antialiased text-sm selection:bg-indigo-100 selection:text-indigo-700 dark:bg-gray-950`}
         suppressHydrationWarning
       >
-        <div className="m-auto max-w-screen-2xl w-full">
+        <div className="m-auto text-black w-full dark:text-gray-200 max-w-screen-2xl">
           <ThemeProvider defaultTheme="light" attribute="class" className>
-          <div className="flex flex-col lg:flex-row w-full h-full items-stretch justify-stretch">
+          <div className="flex flex-col h-full justify-stretch w-full items-stretch lg:flex-row">
             <Sidebar />
-            <main className="w-full lg:w-[calc(100%-208px)] bg-blue-50">{children}</main>
+            <main className="bg-blue-50 w-full dark:bg-gray-700 lg:w-[calc(100%-208px)]">{children}</main>
           </div>
           </ThemeProvider>
         </div>

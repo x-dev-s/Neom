@@ -1,4 +1,4 @@
-
+import PV from "../../components/UI/PV/main";
 export const metadata = {
     title: "PV - " + process.env.WEBSITE_NAME,
     openGraph: {
@@ -9,5 +9,5 @@ export const metadata = {
     },
 };
 export default function PvPage(){
-    return <></>
+    return <PV />
 }
