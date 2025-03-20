@@ -36,6 +36,7 @@
     "bcryptjs": "^3.0.2",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
+    "export-from-json": "^1.7.4",
     "jose": "^6.0.10",
     "mssql": "^11.0.1",
     "mysql2": "^3.13.0",

@@ -12,6 +12,10 @@
     --background: #E8F3FC;
     --foreground: #000000;
   }
+  tspan{
+    fill: #6b7280;
+    font-size: 12px;
+  }
 }
 
 body {
@@ -21,7 +25,8 @@ body {
 }
 
 tspan{
-  color: #e5e7eb !important;
+  fill: #6b7280;
+  font-size: 12px;
 }
 
 .bg-tremor-brand{

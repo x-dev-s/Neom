@@ -66,7 +66,7 @@ export default function TotalYieldDoughnut() {
     
     return (
         <>
-            <Card className="h-auto md:h-full sm:max-w-lg sm:mx-auto">
+            <Card className="h-auto w-full md:h-full sm:mx-auto">
                 <h3 className="text-tremor-content-strong text-tremor-default dark:text-dark-tremor-content-strong font-semibold">
                     Total Active Power
                 </h3>

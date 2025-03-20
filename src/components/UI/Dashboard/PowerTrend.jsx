@@ -3,6 +3,9 @@ import { cx } from "@/lib/utils";
 import { AreaChart as TremorAreaChart } from '@tremor/react';
 import { useEffect, useState } from 'react';
 import { Card } from "@/components/Card";
+import { TfiReload } from "react-icons/tfi";
+import { MdOutlineFileDownload } from "react-icons/md";
+import exportFromJSON from 'export-from-json';
 
 // Power Generation Formatter
 function powerFormatter(number) {
@@ -18,6 +21,8 @@ function powerFormatter(number) {
 
 export default function PowerTrend() {
   const [data, setData] = useState(null);
+  const [start, setStart] = useState(null);
+  const [end, setEnd] = useState(null);
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ');
@@ -25,7 +30,15 @@ export default function PowerTrend() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('/api/data/PowerTrend');
+      let s, e;
+      if (!start) {
+        s = new Date(Date.now() - 86400000 - new Date().getTimezoneOffset() * 36000).toISOString().slice(0, 16).replace('T', ' ');
+      }
+      if (!end) {
+        e = new Date(Date.now() - new Date().getTimezoneOffset() * 36000).toISOString().slice(0, 16).replace('T', ' ');
+      }
+        
+      const response = await fetch(`/api/data/PowerTrend?start=${start || s}&end=${end || e}`);
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }
@@ -87,7 +100,7 @@ export default function PowerTrend() {
 
   // Main Component
   return (
-    <Card className="h-auto md:h-full sm:max-w-2xl sm:mx-auto">
+    <Card className="h-auto w-full md:h-full sm:mx-auto">
       <div className="sm:max-w-7xl sm:mx-auto">
         <h3 className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
           Active Power Trend
@@ -109,7 +122,7 @@ export default function PowerTrend() {
                 </p>
               </div>
               <p className="text-md text-tremor-content text-tremor-default dark:text-dark-tremor-content font-medium">
-                {item.details.map((detail) => `${detail.value.toFixed(2)} kW`).join(', ')}
+                {item.details.map((detail) => `${detail.value?.toFixed(2)} kW`).join(', ')}
               </p>
             </li>
           ))}
@@ -127,7 +140,7 @@ export default function PowerTrend() {
           yAxisWidth={100}
           valueFormatter={powerFormatter}
           customTooltip={Tooltip}
-          className="h-72 dark:text-gray-400 hidden mt-10 sm:block"
+          className="h-72 dark:fill-gray-500 fill-gray-500 hidden mt-10 sm:block"
         />
         <TremorAreaChart
           data={data}
@@ -141,8 +154,34 @@ export default function PowerTrend() {
           showYAxis={false}
           customTooltip={Tooltip}
           valueFormatter={powerFormatter}
-          className="h-72 mt-6 sm:hidden"
+          className="h-72 dark:fill-gray-500 fill-gray-500 mt-6 sm:hidden"
         />
+      </div>
+      <div className="flex flex-wrap justify-between items-center mt-5">
+          {/* <span className="text-tremor-content text-tremor-default dark:text-dark-tremor-content font-medium">
+            Last 24 hours
+          </span>
+          <button className="flex bg-gray-100 justify-center p-2 rounded-full dark:bg-gray-800 dark:hover:bg-gray-700 hover:bg-gray-200 items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 text-gray-500 w-4 dark:text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M10 12a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"/>
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm0-2a6 6 0 100-12 6 6 0 000 12z" clipRule="evenodd"/>
+            </svg>
+          </button> */}
+          <div className="flex flex-wrap justify-center w-full gap-1 items-center">
+            <input type="datetime-local" min={"2025-03-16T00:00"} max={end} onChange={
+              (e) => setStart(e.target.value)
+            } value={start || new Date(Date.now() - 86400000 - new Date().getTimezoneOffset() * 36000).toISOString().slice(0, 16).replace('T', ' ')} className="flex-1 bg-transparent p-2 rounded-md text-gray-600 text-sm w-40 dark:bg-gray-800 dark:text-gray-400" />
+            <span className="text-gray-600 dark:text-gray-400 font-bold">-</span>
+            <input type="datetime-local" min={start} max={new Date().toISOString().slice(0, 16)} onChange={
+              (e) => setEnd(e.target.value)
+            } value={end || new Date(Date.now() - new Date().getTimezoneOffset() * 36000).toISOString().slice(0, 16).replace('T', ' ')} className="flex-1 bg-transparent p-2 rounded-md text-gray-600 text-sm w-40 dark:bg-gray-800 dark:text-gray-400" />
+            <span className="flex bg-blue-500 h-full justify-center p-2 rounded-md text-white cursor-pointer dark:bg-blue-500 dark:text-white items-center" onClick={fetchData}>
+              <TfiReload className="h-5 w-5" />
+            </span>
+            <span className="flex bg-blue-500 h-full justify-center p-2 rounded-md text-white cursor-pointer dark:bg-blue-500 dark:text-white items-center" onClick={() => exportFromJSON({ data: data, fileName: `PowerTrend_${start.slice(0,10)}_${end.slice(0,10)}`, exportType: exportFromJSON.types.csv })}>
+              <MdOutlineFileDownload className="h-6 w-6" />
+            </span>
+            </div>
       </div>
     </Card>
   );

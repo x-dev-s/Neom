@@ -1,8 +1,14 @@
+import { de } from "date-fns/locale";
 import { fetchPowerTrendData } from "../../../server";
 export const dynamic = 'force-dynamic';
-export async function GET() {
+export async function GET(request) {
   try {
-    const data = await fetchPowerTrendData();
+    let url = new URL(request.url);
+    const params = url.searchParams;
+    const start = decodeURIComponent(params.get('start'));
+    const end = decodeURIComponent(params.get('end'));
+    
+    const data = await fetchPowerTrendData(start, end);
     return Response.json(await data.json());
   } catch (error) {
     return Response.json(

@@ -67,7 +67,7 @@ export default function CurtailmentBar() {
 
   return (
     <>
-      <Card className="h-full sm:max-w-lg sm:mx-auto">
+      <Card className="h-full w-full sm:mx-auto">
         <h3 className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
           Curtailment Bar
         </h3>
