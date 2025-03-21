@@ -23,28 +23,24 @@ export async function fetchAllData() {
 export async function fetchDailyYieldData(span) {
   try {
     const connection = await connectToDatabase();
-    const [generator1] = await connection.execute(
-      `SELECT DATE(Timestamp) AS day, SUM(TotalActivePower_G1 * (5 / 60)) AS "Daily Power Yield" FROM All_Data WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL ${parseInt(span)-1} DAY) GROUP BY day`
-    );
-    const [generator2] = await connection.execute(
-      `SELECT DATE(Timestamp) AS day, SUM(TotalActivePower_G2 * (5 / 60)) AS "Daily Power Yield" FROM All_Data WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL ${parseInt(span)-1} DAY) GROUP BY day`
-    );
-    const [generator3] = await connection.execute(
-      `SELECT DATE(Timestamp) AS day, SUM(TotalActivePower_G3 * (5 / 60)) AS "Daily Power Yield" FROM All_Data WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL ${parseInt(span)-1} DAY) GROUP BY day`
+    const [rows] = await connection.execute(
+      `SELECT DATE(Timestamp) AS Day, SUM(TotalActivePower_G1 * (5 / 60)) AS "Generator 1", SUM(TotalActivePower_G2 * (5 / 60)) AS "Generator 2", SUM(TotalActivePower_G3 * (5 / 60)) AS "Generator 3" FROM All_Data WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL ${parseInt(span)-1} DAY) GROUP BY Day`
     );
     const [pv] = await connection.execute(
-      `SELECT DATE(Timestamp) AS day, DailyPowerYield_I AS "Daily Power Yield" FROM All_Data WHERE HOUR(Timestamp) = 23 AND Timestamp >= DATE_SUB(CURDATE(), INTERVAL ${parseInt(span)-1} DAY) GROUP BY day`
+      `SELECT DATE(Timestamp) AS Day, DailyPowerYield_I AS PV FROM All_Data WHERE HOUR(Timestamp) = 23 AND Timestamp >= DATE_SUB(CURDATE(), INTERVAL ${parseInt(span)-1} DAY) GROUP BY Day`
     );
     const [latestPV] = await connection.execute(
-      `SELECT Timestamp AS day, DailyPowerYield_I AS "Daily Power Yield" FROM All_Data WHERE 1 ORDER BY Timestamp DESC LIMIT 1`
+      `SELECT Timestamp AS Day, DailyPowerYield_I AS PV FROM All_Data WHERE 1 ORDER BY Timestamp DESC LIMIT 1`
     );
     pv.push(latestPV[0]);
-    return Response.json({
-      generator1,
-      generator2,
-      generator3,
-      pv,
-    });
+    const data = rows.map((item) => ({
+      Day: new Date(item.Day).toLocaleDateString("en-PK"),
+      "Generator 1": item["Generator 1"],
+      "Generator 2": item["Generator 2"],
+      "Generator 3": item["Generator 3"],
+      PV: pv.find((pvItem) => new Date(pvItem.Day).getDate() == new Date(item.Day).getDate())?.PV || 0,
+      }));
+    return Response.json(data);
   } catch (error) {
     console.error("Error fetching data:", error);
     return Response.json(
@@ -76,14 +72,14 @@ export async function fetchCurtailmentData(span = 7) {
 
     // Combine all three queries into one
     const [rows] = await connection.execute(
-      `SELECT DATE(Timestamp) AS day, SUM(TotalCurrentCapacity * (5 / 60)) AS "Max. Power Yield", SUM(TotalCurtailedPower * (5 / 60)) AS "Curtailed Power Yield", (SELECT DailyPowerYield_I FROM All_Data WHERE HOUR(Timestamp) = 23 AND DATE(Timestamp) = DATE(AD.Timestamp) LIMIT 1) AS "Actual Power Yield" FROM All_Data AD WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL ${parseInt(span)-1} DAY) GROUP BY day`
+      `SELECT DATE(Timestamp) AS Day, SUM(TotalCurrentCapacity * (5 / 60)) AS "Max. Power Yield", SUM(TotalCurtailedPower * (5 / 60)) AS "Curtailed Power Yield", (SELECT DailyPowerYield_I FROM All_Data WHERE HOUR(Timestamp) = 23 AND DATE(Timestamp) = DATE(AD.Timestamp) LIMIT 1) AS "Actual Power Yield" FROM All_Data AD WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL ${parseInt(span)-1} DAY) GROUP BY Day`
     );
     const [latestPV] = await connection.execute(
-      `SELECT Timestamp AS day, DailyPowerYield_I AS "Actual Power Yield" FROM All_Data WHERE 1 ORDER BY Timestamp DESC LIMIT 1`
+      `SELECT Timestamp AS Day, DailyPowerYield_I AS "Actual Power Yield" FROM All_Data WHERE 1 ORDER BY Timestamp DESC LIMIT 1`
     );
     // Map the data and format it
     const data = rows.map((item) => ({
-      day: new Date(item.day).toLocaleDateString("en-PK"),
+      Day: new Date(item.Day).toLocaleDateString("en-PK"),
       "Max. Power Yield": item["Max. Power Yield"],
       "Curtailed Power Yield": item["Curtailed Power Yield"],
       "Actual Power Yield": item["Actual Power Yield"] || 0,

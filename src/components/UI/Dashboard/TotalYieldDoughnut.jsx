@@ -71,7 +71,7 @@ export default function TotalYieldDoughnut() {
                     Total Active Power
                 </h3>
                 <DonutChart
-                    className="h-52 dark:fill-gray-200 mt-8"
+                    className="h-52 dark:fill-gray-200 mt-8 font-medium text-md"
                     data={summary}
                     category="value"
                     index="name"

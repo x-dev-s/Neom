@@ -61,7 +61,7 @@ export default function Register() {
 
     return (
         <div className="flex h-dvh w-dvw justify-center items-center z-50 bg-white fixed top-0 left-0">
-            <div className="m-auto bg-green-50 px-8 py-[100px] rounded-3xl shadow-2xl w-full sm:w-96">
+            <div className="m-auto bg-green-50 px-8 py-[100px] sm:rounded-3xl shadow-2xl w-full sm:w-96">
                 <img src="/images/logo.png" alt="Logo" className="h-20 mb-10 mx-auto" />
                 <h1 className="text-3xl font-bold font-mono text-center pb-10">Register</h1>
                 <form onSubmit={handleSubmit} className="flex flex-col space-y-4">

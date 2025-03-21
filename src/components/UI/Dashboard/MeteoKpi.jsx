@@ -53,8 +53,8 @@ export default function MeteoKpi() {
               <dt className="text-tremor-content text-tremor-default dark:text-dark-tremor-content font-semibold mb-8">
                 {item.name}
               </dt>
-              <dd className="flex justify-between items-center mt-1">
-                <span className="text-tremor-content-strong text-tremor-title dark:text-dark-tremor-content-strong font-medium">
+              <dd className="flex justify-between items-center my-1">
+                <span className="text-md text-tremor-content-strong text-tremor-title dark:text-dark-tremor-content-strong font-medium">
                   {item.valueFormatter(data[data.length - 1]?.[item.name] || 0)}
                 </span>
                 <span className="text-tremor-content text-tremor-default text-xs dark:text-dark-tremor-content">

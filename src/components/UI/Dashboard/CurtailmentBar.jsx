@@ -8,6 +8,9 @@ import {
   ListItem,
 } from "@tremor/react";
 import { TbSettings2 } from "react-icons/tb";
+import { FiDownload } from "react-icons/fi";
+import { TfiReload } from "react-icons/tfi";
+import exportFromJSON from 'export-from-json';
 
 export default function CurtailmentBar() {
   const [data, setData] = useState(null);
@@ -77,16 +80,22 @@ export default function CurtailmentBar() {
   return (
     <>
       <Card className="h-full w-full sm:mx-auto">
-        <div className="flex flex-wrap justify-between items-center">
+        <div className="flex flex-wrap justify-between items-center gap-3">
                 <h3 className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
                 PV Curtailment
                 </h3>
-                <div className="flex justify-center text-gray-700 text-xs dark:text-gray-400 gap-1 items-center relative">
+                <div className="flex justify-center text-gray-700 text-xs dark:text-gray-400 gap-[6px] items-center relative">
                   <span className="text-xs dark:text-dark-tremor-content font-medium tremor-content tremor-default">
                     {span}
                   </span>
-                  <span className="flex flex-1 h-full justify-center p-1 rounded-md cursor-pointer items-center sm:flex-none" onClick={() => setShowSpanSelector(!showSpanSelector)}>
+                  <span className="flex flex-1 h-full justify-center cursor-pointer items-center sm:flex-none" onClick={() => setShowSpanSelector(!showSpanSelector)}>
                       <TbSettings2 className="h-5 w-5" />
+                  </span>
+                  <span className="flex flex-1 h-full justify-center cursor-pointer items-center sm:flex-none" onClick={() => exportFromJSON({ data: data, fileName: `PvCurtailment_${span}`, exportType: exportFromJSON.types.csv })}>
+                      <FiDownload className="h-5 w-5" />
+                  </span>
+                  <span className="flex flex-1 h-full justify-center cursor-pointer items-center sm:flex-none" onClick={fetchData}>
+                    <TfiReload className="h-[18px] w-[18px]" />
                   </span>
                   {
                     showSpanSelector && (
@@ -114,7 +123,7 @@ export default function CurtailmentBar() {
                 </div>
         <BarChart
           data={summary.data}
-          index="day"
+          index="Day"
           type="default"
           categories={["Max. Power Yield", "Curtailed Power Yield", "Actual Power Yield"]}
           colors={["blue", "violet", "cyan"]}

@@ -53,7 +53,7 @@ export default function Login() {
 
     return (
         <div className="flex bg-white h-dvh justify-center w-dvw dark:bg-gray-700 fixed items-center left-0 top-0 z-50">
-            <div className="flex flex-col bg-green-50 h-full justify-center m-auto rounded-3xl shadow-2xl w-full dark:bg-gray-950 items-center px-8 py-[100px] sm:h-auto sm:w-96">
+            <div className="flex flex-col bg-green-50 h-full justify-center m-auto sm:rounded-3xl shadow-2xl w-full dark:bg-gray-950 items-center px-8 py-[100px] sm:h-auto sm:w-96">
                 <img src="/images/logo.png" alt="Logo" className="h-20 dark:bg-white mb-10 mx-auto" />
                 <h1 className="text-3xl text-center font-bold font-mono pb-10">Login</h1>
                 <form onSubmit={handleSubmit} className="flex flex-col space-y-4">

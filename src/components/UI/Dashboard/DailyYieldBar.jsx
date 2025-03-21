@@ -4,6 +4,9 @@ import { BarChart } from "@/components/Barchart";
 import { Card } from "@/components/Card";
 import { useEffect, useState } from "react";
 import { TbSettings2 } from "react-icons/tb";
+import { FiDownload } from "react-icons/fi";
+import { TfiReload } from "react-icons/tfi";
+import exportFromJSON from 'export-from-json';
 import {
   List,
   ListItem,
@@ -16,6 +19,7 @@ import {
 
 export default function DailyYieldBar() {
   const [data, setData] = useState(null);
+  const [exportData, setExportData] = useState(null);
   const [showSpanSelector, setShowSpanSelector] = useState(false);
   const [span, setSpan] = useState("Last 7 days");
 
@@ -34,22 +38,23 @@ export default function DailyYieldBar() {
         throw new Error("Failed to fetch data");
       }
       const result = await response.json();
+      setExportData(result);
       const formattedData = {
-        generator1: result.generator1.map((item) => ({
-          day: new Date(item.day).toLocaleDateString("en-PK"),
-          "Daily Power Yield": item["Daily Power Yield"],
+        generator1: result.map((item) => ({
+          Day: item.Day,
+          "Daily Power Yield": item["Generator 1"]
         })),
-        generator2: result.generator2.map((item) => ({
-          day: new Date(item.day).toLocaleDateString("en-PK"),
-          "Daily Power Yield": item["Daily Power Yield"],
+        generator2: result.map((item) => ({
+          Day: item.Day,
+          "Daily Power Yield": item["Generator 2"]
         })),
-        generator3: result.generator3.map((item) => ({
-          day: new Date(item.day).toLocaleDateString("en-PK"),
-          "Daily Power Yield": item["Daily Power Yield"],
+        generator3: result.map((item) => ({
+          Day: item.Day,
+          "Daily Power Yield": item["Generator 3"]
         })),
-        pv: result.pv.map((item) => ({
-          day: new Date(item.day).toLocaleDateString("en-PK"),
-          "Daily Power Yield": item["Daily Power Yield"],
+        pv: result.map((item) => ({
+          Day: item.Day,
+          "Daily Power Yield": item.PV
         })),
       };
       setData(formattedData);
@@ -123,16 +128,22 @@ export default function DailyYieldBar() {
   return (
     <>
       <Card className="h-full w-full sm:mx-auto">
-        <div className="flex flex-wrap justify-between items-center">
+        <div className="flex flex-wrap justify-between items-center gap-3">
         <h3 className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
         Daily Power Yield
         </h3>
-        <div className="flex justify-center text-gray-700 text-xs dark:text-gray-400 gap-1 items-center relative">
+        <div className="flex justify-center text-gray-700 text-xs dark:text-gray-400 gap-[6px] items-center relative">
           <span className="text-xs dark:text-dark-tremor-content font-medium tremor-content tremor-default">
             {span}
           </span>
-          <span className="flex flex-1 h-full justify-center p-1 rounded-md cursor-pointer items-center sm:flex-none" onClick={() => setShowSpanSelector(!showSpanSelector)}>
+          <span className="flex flex-1 h-full justify-center cursor-pointer items-center sm:flex-none" onClick={() => setShowSpanSelector(!showSpanSelector)}>
               <TbSettings2 className="h-5 w-5" />
+          </span>
+          <span className="flex flex-1 h-full justify-center cursor-pointer items-center sm:flex-none" onClick={() => exportFromJSON({ data: exportData, fileName: `DailyPowerYield_${span}`, exportType: exportFromJSON.types.csv })}>
+              <FiDownload className="h-5 w-5" />
+          </span>
+          <span className="flex flex-1 h-full justify-center cursor-pointer items-center sm:flex-none" onClick={fetchData}>
+            <TfiReload className="h-[18px] w-[18px]" />
           </span>
           {
             showSpanSelector && (
@@ -171,10 +182,10 @@ export default function DailyYieldBar() {
               <TabPanel key={generator.name}>
                 <BarChart
                   data={generator.data}
-                  index="day"
+                  index="Day"
                   categories={["Daily Power Yield"]}
                   colors={["blue", "violet"]}
-                  valueFormatter={(value) => `${value.toFixed(2)} kWh`}
+                  valueFormatter={(value) => `${value?.toFixed(2)} kWh`}
                   showLegend={false}
                   showYAxis={false}
                   yAxisWidth={100}
@@ -195,7 +206,7 @@ export default function DailyYieldBar() {
                         <span>Today&apos;s Power Yield</span>
                       </div>
                       <span className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-medium">
-                        {item.value.toFixed(2)} kWh
+                        {item.value?.toFixed(2)} kWh
                       </span>
                     </ListItem>
                   ))}
