@@ -116,3 +116,98 @@ export async function fetchMeteoKpiData() {
     return null;
   }
 }
+
+export async function fetchInverterPowerTrendData(inverterId, start, end) {
+  try {
+    if (!start || !end) {
+      return Response.json({ message: "Invalid request" }, { status: 400 });
+    }
+    const connection = await connectToDatabase();
+    const [rows] = await connection.execute(
+      `SELECT DATE_FORMAT(Timestamp, '%e/%c/%Y %l:%i %p') AS 'Timestamp', TotalActivePower_I${inverterId} AS "Active Power", ', TotalReactivePower_I${inverterId} AS "Reactive Power" FROM All_Data WHERE Timestamp BETWEEN ? AND ?`,
+      [start, end]
+    );
+    return Response.json(rows);
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function fetchInverterDailyYieldData(inverterId = 1, span) {
+  try {
+    const connection = await connectToDatabase();
+    const [rows] = await connection.execute(
+      `SELECT DATE(Timestamp) AS Day, DailyYield_I${inverterId} AS "Daily Power Yield" FROM All_Data WHERE HOUR(Timestamp) = 23 AND Timestamp >= DATE_SUB(CURDATE(), INTERVAL ${parseInt(span)-1} DAY) GROUP BY Day`
+    );
+    const [latestPV] = await connection.execute(
+      `SELECT Timestamp AS Day, DailyYield_I${inverterId} AS "Daily Power Yield" FROM All_Data WHERE 1 ORDER BY Timestamp DESC LIMIT 1`
+    );
+    rows.push(latestPV[0]);
+    return Response.json(rows);
+  }
+  catch (error) {
+    console.error("Error fetching data:", error);
+    return Response.json(
+      { message: "Error fetching data", error: error.message },
+      { status: 500 }
+    );
+  }
+}
+
+export async function fetchInverterCurtailmentData(inverterId = 1, span = 7) {
+  try {
+    const connection = await connectToDatabase();
+    const [rows] = await connection.execute(
+      `SELECT DATE(Timestamp) AS Day, SUM(CurrentCapacity_I${inverterId} * (5 / 60)) AS "Max. Power Yield", SUM(CurtailedPower_I${inverterId} * (5 / 60)) AS "Curtailed Power Yield", (SELECT DailyYield_I${inverterId} FROM All_Data WHERE HOUR(Timestamp) = 23 AND DATE(Timestamp) = DATE(AD.Timestamp) LIMIT 1) AS "Actual Power Yield" FROM All_Data AD WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL ${parseInt(span)-1} DAY) GROUP BY Day`
+    );
+    const [latestPV] = await connection.execute(
+      `SELECT Timestamp AS Day, DailyYield_I${inverterId} AS "Actual Power Yield" FROM All_Data WHERE 1 ORDER BY Timestamp DESC LIMIT 1`
+    );
+    const data = rows.map((item) => ({
+      Day: new Date(item.Day).toLocaleDateString("en-PK"),
+      "Max. Power Yield": item["Max. Power Yield"],
+      "Curtailed Power Yield": item["Curtailed Power Yield"],
+      "Actual Power Yield": item["Actual Power Yield"] || 0,
+    }));
+    data[data.length - 1]["Actual Power Yield"] =
+      latestPV[0]["Actual Power Yield"];
+    return Response.json(data);
+  }
+  catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+export async function fetchGeneratorPowerTrendData(generatorId = 1, start, end) {
+  try {
+    if (!start || !end) {
+      return Response.json({ message: "Invalid request" }, { status: 400 });
+    }
+    const connection = await connectToDatabase();
+    const [rows] = await connection.execute(
+      `SELECT DATE_FORMAT(Timestamp, '%e/%c/%Y %l:%i %p') AS 'Timestamp', TotalApparentPower_G${generatorId} AS "Apparent Power", TotalActivePower_G${generatorId} AS "Active Power", TotalReactivePower_G${generatorId} AS "Reactive Power" FROM All_Data WHERE Timestamp BETWEEN ? AND ?`,
+      [start, end]
+    );
+    return Response.json(rows);
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function fetchGeneratorDailyYieldData(generatorId = 1, span) {
+  try {
+    const connection = await connectToDatabase();
+    const [rows] = await connection.execute(
+      `SELECT DATE(Timestamp) AS Day, SUM(TotalActivePower_G${generatorId} * (5 / 60)) AS "Daily Power Yield" FROM All_Data WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL ${parseInt(span)-1} DAY) GROUP BY Day`
+    );
+    return Response.json(rows);
+  }
+  catch (error) {
+    console.error("Error fetching data:", error);
+    return Response.json(
+      { message: "Error fetching data", error: error.message },
+      { status: 500 }
+    );
+  }
+}

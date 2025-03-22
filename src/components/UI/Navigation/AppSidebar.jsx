@@ -118,9 +118,9 @@ export default function AppSidebar({ ...props }) {
           </span>
           <div>
             <span className="block text-sm font-semibold text-gray-900 dark:text-gray-50">
-              PowerMatix
+              Power Matix
             </span>
-            <span className="block text-xs text-gray-900 dark:text-gray-50">
+            <span className="block text-xs text-gray-900 dark:text-gray-300">
               Technology Value Creation
             </span>
           </div>

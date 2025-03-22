@@ -35,4 +35,6 @@ export async function middleware(request) {
   return NextResponse.next();
 
 }
-export const config = { matcher: ["/login/", "/register/", "/forgotpassword/", "/", "/api/data/:path*"] };
+export const config = { matcher: ["/login/", "/register/", "/forgotpassword/", "/", "/api/data/:path*", "/pv", "/pv/:path*", "/genset", "/genset/:path*",
+"/sld", "/meteo"
+] };
