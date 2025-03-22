@@ -8,7 +8,7 @@ import MeteoKpi from "./MeteoKpi";
 export default function Dashboard() {
   return (
     <div className="flex justify-center p-4 items-center min-h-dvw">
-      <div className="h-full w-full max-w-7xl overflow-hidden">
+      <div className="h-full w-full max-w-screen-2xl overflow-hidden">
         {/* Flex Layout */}
         <div className="flex flex-wrap w-full gap-3 lg:flex-nowrap">
           {/* Left Section - 65% */}

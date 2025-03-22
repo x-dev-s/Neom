@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/page.jsx", "src/app/layout.jsx", "src/app/login/page.js", "src/components/UI/Navigation/DropdownUserProfile.jsx", "src/components/UI/Navigation/UserProfile.jsx", "src/components/UI/Dashboard/AreaChart.jsx", "src/components/UI/Dashboard/PvBar.jsx", "src/components/UI/Dashboard/GensetBar.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/page.jsx", "src/app/layout.jsx", "src/app/login/page.js", "src/components/UI/Navigation/DropdownUserProfile.jsx", "src/components/UI/Navigation/UserProfile.jsx", "src/components/UI/Dashboard/AreaChart.jsx", "src/components/UI/Dashboard/PvBar.jsx", "src/components/UI/Dashboard/GensetBar.jsx", "src/components/UI/Navigation/AppSidebar.jsx", "src/components/UI/Navigation/Breadcrumbs.jsx"],
   "exclude": ["node_modules"]
 }

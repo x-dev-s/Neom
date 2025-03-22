@@ -11,12 +11,9 @@ import {
 } from "@/components/Drawer"
 import { cx, focusRing } from "@/lib/utils"
 import {
-  RiHome2Line,
-  RiLinkM,
-  RiListCheck,
   RiMenuLine,
-  RiSettings5Line,
 } from "@remixicon/react"
+import { TbLayoutDashboardFilled } from "react-icons/tb";
 import { FaSolarPanel } from "react-icons/fa6";
 import { TiWeatherCloudy } from "react-icons/ti";
 import { GiPowerGenerator } from "react-icons/gi";
@@ -24,7 +21,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 const navigation = [
-  { name: "Dashboard", href: siteConfig.baseLinks.dashboard, icon: RiHome2Line },
+  { name: "Dashboard", href: siteConfig.baseLinks.dashboard, icon: TbLayoutDashboardFilled },
   { name: "PV", href: siteConfig.baseLinks.pv.self, icon: FaSolarPanel },
   { name: "Meteo", href: siteConfig.baseLinks.meteo, icon: TiWeatherCloudy },
   { name: "Genset", href: siteConfig.baseLinks.genset.self, icon: GiPowerGenerator },
@@ -38,7 +35,7 @@ export default function MobileSidebar() {
   return (
     <>
       <Drawer>
-        <DrawerTrigger asChild>
+        <DrawerTrigger asChild className="absolute top-0 right-0 mt-2 mr-2">
           <Button
             variant="ghost"
             aria-label="open sidebar"

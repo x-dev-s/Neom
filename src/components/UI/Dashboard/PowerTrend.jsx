@@ -50,6 +50,8 @@ export default function PowerTrend() {
   };
 
   useEffect(() => {
+    setStart(new Date(Date.now() - 86400000 - new Date().getTimezoneOffset() * 36000).toISOString().slice(0, 16).replace('T', ' '));
+    setEnd(new Date(Date.now() - new Date().getTimezoneOffset() * 36000).toISOString().slice(0, 16).replace('T', ' '));
     fetchData();
     setInterval(fetchData, 300000);
   }, []);
