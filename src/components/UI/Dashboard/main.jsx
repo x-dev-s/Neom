@@ -34,7 +34,7 @@ export default function Dashboard() {
             </div>
 
             {/* Third Row - Three Columns */}
-            <div className="flex flex-wrap h-full w-full gap-3 md:flex-nowrap">
+            <div className="flex flex-col gap-3">
               <MeteoKpi />
             </div>
           </div>
