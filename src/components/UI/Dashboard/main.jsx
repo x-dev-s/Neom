@@ -7,12 +7,12 @@ import MeteoKpi from "./MeteoKpi";
 
 export default function Dashboard() {
   return (
-    <div className="flex justify-center p-4 items-center min-h-dvw">
-      <div className="h-full w-full max-w-screen-2xl overflow-hidden">
+    <div className="flex justify-stretch p-4 items-stretch min-h-[calc(100svh-64px)]">
+      <div className="flex items-stretch justify-stretch grow w-full max-w-screen-2xl overflow-hidden">
         {/* Flex Layout */}
-        <div className="flex flex-wrap w-full gap-3 lg:flex-nowrap">
+        <div className="flex grow items-stretch justify-stretch flex-wrap w-full gap-3 lg:flex-nowrap">
           {/* Left Section - 65% */}
-          <div className="flex flex-col w-full gap-3">
+          <div className="flex grow flex-col w-full gap-3">
             {/* First Row - Two Columns */}
             <div className="flex flex-wrap h-full w-full gap-3 md:flex-nowrap">
               <div className="flex bg-white h-auto justify-center rounded-2xl w-full dark:bg-gray-950 items-center md:h-full md:w-1/2 overflow-hidden">

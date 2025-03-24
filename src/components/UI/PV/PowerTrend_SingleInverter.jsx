@@ -19,7 +19,7 @@ function powerFormatter(number) {
   return `${formatter.format(number)} kW`; // Append "W" for watts
 }
 
-export default function PowerTrend() {
+export default function PowerTrend({id}) {
   const [data, setData] = useState(null);
   const [start, setStart] = useState(null);
   const [end, setEnd] = useState(null);
@@ -38,7 +38,7 @@ export default function PowerTrend() {
         e = new Date(Date.now() - new Date().getTimezoneOffset() * 36000).toISOString().slice(0, 16).replace('T', ' ');
       }
         
-      const response = await fetch(`/api/data/PowerTrend?start=${start || s}&end=${end || e}`);
+      const response = await fetch(`/api/data/PowerTrend_SingleInverter?id=${id}&start=${start || s}&end=${end || e}`);
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }
@@ -67,36 +67,25 @@ export default function PowerTrend() {
   const summary = [
     {
       index: 0,
-      name: 'Total Load',
+      name: 'Active Power',
       data: data || [],
       details: [
             {
-              value: data[data.length - 1]['Total Load'],
+              value: data[data.length - 1]['Active Power'],
               color: 'bg-blue-500',
             },
           ]
     },
     {
       index: 1,
-      name: 'Genset Power',
+      name: 'Reactive Power',
       data: data || [],
       details: [
             {
-              value: data[data.length - 1]['Genset Power'],
+              value: data[data.length - 1]['Reactive Power'],
               color: 'bg-violet-500',
             },
           ],
-    },
-    {
-      index: 2,
-      name: 'PV Power',
-      data: data || [],
-      details: [
-            {
-              value: data[data.length - 1]['PV Power'],
-              color: 'bg-cyan-500',
-            },
-          ]
     },
   ];
 
@@ -134,7 +123,7 @@ export default function PowerTrend() {
           index="Timestamp"
           colors={['blue', 'violet', 'cyan']}
           curveType='monotone'
-          categories={['Total Load', 'Genset Power', 'PV Power']}
+          categories={['Active Power', 'Reactive Power']}
           showLegend={false}
           startEndOnly={true}
           showGradient={false}
@@ -149,7 +138,7 @@ export default function PowerTrend() {
           index="Timestamp"
           colors={["blue", "violet", "cyan"]}
           curveType='monotone'
-          categories={['Total Load', 'Genset Power', 'PV Power']}
+          categories={['Active Power', 'Reactive Power']}
           startEndOnly={true}
           showLegend={false}
           showGradient={false}
@@ -184,9 +173,8 @@ const Tooltip = ({ payload, active, label }) => {
   if (!active || !payload || payload.length === 0) return null;
 
   const status = {
-    "Total Load": "bg-blue-500 dark:bg-blue-500",
-    "Genset Power": "bg-violet-500 dark:bg-violet-500",
-    "PV Power": "bg-cyan-500 dark:bg-cyan-500",
+    "Active Power": "bg-blue-500 dark:bg-blue-500",
+    "Reactive Power": "bg-violet-500 dark:bg-violet-500",
   };
 
   const data = payload.map((item) => ({

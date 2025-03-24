@@ -82,7 +82,7 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${sans.variable} ${mono.variable} ${serif.variable} font-sans overflow-y-scroll flex flex-col items-center justify-center min-h-dvh scroll-auto bg-blue-50 antialiased text-sm selection:bg-indigo-100 selection:text-indigo-700 dark:bg-gray-950`}
+        className={`${sans.variable} ${mono.variable} ${serif.variable} font-sans overflow-y-scroll flex flex-col items-center justify-center min-h-dvh scroll-auto bg-blue-50 antialiased text-sm selection:bg-indigo-100 selection:text-indigo-700 dark:bg-gray-700`}
         suppressHydrationWarning
       >
         <div className="m-auto text-black w-full dark:text-gray-200 max-w-screen-2xl">

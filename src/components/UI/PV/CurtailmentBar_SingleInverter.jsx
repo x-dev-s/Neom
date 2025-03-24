@@ -12,7 +12,7 @@ import { FiDownload } from "react-icons/fi";
 import { TfiReload } from "react-icons/tfi";
 import exportFromJSON from 'export-from-json';
 
-export default function CurtailmentBar() {
+export default function CurtailmentBar_SingleInverter({id}) {
   const [data, setData] = useState(null);
   const [showSpanSelector, setShowSpanSelector] = useState(false);
   const [span, setSpan] = useState("Last 7 days");
@@ -29,7 +29,7 @@ export default function CurtailmentBar() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`/api/data/CurtailmentBar?span=${span.split(" ")[1]}`);
+      const response = await fetch(`/api/data/CurtailmentBar_SingleInverter?id=${id}&span=${span.split(" ")[1]}`);
       if (!response.ok) {
         throw new Error("Failed to fetch data");
       }

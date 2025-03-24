@@ -178,7 +178,7 @@ const Sidebar = React.forwardRef<HTMLDivElement, React.ComponentProps<"div">>(
         <div
           className={cx(
             "fixed inset-y-0 z-10 hidden h-svh w-[--sidebar-width] transition-[left,right,width] duration-150 ease-in-out will-change-transform xl:flex",
-            "left-0 group-data-[collapsible=true]:left-[calc(var(--sidebar-width)*-1)]",
+            "left-[calc(var(--sidebar-width)] group-data-[collapsible=true]:left-[calc(var(--sidebar-width)*-1)]",
             "border-r border-gray-200 dark:border-gray-800",
             className,
           )}

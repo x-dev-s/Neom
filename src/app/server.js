@@ -117,14 +117,14 @@ export async function fetchMeteoKpiData() {
   }
 }
 
-export async function fetchInverterPowerTrendData(inverterId, start, end) {
+export async function fetchInverterPowerTrendData(inverterId=1, start, end) {
   try {
     if (!start || !end) {
       return Response.json({ message: "Invalid request" }, { status: 400 });
     }
     const connection = await connectToDatabase();
     const [rows] = await connection.execute(
-      `SELECT DATE_FORMAT(Timestamp, '%e/%c/%Y %l:%i %p') AS 'Timestamp', TotalActivePower_I${inverterId} AS "Active Power", ', TotalReactivePower_I${inverterId} AS "Reactive Power" FROM All_Data WHERE Timestamp BETWEEN ? AND ?`,
+      `SELECT DATE_FORMAT(Timestamp, '%e/%c/%Y %l:%i %p') AS 'Timestamp', TotalActivePower_I${inverterId} AS "Active Power", TotalReactivePower_I${inverterId} AS "Reactive Power" FROM All_Data WHERE Timestamp BETWEEN ? AND ?`,
       [start, end]
     );
     return Response.json(rows);
@@ -133,7 +133,7 @@ export async function fetchInverterPowerTrendData(inverterId, start, end) {
   }
 }
 
-export async function fetchInverterDailyYieldData(inverterId = 1, span) {
+export async function fetchInverterDailyYieldData(inverterId = 1, span=7) {
   try {
     const connection = await connectToDatabase();
     const [rows] = await connection.execute(
@@ -195,7 +195,7 @@ export async function fetchGeneratorPowerTrendData(generatorId = 1, start, end) 
   }
 }
 
-export async function fetchGeneratorDailyYieldData(generatorId = 1, span) {
+export async function fetchGeneratorDailyYieldData(generatorId = 1, span=7) {
   try {
     const connection = await connectToDatabase();
     const [rows] = await connection.execute(
@@ -209,5 +209,39 @@ export async function fetchGeneratorDailyYieldData(generatorId = 1, span) {
       { message: "Error fetching data", error: error.message },
       { status: 500 }
     );
+  }
+}
+
+export async function fetchSldData() {
+  try {
+    const connection = await connectToDatabase();
+    const [rows] = await connection.execute(
+      `SELECT 
+    TotalReactivePower_I, 
+    (TotalActivePower_I / TotalCurrentCapacity) * 100,
+
+    TotalActivePower_G1, 
+    TotalReactivePower_G1, 
+    GeneratorOutput_G1,
+
+    TotalActivePower_G2, 
+    TotalReactivePower_G2, 
+    GeneratorOutput_G2,
+
+    TotalActivePower_G3, 
+    TotalReactivePower_G3, 
+    GeneratorOutput_G3,
+
+    TotalLoad, 
+    TotalKVAR, 
+    (TotalLoad / 3000) * 100
+
+FROM All_Data 
+ORDER BY Timestamp DESC 
+LIMIT 1`
+    );
+    return Response.json(rows);
+  } catch (error) {
+    return null;
   }
 }
