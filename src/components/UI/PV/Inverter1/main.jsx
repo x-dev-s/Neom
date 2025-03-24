@@ -1,8 +1,8 @@
 import DailyYieldBar_SingleInverter from "../DailyYieldBar_SingleInverter";
 import CurtailmentBar_SingleInverter from "../CurtailmentBar_SingleInverter";
 import PowerTrend_SingleInverter from "../PowerTrend_SingleInverter";
-import DataTable from "./DataTable";
-import OperationStatus from "./OperationStatus";
+import DataTable_SingleInverter from "../DataTable_SingleInverter";
+import OperationStatus_SingleInverter from "../OperationStatus_SingleInverter";
 
 export default function Inverter1() {
   return (
@@ -32,14 +32,14 @@ export default function Inverter1() {
             {/* Third Row - Three Columns */}
             <div className="flex flex-wrap h-full w-full gap-3 md:flex-nowrap">
               <div className="flex bg-white h-auto justify-center rounded-2xl w-full dark:bg-gray-950 items-center md:h-full overflow-hidden">
-                <OperationStatus />
+                <OperationStatus_SingleInverter id={1} />
               </div>
             </div>
 
             {/* Fourth Row - Three Columns */}
             <div className="flex flex-wrap h-full w-full gap-3 md:flex-nowrap">
               <div className="flex flex-col bg-white justify-center rounded-2xl w-full dark:bg-gray-950 items-center overflow-hidden">
-                <DataTable />
+                <DataTable_SingleInverter id={1} />
               </div>
             </div>
           </div>

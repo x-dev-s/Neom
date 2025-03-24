@@ -1,4 +1,4 @@
-
+import Inverter4 from "../../../components/UI/PV/Inverter4/main";
 export const metadata = {
     title: "Inverter 4 - " + process.env.WEBSITE_NAME,
     openGraph: {
@@ -9,5 +9,5 @@ export const metadata = {
     },
 };
 export default function Inverter4Page(){
-    return <></>
+    return <Inverter4 />;
 }

@@ -179,6 +179,18 @@ export async function fetchInverterCurtailmentData(inverterId = 1, span = 7) {
   }
 }
 
+export const fetchInverterTableData = async (inverterId = 1) => {
+  try {
+    const connection = await connectToDatabase();
+    const [rows] = await connection.execute(
+      `SELECT DATE_FORMAT(Timestamp, '%e/%c/%Y %l:%i %p') AS 'Timestamp', TotalDCpower_I${inverterId} AS "DC Power", TotalPowerFactor_I${inverterId} AS "Power Factor", PhaseAVoltage_I${inverterId} AS "Phase A Voltage", PhaseBVoltage_I${inverterId} AS "Phase B Voltage", PhaseCVoltage_I${inverterId} AS "Phase C Voltage", PhaseACurrent_I${inverterId} AS "Phase A Current", PhaseBCurrent_I${inverterId} AS "Phase B Current", PhaseCCurrent_I${inverterId} AS "Phase C Current", InteriorTemp_I${inverterId} AS "Interior Temperature" FROM All_Data WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL 1 DAY)`
+    );
+    return Response.json(rows);
+  } catch (error) {
+    return null;
+  }
+}
+
 export async function fetchGeneratorPowerTrendData(generatorId = 1, start, end) {
   try {
     if (!start || !end) {
@@ -217,8 +229,9 @@ export async function fetchSldData() {
     const connection = await connectToDatabase();
     const [rows] = await connection.execute(
       `SELECT 
+    TotalActivePower_I,
     TotalReactivePower_I, 
-    (TotalActivePower_I / TotalCurrentCapacity) * 100,
+    (TotalActivePower_I / TotalCurrentCapacity) * 100 AS PVOutput,
 
     TotalActivePower_G1, 
     TotalReactivePower_G1, 

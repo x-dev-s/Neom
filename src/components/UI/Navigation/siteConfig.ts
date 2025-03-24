@@ -16,9 +16,9 @@ export const siteConfig = {
       meteo : '/meteo/',
       genset: {
         self: "/genset/",
-        g1: "/genset/genrator1/",
-        g2: "/genset/genrator2/",
-        g3: "/genset/genrator3/",
+        g1: "/genset/generator1/",
+        g2: "/genset/generator2/",
+        g3: "/genset/generator3/",
       },      
       sld: "/sld/",
     },
