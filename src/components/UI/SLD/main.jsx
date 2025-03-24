@@ -97,7 +97,7 @@ export default function SLD() {
             activePower: latestData[0].TotalActivePower_I,
             reactivePower: latestData[0].TotalReactivePower_I,
             performanceRatio: latestData[0].PVOutput,
-            imageSrc: "/images/pv.png",
+            imageSrc: "/images/PV.png",
           },
         },
         {
