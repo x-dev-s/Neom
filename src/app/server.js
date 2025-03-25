@@ -109,7 +109,7 @@ export async function fetchMeteoKpiData() {
   try {
     const connection = await connectToDatabase();
     const [rows] = await connection.execute(
-      `SELECT DATE_FORMAT(Timestamp, '%e/%c/%Y %l:%i %p') AS 'Timestamp', AmbientTemp AS "Ambient Temperature", AmbientHumidity AS "Ambient Humidity", SlopeTransientIrradiation AS "Slope Transient Irradiation", WindSpeed AS "Wind Speed", WindAngle AS "Wind Angle", TempPVmodule AS "PV Module Temperature" FROM All_Data WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL 1 DAY)`
+      `SELECT DATE_FORMAT(Timestamp, '%e/%c/%Y %l:%i %p') AS 'Timestamp', AmbientTemp AS "Ambient Temperature", AmbientHumidity AS "Ambient Humidity", SlopeTransientIrradiation AS "Slope Transient Irradiation" FROM All_Data WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL 1 DAY)`
     );
     return Response.json(rows);
   } catch (error) {
@@ -195,7 +195,7 @@ export const fetchInverterTableData = async (inverterId = 1) => {
   try {
     const connection = await connectToDatabase();
     const [rows] = await connection.execute(
-      `SELECT DATE_FORMAT(Timestamp, '%e/%c/%Y %l:%i %p') AS 'Timestamp', TotalDCpower_I${inverterId} AS "DC Power", TotalPowerFactor_I${inverterId} AS "Power Factor", PhaseAVoltage_I${inverterId} AS "Phase A Voltage", PhaseBVoltage_I${inverterId} AS "Phase B Voltage", PhaseCVoltage_I${inverterId} AS "Phase C Voltage", PhaseACurrent_I${inverterId} AS "Phase A Current", PhaseBCurrent_I${inverterId} AS "Phase B Current", PhaseCCurrent_I${inverterId} AS "Phase C Current", InteriorTemp_I${inverterId} AS "Interior Temperature" FROM All_Data WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL 1 DAY)`
+      `SELECT DATE_FORMAT(Timestamp, '%e/%c/%Y %l:%i %p') AS 'Timestamp', TotalDCpower_I${inverterId} AS "DC Power", TotalPowerFactor_I${inverterId} AS "Power Factor", PhaseAVoltage_I${inverterId} AS "Phase A Voltage", PhaseBVoltage_I${inverterId} AS "Phase B Voltage", PhaseCVoltage_I${inverterId} AS "Phase C Voltage", PhaseACurrent_I${inverterId} AS "Phase A Current", PhaseBCurrent_I${inverterId} AS "Phase B Current", PhaseCCurrent_I${inverterId} AS "Phase C Current", InteriorTemp_I${inverterId} AS "Interior Temperature" FROM All_Data WHERE Timestamp >= DATE_SUB(NOW(), INTERVAL 29 DAY)`
     );
     return Response.json(rows);
   } catch (error) {
@@ -236,14 +236,26 @@ export async function fetchGeneratorDailyYieldData(generatorId = 1, span=7) {
   }
 }
 
+export const fetchGeneratorTableData = async (generatorId = 1) => {
+  try {
+    const connection = await connectToDatabase();
+    const [rows] = await connection.execute(
+      `SELECT DATE_FORMAT(Timestamp, '%e/%c/%Y %l:%i %p') AS 'Timestamp', EngineSpeed_G${generatorId} AS "Engine Speed", GeneratorFrequency_G${generatorId} AS "Generator Frequency", GeneratorOutput_G${generatorId} AS "Generator Output", AvgPowerFactor_G${generatorId} AS "Power Factor", Line1Voltage_G${generatorId} AS "Line 1 Voltage", Line2Voltage_G${generatorId} AS "Line 2 Voltage", Line3Voltage_G${generatorId} AS "Line 3 Voltage", Line1Current_G${generatorId} AS "Line 1 Current", Line2Current_G${generatorId} AS "Line 2 Current", Line3Current_G${generatorId} AS "Line 3 Current", Line1ActivePower_G${generatorId} AS "Line 1 Active Power", Line2ActivePower_G${generatorId} AS "Line 2 Active Power", Line3ActivePower_G${generatorId} AS "Line 3 Active Power", CoolantTemp_G${generatorId} AS "Coolant Temperature" , OilPressure_G${generatorId} AS "Oil Pressure" , EngineBatteryVoltage_G${generatorId} AS "Engine Battery Voltage" , ChargerVoltage_G${generatorId} AS "Charger Voltage" FROM All_Data WHERE Timestamp >= DATE_SUB(NOW(), INTERVAL 29 DAY)`
+    );
+    return Response.json(rows);
+  } catch (error) {
+    return null;
+  }
+}
+
+
 export async function fetchSldData() {
   try {
     const connection = await connectToDatabase();
     const [rows] = await connection.execute(
       `SELECT 
-    TotalActivePower_I,
     TotalReactivePower_I, 
-    (TotalActivePower_I / TotalCurrentCapacity) * 100 AS PVOutput,
+    (TotalActivePower_I / TotalCurrentCapacity) * 100,
 
     TotalActivePower_G1, 
     TotalReactivePower_G1, 
