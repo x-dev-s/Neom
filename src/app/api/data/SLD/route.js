@@ -1,4 +1,4 @@
-import { fetchSldData } from "../../../server";
+import { fetchSldData } from "@/app/server";
 export const dynamic = 'force-dynamic';
 export async function GET() {
   try {

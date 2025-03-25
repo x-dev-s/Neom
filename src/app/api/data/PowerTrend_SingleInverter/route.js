@@ -1,4 +1,4 @@
-import { fetchInverterPowerTrendData } from "../../../server";
+import { fetchInverterPowerTrendData } from "@/app/server";
 export const dynamic = 'force-dynamic';
 export async function GET(request) {
   try {

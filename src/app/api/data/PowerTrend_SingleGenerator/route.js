@@ -1,4 +1,4 @@
-import { fetchGeneratorPowerTrendData } from "../../../server";
+import { fetchGeneratorPowerTrendData } from "@/app/server";
 export const dynamic = 'force-dynamic';
 export async function GET(request) {
   try {

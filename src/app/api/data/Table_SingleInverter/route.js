@@ -1,4 +1,4 @@
-import { fetchInverterTableData } from "../../../server";
+import { fetchInverterTableData } from "@/app/server";
 export const dynamic = 'force-dynamic';
 export async function GET(request) {
   try {
