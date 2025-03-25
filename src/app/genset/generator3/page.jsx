@@ -1,13 +1,13 @@
-
+import Generator3 from "@/components/UI/Genset/Generator3/main";
 export const metadata = {
-    title: "Generator 3 - " + process.env.WEBSITE_NAME,
+    title: "Generator 1 - " + process.env.WEBSITE_NAME,
     openGraph: {
-        title: "Generator 3 - " + process.env.WEBSITE_NAME,
+        title: "Generator 1 - " + process.env.WEBSITE_NAME,
     },
     twitter: {
-        title: "Generator 3 - " + process.env.WEBSITE_NAME,
+        title: "Generator 1 - " + process.env.WEBSITE_NAME,
     },
 };
-export default function Generator3Page(){
-    return <></>
+export default function Generator1Page() {
+    return <Generator3 />;
 }
