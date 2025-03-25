@@ -149,12 +149,20 @@ export default function SLD() {
         ].map((edge) => ({
           ...edge,
           animated: nodes.find((n) => n.id === edge.source)?.data.activePower > 0,
+          className: nodes.find((n) => n.id === edge.source)?.data.activePower > 0
+            ? "text-green-500 dark:text-green-400 fill-green-500 dark:fill-green-400"
+            : "text-red-500 dark:text-red-400 fill-red-500 dark:fill-red-400"
         }))}
         nodeTypes={{ customNode: CustomNode }}
         proOptions={{ hideAttribution: true }}
+        fitView={true}
+        fitViewOptions={{ minZoom: 0.05 }}
+        minZoom={0.3}
         zoomOnScroll={true}
         zoomOnPinch={true}
         zoomOnDoubleClick={false}
+        draggable={true}
+        panOnDrag={true}
       />
     </div>
   );

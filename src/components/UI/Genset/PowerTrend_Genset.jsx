@@ -7,19 +7,7 @@ import { TfiReload } from "react-icons/tfi";
 import { FiDownload } from "react-icons/fi";
 import exportFromJSON from 'export-from-json';
 
-// Power Generation Formatter
-function powerFormatter(number) {
-  const formatter = new Intl.NumberFormat('en-US', {
-    style: 'decimal', // No currency symbol
-    maximumFractionDigits: 1, // Adjust decimal places
-    notation: 'compact', // Use compact notation (e.g., 1K, 1M)
-    compactDisplay: 'short', // Display as "K" for thousand, "M" for million, etc.
-  });
-
-  return `${formatter.format(number)} kW`; // Append "W" for watts
-}
-
-export default function PowerTrend() {
+export default function PowerTrend_Genset() {
   const [data, setData] = useState(null);
   const [start, setStart] = useState(null);
   const [end, setEnd] = useState(null);
@@ -38,7 +26,7 @@ export default function PowerTrend() {
         e = new Date(Date.now() - new Date().getTimezoneOffset() * 36000).toISOString().slice(0, 16).replace('T', ' ');
       }
         
-      const response = await fetch(`/api/data/PowerTrend?start=${start || s}&end=${end || e}`);
+      const response = await fetch(`/api/data/PowerTrend_Genset?start=${start || s}&end=${end || e}`);
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }
@@ -67,37 +55,26 @@ export default function PowerTrend() {
   const summary = [
     {
       index: 0,
-      name: 'Total Load',
+      name: 'Total Active Power',
       data: data || [],
       details: [
             {
-              value: data[data.length - 1]['Total Load'],
+              value: data[data.length - 1]['Total Active Power'],
               color: 'bg-blue-500',
             },
           ]
     },
     {
       index: 1,
-      name: 'Genset Power',
+      name: 'Total Reactive Power',
       data: data || [],
       details: [
             {
-              value: data[data.length - 1]['Genset Power'],
+              value: data[data.length - 1]['Total Reactive Power'],
               color: 'bg-violet-500',
             },
           ],
-    },
-    {
-      index: 2,
-      name: 'PV Power',
-      data: data || [],
-      details: [
-            {
-              value: data[data.length - 1]['PV Power'],
-              color: 'bg-cyan-500',
-            },
-          ]
-    },
+    }
   ];
 
   // Main Component
@@ -105,12 +82,12 @@ export default function PowerTrend() {
     <Card className="h-auto w-full md:h-full sm:mx-auto">
       <div className="sm:max-w-7xl sm:mx-auto">
         <h3 className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
-          Active Power Trend
+          Genset Power Trend
         </h3>
         <p className="text-tremor-content text-tremor-default dark:text-dark-tremor-content leading-6"></p>
         <ul role="list" className="flex flex-wrap justify-around gap-6 items-center mt-10">
           {summary.map((item, index) => (
-            <li key={index} className='flex flex-col justify-center basis-32 gap-3 items-center'>
+            <li key={index} className='flex flex-col justify-center basis-52 gap-3 items-center'>
               <div className="flex space-x-3">
                 {item.details.map((detail, detailIndex) => (
                   <span
@@ -134,13 +111,13 @@ export default function PowerTrend() {
           index="Timestamp"
           colors={["blue", "violet", "cyan"]}
           curveType='monotone'
-          categories={['Total Load', 'Genset Power', 'PV Power']}
+          categories={['Total Active Power', 'Total Reactive Power']}
           startEndOnly={true}
           showLegend={false}
           showGradient={false}
           showYAxis={false}
           customTooltip={Tooltip}
-          valueFormatter={powerFormatter}
+          valueFormatter={(value) => value.toFixed(2)}
           className="h-72 dark:fill-gray-500 fill-gray-500 mt-6"
         />
       </div>
@@ -165,7 +142,7 @@ export default function PowerTrend() {
             <span className="flex flex-1 bg-blue-500 h-full justify-center p-2 rounded-md text-white cursor-pointer dark:bg-blue-500 dark:text-white items-center sm:flex-none" onClick={fetchData}>
               <TfiReload className="h-5 w-5" />
             </span>
-            <span className="flex flex-1 bg-blue-500 h-full justify-center p-2 rounded-md text-white cursor-pointer dark:bg-blue-500 dark:text-white items-center sm:flex-none" onClick={() => exportFromJSON({ data: data, fileName: `PowerTrend_${start.slice(0,10)}_${end.slice(0,10)}`, exportType: exportFromJSON.types.csv })}>
+            <span className="flex flex-1 bg-blue-500 h-full justify-center p-2 rounded-md text-white cursor-pointer dark:bg-blue-500 dark:text-white items-center sm:flex-none" onClick={() => exportFromJSON({ data: data, fileName: `PowerTrend_Genset_${start.slice(0,10)}_${end.slice(0,10)}`, exportType: exportFromJSON.types.csv })}>
               <FiDownload className="h-5 w-5" />
             </span>
             </div>
@@ -178,10 +155,14 @@ const Tooltip = ({ payload, active, label }) => {
   if (!active || !payload || payload.length === 0) return null;
 
   const status = {
-    "Total Load": "bg-blue-500 dark:bg-blue-500",
-    "Genset Power": "bg-violet-500 dark:bg-violet-500",
-    "PV Power": "bg-cyan-500 dark:bg-cyan-500",
+    "Total Active Power": "bg-blue-500 dark:bg-blue-500",
+    "Total Reactive Power": "bg-violet-500 dark:bg-violet-500",
   };
+
+  const formatter = {
+    'Total Active Power': (number) => `${number.toFixed(2)} kW`,
+    'Total Reactive Power': (number) => `${number.toFixed(2)} kVAr`,
+  }
 
   const data = payload.map((item) => ({
     status: item.dataKey,
@@ -190,7 +171,7 @@ const Tooltip = ({ payload, active, label }) => {
 
   return (
     <>
-      <div className="bg-white border border-gray-500/10 rounded-md shadow-md text-sm w-60 dark:bg-gray-900 dark:border-gray-400/20 mt-1 px-4 py-2 space-y-1">
+      <div className="bg-white border border-gray-500/10 rounded-md shadow-md text-sm min-w-60 dark:bg-gray-900 dark:border-gray-400/20 mt-1 px-4 py-2 space-y-1">
       <p className="flex justify-between items-center">
           <span className="font-medium">{label}</span>
         </p>
@@ -204,13 +185,13 @@ const Tooltip = ({ payload, active, label }) => {
               )}
               aria-hidden={true}
             />
-            <div className="flex justify-between w-full">
+            <div className="flex justify-between w-full gap-6">
               <span className="text-gray-900 dark:text-gray-50">
                 {item.status}
               </span>
               <div className="flex items-center space-x-1">
                 <span className="text-gray-900 dark:text-gray-50 font-medium">
-                  {`${item.value.toFixed(2)} kW`}
+                  {formatter[item.status](item.value)}
                 </span>
               </div>
             </div>

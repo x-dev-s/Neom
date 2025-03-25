@@ -179,6 +179,18 @@ export async function fetchInverterCurtailmentData(inverterId = 1, span = 7) {
   }
 }
 
+export async function fetchInvertersActivePowerData(){
+  try {
+    const connection = await connectToDatabase();
+    const [rows] = await connection.execute(
+      `SELECT TotalActivePower_I1 AS "Inverter 1", TotalActivePower_I2 AS "Inverter 2", TotalActivePower_I3 AS "Inverter 3", TotalActivePower_I4 AS "Inverter 4", TotalActivePower_I5 AS "Inverter 5", TotalActivePower_I6 AS "Inverter 6" FROM All_Data ORDER BY Timestamp DESC LIMIT 1`
+    );
+    return Response.json(rows);
+  } catch (error) {
+    return null;
+  }
+}
+
 export const fetchInverterTableData = async (inverterId = 1) => {
   try {
     const connection = await connectToDatabase();
@@ -255,6 +267,102 @@ LIMIT 1`
     );
     return Response.json(rows);
   } catch (error) {
+    return null;
+  }
+}
+
+export async function fetchMeteoTrendsData(start, end){
+  try {
+    const connection = await connectToDatabase();
+    const [rows] = await connection.execute(
+      `SELECT DATE_FORMAT(Timestamp, '%e/%c/%Y %l:%i %p') AS 'Timestamp', AmbientTemp AS "Ambient Temperature", AmbientHumidity AS "Ambient Humidity", TempPVmodule AS "PV Module Temperature", AtmosphericPressure AS "Air Pressure", WindSpeed AS "Wind Speed", WindAngle AS "Wind Angle", SlopeTransientIrradiation AS "Slope Transient Irradiation", TransientHorizontalIrradiation AS "Transient Horizontal Irradiation" FROM All_Data WHERE Timestamp BETWEEN ? AND ?`,
+      [start, end]
+    );
+    return Response.json(rows);
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function fetchPvPowerTrendData(start, end){
+  try {
+    if (!start || !end) {
+      return Response.json({ message: "Invalid request" }, { status: 400 });
+    }
+    const connection = await connectToDatabase();
+    const [rows] = await connection.execute(
+      `SELECT DATE_FORMAT(Timestamp, '%e/%c/%Y %l:%i %p') AS 'Timestamp', TotalActivePower_I AS "Total Active Power", TotalReactivePower_I AS "Total Reactive Power" FROM All_Data WHERE Timestamp BETWEEN ? AND ?`,
+      [start, end]
+    );
+    return Response.json(rows);
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function fetchPvPowerYieldData(span){
+  try {
+    const connection = await connectToDatabase();
+    const [rows] = await connection.execute(
+      `SELECT DATE(Timestamp) AS Day, DailyPowerYield_I AS "Daily Power Yield" FROM All_Data WHERE HOUR(Timestamp) = 23 AND Timestamp >= DATE_SUB(CURDATE(), INTERVAL ${parseInt(span)-1} DAY) GROUP BY Day`
+    );
+    const [latestPV] = await connection.execute(
+      `SELECT Timestamp AS Day, DailyPowerYield_I AS "Daily Power Yield" FROM All_Data WHERE 1 ORDER BY Timestamp DESC LIMIT 1`
+    );
+    rows.push(latestPV[0]);
+    return Response.json(rows);
+  }
+  catch (error) {
+    console.error("Error fetching data:", error);
+    return Response.json(
+      { message: "Error fetching data", error: error.message },
+      { status: 500 }
+    );
+  }
+}
+
+export async function fetchGeneratorsActivePowerData(){
+  try {
+    const connection = await connectToDatabase();
+    const [rows] = await connection.execute(
+      `SELECT TotalActivePower_G1 AS "Generator 1", TotalActivePower_G2 AS "Generator 2", TotalActivePower_G3 AS "Generator 3" FROM All_Data ORDER BY Timestamp DESC LIMIT 1`
+    );
+    return Response.json(rows);
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function fetchGensetPowerYieldData(span){
+  try {
+    const connection = await connectToDatabase();
+    const [rows] = await connection.execute(
+      `SELECT DATE(Timestamp) AS Day, SUM(TotalActivePower_G * (5 / 60)) AS "Daily Power Yield" FROM All_Data WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL ${parseInt(span)-1} DAY) GROUP BY Day`
+    );
+    return Response.json(rows);
+  }
+  catch (error) {
+    console.error("Error fetching data:", error);
+    return Response.json(
+      { message: "Error fetching data", error: error.message },
+      { status: 500 }
+    );
+  }
+}
+
+export async function fetchGensetPowerTrendData(start, end){
+  try {
+    if (!start || !end) {
+      return Response.json({ message: "Invalid request" }, { status: 400 });
+    }
+    const connection = await connectToDatabase();
+    const [rows] = await connection.execute(
+      `SELECT DATE_FORMAT(Timestamp, '%e/%c/%Y %l:%i %p') AS 'Timestamp', TotalActivePower_G AS "Total Active Power", TotalReactivePower_G AS "Total Reactive Power" FROM All_Data WHERE Timestamp BETWEEN ? AND ?`,
+      [start, end]
+    );
+    return Response.json(rows);
+  }
+  catch (error) {
     return null;
   }
 }

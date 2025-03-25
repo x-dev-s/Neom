@@ -8,7 +8,7 @@ function classNames(...classes) {
 }
 
 
-export default function TotalYieldDoughnut() {
+export default function ActivePowerDoughnut() {
     const [data, setData] = useState([]);
 
     const fetchData = async () => {
@@ -66,7 +66,7 @@ export default function TotalYieldDoughnut() {
     
     return (
         <>
-            <Card className="h-auto w-full md:h-full sm:mx-auto">
+            <Card className="h-auto w-full md:h-full sm:mx-auto flex flex-col justify-between">
                 <h3 className="text-tremor-content-strong text-tremor-default dark:text-dark-tremor-content-strong font-semibold">
                     Total Active Power
                 </h3>
@@ -123,7 +123,7 @@ const customTooltip = (props) => {
   
     if (!categoryPayload) return null;
     return (
-      <div className="flex bg-tremor-background bg-white border border-tremor-border justify-between rounded-lg rounded-tremor-default shadow-tremor-dropdown text-tremor-default w-full dark:bg-dark-tremor-background dark:bg-gray-900 dark:border-dark-tremor-border dark:border-gray-700 dark:shadow-dark-tremor-dropdown items-center min-w-52 px-2.5 py-2 space-x-4">
+      <div className="flex text-sm bg-tremor-background bg-white border border-tremor-border justify-between rounded-lg rounded-tremor-default shadow-tremor-dropdown text-tremor-default w-full dark:bg-dark-tremor-background dark:bg-gray-900 dark:border-dark-tremor-border dark:border-gray-700 dark:shadow-dark-tremor-dropdown items-center min-w-52 px-2.5 py-2 space-x-4">
         <div className="flex items-center space-x-2 truncate">
           <span
             className={classNames(

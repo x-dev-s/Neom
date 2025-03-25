@@ -94,7 +94,7 @@ export default function PowerTrend({id}) {
     <Card className="h-auto w-full md:h-full sm:mx-auto">
       <div className="sm:max-w-7xl sm:mx-auto">
         <h3 className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
-          Active Power Trend
+          Inverter Power Trend
         </h3>
         <p className="text-tremor-content text-tremor-default dark:text-dark-tremor-content leading-6"></p>
         <ul role="list" className="flex flex-wrap justify-around gap-6 items-center mt-10">
@@ -121,21 +121,6 @@ export default function PowerTrend({id}) {
         <TremorAreaChart
           data={data}
           index="Timestamp"
-          colors={['blue', 'violet', 'cyan']}
-          curveType='monotone'
-          categories={['Active Power', 'Reactive Power']}
-          showLegend={false}
-          startEndOnly={true}
-          showGradient={false}
-          showYAxis={false}
-          yAxisWidth={100}
-          valueFormatter={powerFormatter}
-          customTooltip={Tooltip}
-          className="h-72 dark:fill-gray-500 fill-gray-500 hidden mt-10 sm:block"
-        />
-        <TremorAreaChart
-          data={data}
-          index="Timestamp"
           colors={["blue", "violet", "cyan"]}
           curveType='monotone'
           categories={['Active Power', 'Reactive Power']}
@@ -144,8 +129,8 @@ export default function PowerTrend({id}) {
           showGradient={false}
           showYAxis={false}
           customTooltip={Tooltip}
-          valueFormatter={powerFormatter}
-          className="h-72 dark:fill-gray-500 fill-gray-500 mt-6 sm:hidden"
+          valueFormatter={(value) => value.toFixed(2)}
+          className="h-80 dark:fill-gray-500 fill-gray-500 mt-6"
         />
       </div>
       <div className="flex flex-wrap justify-between items-center mt-5">
@@ -177,6 +162,11 @@ const Tooltip = ({ payload, active, label }) => {
     "Reactive Power": "bg-violet-500 dark:bg-violet-500",
   };
 
+  const formatter = {
+    'Active Power': (number) => `${number.toFixed(2)} kW`,
+    'Reactive Power': (number) => `${number.toFixed(2)} kVAr`,
+  }
+
   const data = payload.map((item) => ({
     status: item.dataKey,
     value: item.value,
@@ -204,7 +194,7 @@ const Tooltip = ({ payload, active, label }) => {
               </span>
               <div className="flex items-center space-x-1">
                 <span className="text-gray-900 dark:text-gray-50 font-medium">
-                  {`${item.value.toFixed(2)} kW`}
+                  {formatter[item.status](item.value)}
                 </span>
               </div>
             </div>

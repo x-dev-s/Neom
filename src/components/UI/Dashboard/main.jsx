@@ -2,7 +2,7 @@
 import DailyYieldBar from "./DailyYieldBar";
 import CurtailmentBar from "./CurtailmentBar";
 import PowerTrend from "./PowerTrend";
-import TotalYieldDoughnut from "./TotalYieldDoughnut";
+import ActivePowerDoughnut from "./ActivePowerDoughnut";
 import MeteoKpi from "./MeteoKpi";
 
 export default function Dashboard() {
@@ -14,21 +14,21 @@ export default function Dashboard() {
           {/* Left Section - 65% */}
           <div className="flex grow flex-col w-full gap-3">
             {/* First Row - Two Columns */}
-            <div className="flex flex-wrap h-full w-full gap-3 md:flex-nowrap">
-              <div className="flex bg-white h-auto justify-center rounded-2xl w-full dark:bg-gray-950 items-center md:h-full md:w-1/2 overflow-hidden">
+            <div className="flex flex-wrap h-full w-full gap-3 lg:flex-nowrap">
+              <div className="flex bg-white h-auto justify-center rounded-2xl w-full dark:bg-gray-950 items-center lg:h-full lg:w-1/2 overflow-hidden">
                 <DailyYieldBar />
               </div>
-              <div className="flex bg-white h-auto justify-center rounded-2xl w-full dark:bg-gray-950 items-center md:h-full md:w-1/2 overflow-hidden">
+              <div className="flex bg-white h-auto justify-center rounded-2xl w-full dark:bg-gray-950 items-center lg:h-full lg:w-1/2 overflow-hidden">
                 <CurtailmentBar />
               </div>
             </div>
 
             {/* Second Row - Two Columns (35% - 65%) */}
-            <div className="flex flex-wrap h-full w-full gap-3 md:flex-nowrap">
-              <div className="flex bg-white justify-center rounded-2xl w-full dark:bg-gray-950 items-center md:w-[40%] overflow-hidden">
-                <TotalYieldDoughnut />
+            <div className="flex flex-wrap h-full w-full gap-3 lg:flex-nowrap">
+              <div className="flex bg-white justify-center rounded-2xl w-full dark:bg-gray-950 items-center lg:w-[35%] overflow-hidden">
+                <ActivePowerDoughnut />
               </div>
-              <div className="flex bg-white h-auto justify-center rounded-2xl w-full dark:bg-gray-950 items-center md:h-full md:w-[60%] overflow-hidden">
+              <div className="flex bg-white h-auto justify-center rounded-2xl w-full dark:bg-gray-950 items-center lg:h-full lg:w-[65%] overflow-hidden">
                 <PowerTrend />
               </div>
             </div>

@@ -1,4 +1,4 @@
-import { fetchPowerTrendData } from "../../../server";
+import { fetchGensetPowerTrendData } from "../../../server";
 export const dynamic = 'force-dynamic';
 export async function GET(request) {
   try {
@@ -7,7 +7,7 @@ export async function GET(request) {
     const start = decodeURIComponent(params.get('start'));
     const end = decodeURIComponent(params.get('end'));
     
-    const data = await fetchPowerTrendData(start, end);
+    const data = await fetchGensetPowerTrendData(start, end);
     return Response.json(await data.json());
   } catch (error) {
     return Response.json(

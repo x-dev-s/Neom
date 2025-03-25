@@ -1,4 +1,4 @@
-
+import Meteo from "../../components/UI/Meteo/main";
 export const metadata = {
     title: "Meteo - " + process.env.WEBSITE_NAME,
     openGraph: {
@@ -9,5 +9,5 @@ export const metadata = {
     },
 };
 export default function MeteoPage(){
-    return <></>
+    return <Meteo />
 }
