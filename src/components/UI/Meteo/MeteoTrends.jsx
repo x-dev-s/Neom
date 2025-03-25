@@ -88,29 +88,29 @@ export default function MeteoTrends() {
       valueFormatter: (number) => `${number.toFixed(2)} °C`,
     },
     {
-      name: "Air Pressure",
-      color: "bg-fuchsia-500",
-      valueFormatter: (number) => `${number.toFixed(2)} kPa`,
-    },
-    {
       name: "Wind Speed",
-      color: "bg-blue-500",
+      color: "bg-fuchsia-500",
       valueFormatter: (number) => `${number.toFixed(2)} m/s`,
     },
     {
       name: "Wind Angle",
-      color: "bg-violet-500",
+      color: "bg-blue-500",
       valueFormatter: (number) => `${number.toFixed(2)} °`,
     },
     {
       name: "Slope Transient Irradiation",
-      color: "bg-cyan-500",
+      color: "bg-violet-500",
       valueFormatter: (number) => `${number.toFixed(2)} W/m²`,
     },
     {
       name: "Transient Horizontal Irradiation",
-      color: "bg-fuchsia-500",
+      color: "bg-cyan-500",
       valueFormatter: (number) => `${number.toFixed(2)} W/m²`,
+    },
+    {
+      name: "Air Pressure",
+      color: "bg-fuchsia-500",
+      valueFormatter: (number) => `${number.toFixed(2)} kPa`,
     },
   ];
 
@@ -120,7 +120,7 @@ export default function MeteoTrends() {
       <Card className="h-auto w-full md:h-full sm:mx-auto ring-0 bg-white justify-center rounded-2xl dark:bg-gray-950 items-center overflow-hidden">
         <div className="sm:max-w-7xl sm:mx-auto">
           <h3 className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
-            Temperature, Pressure & Humidity
+            Temperature, Humidity & Speed
           </h3>
           <p className="text-tremor-content text-tremor-default dark:text-dark-tremor-content leading-6"></p>
           <ul
@@ -156,7 +156,7 @@ export default function MeteoTrends() {
               "Ambient Temperature",
               "Ambient Humidity",
               "PV Module Temperature",
-              "Air Pressure",
+              "Wind Speed",
             ]}
             startEndOnly={true}
             showLegend={false}
@@ -239,7 +239,7 @@ export default function MeteoTrends() {
       <Card className="h-auto w-full md:h-full ring-0 sm:mx-auto bg-white justify-center rounded-2xl dark:bg-gray-950 items-center overflow-hidden">
         <div className="sm:max-w-7xl sm:mx-auto">
           <h3 className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
-            Speed, Direction & Irradiance
+            Direction, Irradiance & Pressure
           </h3>
           <p className="text-tremor-content text-tremor-default dark:text-dark-tremor-content leading-6"></p>
           <ul
@@ -272,10 +272,10 @@ export default function MeteoTrends() {
             colors={["blue", "violet", "cyan", "fuchsia"]}
             curveType="monotone"
             categories={[
-              "Wind Speed",
               "Wind Angle",
               "Slope Transient Irradiation",
               "Transient Horizontal Irradiation",
+              "Air Pressure",
             ]}
             startEndOnly={true}
             showLegend={false}
@@ -365,11 +365,11 @@ const Tooltip = ({ payload, active, label }) => {
     "Ambient Temperature": "bg-blue-500 dark:bg-blue-500",
     "Ambient Humidity": "bg-violet-500 dark:bg-violet-500",
     "PV Module Temperature": "bg-cyan-500 dark:bg-cyan-500",
+    "Wind Speed": "bg-fuchsia-500 dark:bg-fuchsia-500",
+    "Wind Angle": "bg-blue-500 dark:bg-blue-500",
+    "Slope Transient Irradiation": "bg-violet-500 dark:bg-violet-500",
+    "Transient Horizontal Irradiation": "bg-cyan-500 dark:bg-cyan-500",
     "Air Pressure": "bg-fuchsia-500 dark:bg-fuchsia-500",
-    "Wind Speed": "bg-blue-500 dark:bg-blue-500",
-    "Wind Angle": "bg-violet-500 dark:bg-violet-500",
-    "Slope Transient Irradiation": "bg-cyan-500 dark:bg-cyan-500",
-    "Transient Horizontal Irradiation": "bg-fuchsia-500 dark:bg-fuchsia-500",
   };
 
   const data = payload.map((item) => ({

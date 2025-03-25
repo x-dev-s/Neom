@@ -62,7 +62,7 @@ export default function DailyYieldBar_SingleGenerator({ id }) {
 
   return (
     <>
-      <Card className="h-full w-full sm:mx-auto">
+      <Card className="h-full w-full sm:mx-auto flex flex-col justify-between">
         <div className="flex flex-wrap justify-between items-center gap-3">
           <h3 className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
             Daily Power Yield
@@ -127,7 +127,7 @@ export default function DailyYieldBar_SingleGenerator({ id }) {
           showYAxis={false}
           yAxisWidth={100}
           showXAxis={true}
-          className="h-48 sm:h-72 mt-8"
+          className="h-48 sm:h-72 lg:h-96 mt-8"
         />
         <div className="mt-4 flex items-center justify-between gap-2">
               <div className="flex items-center space-x-2">

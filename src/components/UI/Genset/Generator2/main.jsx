@@ -12,25 +12,25 @@ export default function Generator2() {
           {/* Left Section - 65% */}
           <div className="flex grow flex-col w-full gap-3">
             {/* First Row - Two Columns */}
-            <div className="flex flex-wrap h-full w-full gap-3 md:flex-nowrap">
-              <div className="flex bg-white h-auto justify-center rounded-2xl w-full dark:bg-gray-950 items-center md:h-full md:w-1/2 overflow-hidden">
+            <div className="flex flex-wrap h-full w-full gap-3 lg:flex-nowrap">
+              <div className="flex bg-white h-auto justify-center rounded-2xl w-full dark:bg-gray-950 items-center lg:h-full lg:w-1/2 overflow-hidden">
                 <DailyYieldBar_SingleGenerator id={2} />
               </div>
-              <div className="flex bg-white h-auto justify-center rounded-2xl w-full dark:bg-gray-950 items-center md:h-full md:w-1/2 overflow-hidden">
+              <div className="flex bg-white h-auto justify-center rounded-2xl w-full dark:bg-gray-950 items-center lg:h-full lg:w-1/2 overflow-hidden">
               <PowerTrend_SingleGenerator id={2} />
               </div>
             </div>
 
 
             {/* Second Row - Three Columns */}
-            <div className="flex flex-wrap h-full w-full gap-3 md:flex-nowrap">
-              <div className="flex bg-white h-auto justify-center rounded-2xl w-full dark:bg-gray-950 items-center md:h-full overflow-hidden">
+            <div className="flex flex-wrap h-full w-full gap-3 lg:flex-nowrap">
+              <div className="flex bg-white h-auto justify-center rounded-2xl w-full dark:bg-gray-950 items-center lg:h-full overflow-hidden">
                 <OperationStatus_SingleGenerator id={2} />
               </div>
             </div>
 
             {/* Third Row - Three Columns */}
-            <div className="flex flex-wrap h-full w-full gap-3 md:flex-nowrap">
+            <div className="flex flex-wrap h-full w-full gap-3 lg:flex-nowrap">
               <div className="flex flex-col bg-white justify-center rounded-2xl w-full dark:bg-gray-950 items-center overflow-hidden">
                 <DataTable_SingleGenerator id={2} />
               </div>

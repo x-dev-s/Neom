@@ -54,12 +54,12 @@ export default function OperationStatus_SingleInverter({id}) {
           <h3 className="font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
             Device Operation Status
           </h3>
-          <span className="inline-flex items-center gap-2 rounded-tremor-full px-3 py-1 text-tremor-default text-tremor-content-emphasis ring-1 ring-inset ring-tremor-ring dark:text-dark-tremor-content-emphasis dark:ring-dark-tremor-ring">
+          <span className="inline-flex items-center gap-2 rounded-lg px-3 py-1 text-tremor-default text-tremor-content-emphasis ring-1 ring-inset ring-gray-200 dark:text-dark-tremor-content-emphasis dark:ring-gray-500">
             <span
-              className="-ml-0.5 size-2 rounded-tremor-full bg-emerald-500"
+              className={`-ml-0.5 size-2 rounded-tremor-full bg-${colorMapping[data[data.length - 1].status]}`}
               aria-hidden={true}
             />
-            Operational
+            {data[data.length - 1].status}
           </span>
         </div>
         <div className="mt-8 flex items-center justify-between">
@@ -76,7 +76,7 @@ export default function OperationStatus_SingleInverter({id}) {
             {percent.toFixed(2)}% uptime
           </p>
         </div>
-        <Tracker data={data} className="mt-4 hidden w-full lg:flex gap-[1px] rounded overflow-hidden" />
+        <Tracker data={data} className="mt-4 w-full flex gap-[1px] rounded overflow-hidden" />
         <div className="mt-3 flex items-center justify-between text-tremor-default text-tremor-content dark:text-dark-tremor-content">
           <span>{data.length} days ago</span>
           <span>Today</span>

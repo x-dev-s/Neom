@@ -132,21 +132,6 @@ export default function PowerTrend({id}) {
         <TremorAreaChart
           data={data}
           index="Timestamp"
-          colors={['blue', 'violet', 'cyan']}
-          curveType='monotone'
-          categories={['Active Power', 'Reactive Power', 'Apparent Power']}
-          showLegend={false}
-          startEndOnly={true}
-          showGradient={false}
-          showYAxis={false}
-          yAxisWidth={100}
-          valueFormatter={powerFormatter}
-          customTooltip={Tooltip}
-          className="h-72 dark:fill-gray-500 fill-gray-500 hidden mt-10 sm:block"
-        />
-        <TremorAreaChart
-          data={data}
-          index="Timestamp"
           colors={["blue", "violet", "cyan"]}
           curveType='monotone'
           categories={['Active Power', 'Reactive Power', 'Apparent Power']}
@@ -156,7 +141,7 @@ export default function PowerTrend({id}) {
           showYAxis={false}
           customTooltip={Tooltip}
           valueFormatter={powerFormatter}
-          className="h-72 dark:fill-gray-500 fill-gray-500 mt-6 sm:hidden"
+          className="h-72 dark:fill-gray-500 fill-gray-500 mt-6"
         />
       </div>
       <div className="flex flex-wrap justify-between items-center mt-5">
