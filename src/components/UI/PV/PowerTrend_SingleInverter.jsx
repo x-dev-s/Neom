@@ -174,7 +174,7 @@ const Tooltip = ({ payload, active, label }) => {
 
   return (
     <>
-      <div className="bg-white border border-gray-500/10 rounded-md shadow-md text-sm w-60 dark:bg-gray-900 dark:border-gray-400/20 mt-1 px-4 py-2 space-y-1">
+      <div className="bg-white border border-gray-500/10 rounded-md shadow-md text-sm min-w-60 dark:bg-gray-900 dark:border-gray-400/20 mt-1 px-4 py-2 space-y-1">
       <p className="flex justify-between items-center">
           <span className="font-medium">{label}</span>
         </p>
@@ -188,7 +188,7 @@ const Tooltip = ({ payload, active, label }) => {
               )}
               aria-hidden={true}
             />
-            <div className="flex justify-between w-full">
+            <div className="flex justify-between w-full gap-6">
               <span className="text-gray-900 dark:text-gray-50">
                 {item.status}
               </span>

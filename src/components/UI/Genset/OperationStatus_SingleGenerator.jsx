@@ -25,7 +25,7 @@ export default function OperationStatus_SingleGenerator({id}) {
       const result = await response.json();
       setData(result.map((item) => ({ 
         tooltip: new Date(item.Day).toLocaleDateString("en-PK"),
-        status: item["Daily Power Yield" > 1] ? "Operational" : "Downtime",
+        status: item["Daily Power Yield"] > 1 ? "Operational" : "Downtime",
         color: colorMapping[item["Daily Power Yield"] ? "Operational" : "Downtime"],
       })));
       setPercent(result.filter((item) => item["Daily Power Yield"] > 1).length / result.length * 100);
