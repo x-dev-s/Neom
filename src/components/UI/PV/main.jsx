@@ -3,6 +3,7 @@ import DailyYieldBar_PV from "./DailyYieldBar_PV"
 import CurtailmentBar_PV from "./CurtailmentBar_PV";
 import PowerTrend_PV from "./PowerTrend_PV";
 import ActivePowerDoughnut_Inverters from "./ActivePowerDoughnut_Inverters";
+import PerformanceKpi from "./PerformanceKpi";
 
 export default function PV() {
   return (
@@ -33,9 +34,9 @@ export default function PV() {
             </div>
 
             {/* Third Row - Three Columns */}
-            {/* <div className="flex flex-col gap-3">
-              <MeteoKpi />
-            </div> */}
+            <div className="flex flex-col gap-3">
+              <PerformanceKpi />
+            </div>
           </div>
         </div>
       </div>

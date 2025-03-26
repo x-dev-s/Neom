@@ -2,6 +2,7 @@
 import DailyYieldBar_Genset from "./DailyYieldBar_Genset"
 import PowerTrend_Genset from "./PowerTrend_Genset";
 import ActivePowerDoughnut_Generators from "./ActivePowerDoughnut_Generators";
+import OutputKpi from "./OutputKpi";
 
 export default function Genset() {
   return (
@@ -32,9 +33,9 @@ export default function Genset() {
             </div>
 
             {/* Third Row - Three Columns */}
-            {/* <div className="flex flex-col gap-3">
-              <MeteoKpi />
-            </div> */}
+            <div className="flex flex-col gap-3">
+              <OutputKpi />
+            </div>
           </div>
         </div>
       </div>

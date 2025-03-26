@@ -26,24 +26,9 @@ export default function DataTable({ id }) {
       const result = await response.json();
       let Data = [
         {
-          name: "Engine Speed",
-          value: result[result.length - 1]["Engine Speed"],
-          unit: "RPM",
-        },
-        {
-          name: "Generator Frequency",
-          value: result[result.length - 1]["Generator Frequency"],
-          unit: "Hz",
-        },
-        {
           name: "Generator Output",
           value: result[result.length - 1]["Generator Output"],
-          unit: "kW",
-        },
-        {
-          name: "Power Factor",
-          value: result[result.length - 1]["Power Factor"],
-          unit: "",
+          unit: "%",
         },
         {
           name: "Line 1 Voltage",
@@ -91,9 +76,24 @@ export default function DataTable({ id }) {
           unit: "kW",
         },
         {
+          name: "Power Factor",
+          value: result[result.length - 1]["Power Factor"],
+          unit: "",
+        },
+        {
+          name: "Generator Frequency",
+          value: result[result.length - 1]["Generator Frequency"],
+          unit: "Hz",
+        },
+        {
+          name: "Engine Speed",
+          value: result[result.length - 1]["Engine Speed"],
+          unit: "RPM",
+        },
+        {
           name: "Oil Pressure",
           value: result[result.length - 1]["Oil Pressure"],
-          unit: "PSI",
+          unit: "kPa",
         },
         {
           name: "Coolant Temperature",

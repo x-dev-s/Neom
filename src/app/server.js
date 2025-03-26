@@ -195,7 +195,7 @@ export const fetchInverterTableData = async (inverterId = 1) => {
   try {
     const connection = await connectToDatabase();
     const [rows] = await connection.execute(
-      `SELECT DATE_FORMAT(Timestamp, '%e/%c/%Y %l:%i %p') AS 'Timestamp', TotalDCpower_I${inverterId} AS "DC Power", TotalPowerFactor_I${inverterId} AS "Power Factor", PhaseAVoltage_I${inverterId} AS "Phase A Voltage", PhaseBVoltage_I${inverterId} AS "Phase B Voltage", PhaseCVoltage_I${inverterId} AS "Phase C Voltage", PhaseACurrent_I${inverterId} AS "Phase A Current", PhaseBCurrent_I${inverterId} AS "Phase B Current", PhaseCCurrent_I${inverterId} AS "Phase C Current", InteriorTemp_I${inverterId} AS "Interior Temperature" FROM All_Data WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL 1 DAY)`
+      `SELECT DATE_FORMAT(Timestamp, '%e/%c/%Y %l:%i %p') AS 'Timestamp', (TotalActivePower_I${inverterId} / CurrentCapacity_I${inverterId}) * 100 AS "Performance Ratio", TotalDCpower_I${inverterId} AS "DC Power", TotalPowerFactor_I${inverterId} AS "Power Factor", PhaseAVoltage_I${inverterId} AS "Phase A Voltage", PhaseBVoltage_I${inverterId} AS "Phase B Voltage", PhaseCVoltage_I${inverterId} AS "Phase C Voltage", PhaseACurrent_I${inverterId} AS "Phase A Current", PhaseBCurrent_I${inverterId} AS "Phase B Current", PhaseCCurrent_I${inverterId} AS "Phase C Current", InteriorTemp_I${inverterId} AS "Interior Temperature" FROM All_Data WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL 1 DAY)`
     );
     return Response.json(rows);
   } catch (error) {
@@ -321,6 +321,18 @@ export async function fetchPvPowerYieldData(span){
   }
 }
 
+export async function fetchInvertersPerformanceKpiData(){
+  try {
+    const connection = await connectToDatabase();
+    const [rows] = await connection.execute(
+      `SELECT DATE_FORMAT(Timestamp, '%e/%c/%Y %l:%i %p') AS 'Timestamp', (TotalActivePower_I1 / CurrentCapacity_I1) * 100 AS "Inverter 1", (TotalActivePower_I2 / CurrentCapacity_I2) * 100 AS "Inverter 2", (TotalActivePower_I3 / CurrentCapacity_I3) * 100 AS "Inverter 3", (TotalActivePower_I4 / CurrentCapacity_I4) * 100 AS "Inverter 4", (TotalActivePower_I5 / CurrentCapacity_I5) * 100 AS "Inverter 5", (TotalActivePower_I6 / CurrentCapacity_I6) * 100 AS "Inverter 6" FROM All_Data WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL 1 DAY)`
+    );
+    return Response.json(rows);
+  } catch (error) {
+    return null;
+  }
+}
+
 export async function fetchGeneratorsActivePowerData(){
   try {
     const connection = await connectToDatabase();
@@ -375,6 +387,19 @@ export const fetchGeneratorTableData = async (generatorId = 1) => {
     );
     return Response.json(rows);
   } catch (error) {
+    return null;
+  }
+}
+
+export const fetchGeneratorsOuputKpiData = async () => {
+  try {
+    const connection = await connectToDatabase();
+    const [rows] = await connection.execute(
+      `SELECT DATE_FORMAT(Timestamp, '%e/%c/%Y %l:%i %p') AS 'Timestamp', GeneratorOutput_G1 AS "Generator 1", GeneratorOutput_G2 AS "Generator 2", GeneratorOutput_G3 AS "Generator 3" FROM All_Data WHERE Timestamp >= DATE_SUB(NOW(), INTERVAL 1 DAY)`
+    );
+    return Response.json(rows);
+  }
+  catch (error) {
     return null;
   }
 }

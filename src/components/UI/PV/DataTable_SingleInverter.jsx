@@ -26,6 +26,11 @@ export default function DataTable({ id }) {
       const result = await response.json();
       let Data = [
         {
+          name: "Performance Ratio",
+          value: result[result.length - 1]["Performance Ratio"],
+          unit: "%",
+        },
+        {
           name: "DC Power",
           value: result[result.length - 1]["DC Power"],
           unit: "kW",
