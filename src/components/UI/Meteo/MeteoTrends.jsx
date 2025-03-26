@@ -117,10 +117,10 @@ export default function MeteoTrends() {
   // Main Component
   return (
     <>
-      <Card className="h-auto w-full md:h-full sm:mx-auto ring-0 bg-white justify-center rounded-2xl dark:bg-gray-950 items-center overflow-hidden">
+      <Card className="h-auto w-full md:h-full sm:mx-auto ring-0 bg-white flex flex-col justify-between rounded-2xl dark:bg-gray-950 items-center overflow-hidden">
         <div className="sm:max-w-7xl sm:mx-auto">
           <h3 className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
-            Temperature, Humidity & Speed
+          Meteo Station Trends
           </h3>
           <p className="text-tremor-content text-tremor-default dark:text-dark-tremor-content leading-6"></p>
           <ul
@@ -236,10 +236,10 @@ export default function MeteoTrends() {
         </div>
       </Card>
 
-      <Card className="h-auto w-full md:h-full ring-0 sm:mx-auto bg-white justify-center rounded-2xl dark:bg-gray-950 items-center overflow-hidden">
+      <Card className="h-auto w-full md:h-full ring-0 sm:mx-auto bg-white flex flex-col justify-between rounded-2xl dark:bg-gray-950 items-center overflow-hidden">
         <div className="sm:max-w-7xl sm:mx-auto">
           <h3 className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
-            Direction, Irradiance & Pressure
+            Meteo Station Trends
           </h3>
           <p className="text-tremor-content text-tremor-default dark:text-dark-tremor-content leading-6"></p>
           <ul
