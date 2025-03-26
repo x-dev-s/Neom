@@ -63,7 +63,7 @@ export default function Login() {
                         placeholder="Email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="bg-white border border-gray-300 p-2 rounded-lg text-sm focus:bg-white"
+                        className="bg-white dark:bg-gray-700 border border-gray-300 p-2 rounded-lg text-sm focus:bg-white"
                         required
                     />
                     <input
@@ -72,7 +72,7 @@ export default function Login() {
                         placeholder="Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="bg-white border border-gray-300 p-2 rounded-lg text-sm focus:bg-white"
+                        className="bg-white dark:bg-gray-700 border border-gray-300 p-2 rounded-lg text-sm focus:bg-white"
                         required
                     />
                     {/* <Link href="/forgotpassword" className="text-[12px] text-green-600">Forgot password?</Link> */}
@@ -85,7 +85,7 @@ export default function Login() {
                     </button>
                     {error && <p className={!error.includes("Success") ? "text-red-500 pt-2 text-sm" : "text-green-500 mt-2 text-sm"}>* {error}</p>}
                 </form>
-                {/* <p className="text-center text-gray-300 text-lg py-3">- OR -</p>
+                {/* <p className="text-center text-gray-300 dark:text-gray-400 text-lg py-3">- OR -</p>
                 <p className="text-center text-sm">Don&apos;t have an account? <Link href="/register" className="text-green-600">Register</Link></p> */}
             </div>
         </div>

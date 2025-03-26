@@ -62,7 +62,7 @@ export default function Register() {
     return (
         <div className="flex bg-white h-dvh justify-center w-dvw dark:bg-gray-700 fixed items-center p-3 left-0 top-0 z-50">
             <div className="flex flex-col bg-green-50 justify-center m-auto rounded-3xl shadow-2xl w-full dark:bg-gray-950 items-center px-8 py-[100px] h-auto max-w-96">
-                <img src="/images/logo.png" alt="Logo" className="h-20 mb-10 mx-auto" />
+            <img src="/images/logo.png" alt="Logo" className="h-32 dark:bg-green-100 mb-10 mx-auto p-6 rounded-2xl" />
                 <h1 className="text-3xl font-bold font-mono text-center pb-10">Register</h1>
                 <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
                     {/* <select
@@ -79,7 +79,7 @@ export default function Register() {
                         name="name"
                         placeholder="Full Name"
                         onChange={(e) => setName(e.target.value)}
-                        className="p-2 bg-white focus:bg-white text-sm border border-gray-300 rounded-lg"
+                        className="p-2 bg-white dark:bg-gray-700 focus:bg-white text-sm border border-gray-300 rounded-lg"
                         required
                     />
                     <input
@@ -88,7 +88,7 @@ export default function Register() {
                         placeholder="Email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="p-2 bg-white focus:bg-white text-sm border border-gray-300 rounded-lg"
+                        className="p-2 bg-white dark:bg-gray-700 focus:bg-white text-sm border border-gray-300 rounded-lg"
                         required
                     />
                     <input
@@ -97,7 +97,7 @@ export default function Register() {
                         placeholder="Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="p-2 bg-white focus:bg-white text-sm border border-gray-300 rounded-lg"
+                        className="p-2 bg-white dark:bg-gray-700 focus:bg-white text-sm border border-gray-300 rounded-lg"
                         required
                     />
                     <button
@@ -109,7 +109,7 @@ export default function Register() {
                     </button>
                     {error && <p className="text-red-500 text-sm pt-2">* {error}</p>}
                 </form>
-                <p className="text-center text-xl py-3 text-gray-300">- OR -</p>
+                <p className="text-center text-lg py-3 text-gray-300 dark:text-gray-400">- OR -</p>
                 <p className="text-center text-sm">Already have an account? <Link href="/login" className="text-green-600">Login</Link></p>
             </div>
         </div>
