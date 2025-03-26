@@ -70,8 +70,9 @@ export default function OutputKpi() {
                 showGridLines={false}
                 showGradient={false}
                 startEndOnly={true}
+                valueFormatter={(value) => item.valueFormatter(value)}
                 className="h-24 -mb-2 dark:text-dark-tremor-content mt-3"
-                showTooltip={false}
+                showTooltip={true}
               />
             </Card>
           )}
