@@ -75,6 +75,10 @@ nav::-webkit-scrollbar {
   height: 0;
 }
 
+.tremor-Tracker-trackingBlock *{
+  color: black;
+}
+
 @keyframes dashMove {
   from {
       background-position: 0;

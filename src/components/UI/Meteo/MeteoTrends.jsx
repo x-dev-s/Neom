@@ -118,7 +118,7 @@ export default function MeteoTrends() {
   return (
     <>
       <Card className="h-auto w-full md:h-full sm:mx-auto ring-0 bg-white flex flex-col justify-between rounded-2xl dark:bg-gray-950 items-center overflow-hidden">
-        <div className="sm:max-w-7xl sm:mx-auto">
+        <div className="sm:mx-auto">
           <h3 className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
           Meteo Station Trends
           </h3>
@@ -237,7 +237,7 @@ export default function MeteoTrends() {
       </Card>
 
       <Card className="h-auto w-full md:h-full ring-0 sm:mx-auto bg-white flex flex-col justify-between rounded-2xl dark:bg-gray-950 items-center overflow-hidden">
-        <div className="sm:max-w-7xl sm:mx-auto">
+        <div className="sm:mx-auto">
           <h3 className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
             Meteo Station Trends
           </h3>

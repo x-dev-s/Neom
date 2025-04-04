@@ -80,7 +80,7 @@ export default function PowerTrend_PV() {
   // Main Component
   return (
     <Card className="h-auto w-full md:h-full sm:mx-auto">
-      <div className="sm:max-w-7xl sm:mx-auto">
+      <div className="sm:mx-auto">
         <h3 className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
           PV Power Trend
         </h3>

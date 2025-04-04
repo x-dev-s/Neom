@@ -73,6 +73,7 @@ export default function OutputKpi() {
                 valueFormatter={(value) => item.valueFormatter(value)}
                 className="h-24 -mb-2 dark:text-dark-tremor-content mt-3"
                 showTooltip={true}
+                customTooltip={Tooltip}
               />
             </Card>
           )}
@@ -82,14 +83,44 @@ export default function OutputKpi() {
   );
 }
 
-const customTooltipHandler = (props, setselectedChartData) => {
-  if (props.active) {
-    setselectedChartData((prev) => {
-      if (prev?.label === props?.label) return prev;
-      return props;
-    });
-  } else {
-    setselectedChartData(null);
-  }
-  return null;
-}
+
+const Tooltip = ({ payload, active, label }) => {
+  if (!active || !payload || payload.length === 0) return null;
+
+  const data = payload.map((item) => ({
+    status: item.dataKey,
+    value: item.value,
+  }));
+
+  return (
+    <>
+      <div className="bg-white border border-gray-500/10 rounded-md shadow-md text-sm max-w-72 dark:bg-gray-900 dark:border-gray-400/20 mt-1 px-4 py-2 space-y-1">
+      <p className="flex justify-between items-center">
+          <span className="font-medium">{label}</span>
+        </p>
+        <hr className="border-gray-500/10 dark:border-gray-400/20" />
+        {data.map((item, index) => (
+          <div key={index} className="flex items-center space-x-2.5">
+            <span
+              className={cx(
+                "bg-blue-500 dark:bg-blue-500",
+                "size-2 shrink-0 rounded-sm"
+              )}
+              aria-hidden={true}
+            />
+            <div className="flex justify-between w-full gap-6">
+              <span className="text-gray-900 dark:text-gray-50 text-wrap">
+                {item.status}
+              </span>
+              <div className="flex items-center space-x-1">
+                <span className="text-gray-900 dark:text-gray-50 font-medium">
+                  {`${item.value.toFixed(2)} %`}
+                </span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+};

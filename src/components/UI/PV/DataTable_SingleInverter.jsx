@@ -147,7 +147,7 @@ export default function DataTable({ id }) {
                     valueFormatter={(value) => `${value.toFixed(2)} ${item.unit}`}
                     showXAxis={false}
                     showYAxis={false}
-                    showTooltip={true}
+                    showTooltip={false}
                     showLegend={false}
                   />
                 </div>

@@ -76,7 +76,7 @@ export default function OperationStatus_SingleGenerator({id}) {
             {percent.toFixed(2)}% uptime
           </p>
         </div>
-        <Tracker data={data} className="mt-4 w-full flex gap-[1px] rounded overflow-hidden" />
+        <Tracker data={data} className="mt-4 w-full flex gap-[1px] rounded text-black dark:dark-gray-200 overflow-hidden" />
         <div className="mt-3 flex items-center justify-between text-tremor-default text-tremor-content dark:text-dark-tremor-content">
           <span>{data.length} days ago</span>
           <span>Today</span>
