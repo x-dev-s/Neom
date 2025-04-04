@@ -92,7 +92,7 @@ export default function PowerTrend({id}) {
   // Main Component
   return (
     <Card className="h-auto w-full md:h-full sm:mx-auto">
-      <div className="sm:mx-auto">
+      <div className="w-full sm:mx-auto">
         <h3 className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
           Inverter Power Trend
         </h3>
@@ -133,7 +133,7 @@ export default function PowerTrend({id}) {
           className="h-80 dark:fill-gray-500 fill-gray-500 mt-6"
         />
       </div>
-      <div className="flex flex-wrap justify-between items-center mt-5">
+      <div className="flex flex-wrap justify-between items-center mt-5 w-full max-w-5xl mx-auto">
           <div className="flex flex-wrap justify-stretch w-full gap-1 items-center">
             <input type="datetime-local" min={"2025-03-16T00:00"} max={end} onChange={
               (e) => setStart(e.target.value)

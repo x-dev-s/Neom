@@ -103,7 +103,7 @@ export default function PowerTrend() {
   // Main Component
   return (
     <Card className="h-auto w-full md:h-full sm:mx-auto">
-      <div className="sm:mx-auto">
+      <div className="w-full sm:mx-auto">
         <h3 className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
           Active Power Trend
         </h3>
@@ -144,7 +144,7 @@ export default function PowerTrend() {
           className="h-72 dark:fill-gray-500 fill-gray-500 mt-6"
         />
       </div>
-      <div className="flex flex-wrap justify-between items-center mt-5">
+      <div className="flex flex-wrap justify-between items-center mt-5 w-full max-w-5xl mx-auto">
           {/* <span className="text-tremor-content text-tremor-default dark:text-dark-tremor-content font-medium">
             Last 24 hours
           </span>
