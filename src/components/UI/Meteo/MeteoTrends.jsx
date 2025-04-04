@@ -118,7 +118,7 @@ export default function MeteoTrends() {
   return (
     <>
       <Card className="h-auto w-full md:h-full sm:mx-auto ring-0 bg-white flex flex-col justify-between rounded-2xl dark:bg-gray-950 items-center overflow-hidden">
-        <div className="sm:mx-auto">
+        <div className="w-full sm:mx-auto">
           <h3 className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
           Meteo Station Trends
           </h3>
@@ -167,7 +167,7 @@ export default function MeteoTrends() {
             className="h-80 dark:fill-gray-500 fill-gray-500 mt-6"
           />
         </div>
-        <div className="flex flex-wrap justify-between items-center mt-5">
+        <div className="flex flex-wrap justify-between items-center mt-5 w-full max-w-5xl mx-auto">
           {/* <span className="text-tremor-content text-tremor-default dark:text-dark-tremor-content font-medium">
               Last 24 hours
             </span>
@@ -237,7 +237,7 @@ export default function MeteoTrends() {
       </Card>
 
       <Card className="h-auto w-full md:h-full ring-0 sm:mx-auto bg-white flex flex-col justify-between rounded-2xl dark:bg-gray-950 items-center overflow-hidden">
-        <div className="sm:mx-auto">
+        <div className="w-full sm:mx-auto">
           <h3 className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
             Meteo Station Trends
           </h3>
@@ -286,7 +286,7 @@ export default function MeteoTrends() {
             className="h-80 dark:fill-gray-500 fill-gray-500 mt-6"
           />
         </div>
-        <div className="flex flex-wrap justify-between items-center mt-5">
+        <div className="flex flex-wrap justify-between items-center mt-5 w-full max-w-5xl mx-auto">
           {/* <span className="text-tremor-content text-tremor-default dark:text-dark-tremor-content font-medium">
               Last 24 hours
             </span>
