@@ -16,6 +16,9 @@
     fill: #6b7280;
     font-size: 12px;
   }
+  .tremor-Tracker-trackingBlock *{
+    color: #f9fafb;
+  }  
 }
 
 body {
