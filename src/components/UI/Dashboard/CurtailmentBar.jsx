@@ -65,45 +65,45 @@ export default function CurtailmentBar() {
         name: "Max. Power Yield",
         value: data[data.length - 1]["Max. Power Yield"],
         percentage:
-          data[data.length - 2]["Max. Power Yield"] > 0
-            ? Math.abs(((data[data.length - 1]["Max. Power Yield"] -
-          data[data.length - 2]["Max. Power Yield"]) /
-            data[data.length - 2]["Max. Power Yield"]) *
+          data[data.length - 3]["Max. Power Yield"] > 0
+            ? Math.abs(((data[data.length - 2]["Max. Power Yield"] -
+          data[data.length - 3]["Max. Power Yield"]) /
+            data[data.length - 3]["Max. Power Yield"]) *
             100).toFixed(2)
             : 0,
         notSigned:
-          data[data.length - 1]["Max. Power Yield"] -
-            data[data.length - 2]["Max. Power Yield"] >
+          data[data.length - 2]["Max. Power Yield"] -
+            data[data.length - 3]["Max. Power Yield"] >
           0,
       },
       {
         name: "Curtailed Power Yield",
         value: data[data.length - 1]["Curtailed Power Yield"],
         percentage:
-          data[data.length - 2]["Curtailed Power Yield"] > 0
-            ? Math.abs(((data[data.length - 1]["Curtailed Power Yield"] -
-              data[data.length - 2]["Curtailed Power Yield"]) /
-              data[data.length - 2]["Curtailed Power Yield"]) *
+          data[data.length - 3]["Curtailed Power Yield"] > 0
+            ? Math.abs(((data[data.length - 2]["Curtailed Power Yield"] -
+              data[data.length - 3]["Curtailed Power Yield"]) /
+              data[data.length - 3]["Curtailed Power Yield"]) *
               100).toFixed(2)
             : 0,
         notSigned:
-          data[data.length - 1]["Curtailed Power Yield"] -
-            data[data.length - 2]["Curtailed Power Yield"] >
+          data[data.length - 2]["Curtailed Power Yield"] -
+            data[data.length - 3]["Curtailed Power Yield"] >
           0,
       },
       {
         name: "Actual Power Yield",
         value: data[data.length - 1]["Actual Power Yield"],
         percentage:
-          data[data.length - 2]["Actual Power Yield"] > 0
-            ? Math.abs(((data[data.length - 1]["Actual Power Yield"] - 
-              data[data.length - 2]["Actual Power Yield"]) /
-              data[data.length - 2]["Actual Power Yield"]) *
+          data[data.length - 3]["Actual Power Yield"] > 0
+            ? Math.abs(((data[data.length - 2]["Actual Power Yield"] - 
+              data[data.length - 3]["Actual Power Yield"]) /
+              data[data.length - 3]["Actual Power Yield"]) *
               100).toFixed(2)
             : 0,
         notSigned:
-          data[data.length - 1]["Actual Power Yield"] -
-            data[data.length - 2]["Actual Power Yield"] >
+          data[data.length - 2]["Actual Power Yield"] -
+            data[data.length - 3]["Actual Power Yield"] >
           0,
       },
     ],
