@@ -96,7 +96,7 @@ export default function DailyYieldBar_SingleInverter({ id }) {
               <TfiReload className="h-[18px] w-[18px]" />
             </span>
             {showSpanSelector && (
-              <ul className="bg-gray-200 border border-gray-300 p-2 rounded-md shadow-md text-sm w-36 absolute dark:bg-gray-900 dark:border-gray-700 dark:text-gray-300 mt-2 right-0 top-5 z-10">
+              <ul className="bg-gray-50 border border-gray-300 p-2 rounded-md shadow-md text-sm w-36 absolute dark:bg-gray-900 dark:border-gray-700 dark:text-gray-300 mt-2 right-0 top-5 z-10">
                 <li className="p-1 rounded-md">
                   <span className="text-xs font-medium">Select Span</span>
                 </li>

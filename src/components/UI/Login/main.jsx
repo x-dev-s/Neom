@@ -63,7 +63,7 @@ export default function Login() {
                         placeholder="Email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="bg-white dark:bg-gray-700 border border-gray-300 p-2 rounded-lg text-sm focus:bg-white"
+                        className="bg-white dark:bg-gray-800 border border-gray-300 p-2 rounded-lg text-sm focus:bg-white"
                         required
                     />
                     <input
@@ -72,7 +72,7 @@ export default function Login() {
                         placeholder="Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="bg-white dark:bg-gray-700 border border-gray-300 p-2 rounded-lg text-sm focus:bg-white"
+                        className="bg-white dark:bg-gray-800 border border-gray-300 p-2 rounded-lg text-sm focus:bg-white"
                         required
                     />
                     {/* <Link href="/forgotpassword" className="text-[12px] text-green-600">Forgot password?</Link> */}
