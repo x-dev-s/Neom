@@ -314,7 +314,7 @@ export default function DailyYieldBar() {
                         <span className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-medium">
                           {item.value?.toFixed(2)} kWh
                         </span>
-                        <div className="flex items-center justify-center text-xs text-tremor-content-strong dark:text-dark-tremor-content-strong gap-[1px]">
+                        {/* <div className="flex items-center justify-center text-xs text-tremor-content-strong dark:text-dark-tremor-content-strong gap-[1px]">
                           {item.notSigned ? (
                             <IoMdArrowDropup size={18} className="text-green-500" />
                           ) : (
@@ -323,7 +323,7 @@ export default function DailyYieldBar() {
                           <span className={item.notSigned ? "text-green-500 font-medium" : "text-red-500 font-medium"}>
                           {item.percentage} %
                           </span>
-                        </div>
+                        </div> */}
                       </div>
                     </ListItem>
                   ))}
