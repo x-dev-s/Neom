@@ -44,7 +44,7 @@ export default function PowerTrend_Genset() {
     setInterval(fetchData, 300000);
   }, []);
 
-  if (!data) {
+  if (!data || data.length === 0) {
     return (
       <div className="flex h-full justify-center w-full items-center min-h-72">
         <div className="border-b-2 border-gray-900 border-t-2 h-10 rounded-full w-10 animate-spin dark:border-gray-200"></div>
