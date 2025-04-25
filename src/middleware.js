@@ -36,5 +36,5 @@ export async function middleware(request) {
 
 }
 export const config = { matcher: ["/login/", "/register/", "/forgotpassword/", "/", "/api/data/:path*", "/pv", "/pv/:path*", "/genset", "/genset/:path*",
-"/sld", "/meteo"
+"/sld", "/meteo, /curtailment"
 ] };

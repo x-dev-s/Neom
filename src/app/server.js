@@ -403,3 +403,19 @@ export const fetchGeneratorsOuputKpiData = async () => {
     return null;
   }
 }
+
+export const fetchCurtailmentTrendData = async (start, end) => {
+  try {
+    if (!start || !end) {
+      return Response.json({ message: "Invalid request" }, { status: 400 });
+    }
+    const connection = await connectToDatabase();
+    const [rows] = await connection.execute(
+      `SELECT DATE_FORMAT(Timestamp, '%e/%c/%Y %l:%i %p') AS 'Timestamp', Calculated_Setpoint/10 AS "Calculated Setpoint", Current_Setpoint AS "Current Setpoint", Actual_Power AS "Actual Power" FROM PV_Data WHERE Timestamp BETWEEN ? AND ?`,
+      [start, end]
+    );
+    return Response.json(rows);
+  } catch (error) {
+    return null;
+  }
+}
