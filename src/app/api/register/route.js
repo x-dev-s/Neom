@@ -1,12 +1,11 @@
-import { connectToDatabase } from "../../../lib/db";
+import db from "../../../lib/db";
 import bcrypt from "bcryptjs"
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
     const { name, email, password } = await request.json()
 
-    const connection = await connectToDatabase();
-    const [rows] = await connection.execute('SELECT * FROM User'); // Replace with your table name
+    const [rows] = await db.query('SELECT * FROM User'); // Replace with your table name
     const response = Response.json(rows);
     const Users = await response.json()
     const existingUser = Users.find(
@@ -20,7 +19,7 @@ export async function POST(request) {
   const hashedPassword = await bcrypt.hash(password, 5)
 
   try {
-    await connection.execute(
+    await db.query(
       `INSERT INTO User (name, email, password) VALUES (?, ?, ?)`,
       [name, email, hashedPassword]
     )

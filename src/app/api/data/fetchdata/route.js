@@ -1,11 +1,10 @@
 // app/api/data/route.js
-import { connectToDatabase } from "../../../../lib/db";
+import { fetchAllData } from "../../../server";
 export const dynamic = 'force-dynamic';
 export async function GET() {
   try {
-    const connection = await connectToDatabase();
-    const [rows] = await connection.execute('SELECT * FROM All_Data'); // Replace with your table name
-    return Response.json(rows);
+    const data = await fetchAllData(span);
+    return Response.json(await data.json());
   } catch (error) {
     return Response.json(
       { message: 'Error fetching data', error: error.message },
