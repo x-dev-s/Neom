@@ -20,7 +20,7 @@ export default function CurtailmentTrend() {
       let s, e;
       if (!start) {
         s = new Date(
-          Date.now() - 86400000 - new Date().getTimezoneOffset() * 36000
+          Date.now() - 21600000 - new Date().getTimezoneOffset() * 36000
         )
           .toISOString()
           .slice(0, 16)
@@ -48,7 +48,7 @@ export default function CurtailmentTrend() {
 
   useEffect(() => {
     setStart(
-      new Date(Date.now() - 86400000 - new Date().getTimezoneOffset() * 36000)
+      new Date(Date.now() - 21600000 - new Date().getTimezoneOffset() * 36000)
         .toISOString()
         .slice(0, 16)
         .replace("T", " ")
@@ -114,7 +114,7 @@ export default function CurtailmentTrend() {
                   </p>
                 </div>
                 <p className="text-md text-tremor-content text-tremor-default dark:text-dark-tremor-content font-medium">
-                  {data[data.length - 1][item.name].toFixed(2)} kW
+                  {parseFloat(data[data.length - 1][item.name])?.toFixed(2)} kW
                 </p>
               </li>
             ))}
@@ -134,8 +134,8 @@ export default function CurtailmentTrend() {
             showGradient={false}
             showYAxis={false}
             customTooltip={Tooltip}
-            valueFormatter={(value) => `${value.toFixed(2)} kW`}
-            className="h-80 dark:fill-gray-500 fill-gray-500 mt-6"
+            valueFormatter={(value) => `${parseFloat(value).toFixed(2)} kW`}
+            className="h-[500px] dark:fill-gray-500 fill-gray-500 mt-6"
           />
         </div>
         <div className="flex flex-wrap justify-between items-center mt-5 w-full max-w-5xl mx-auto">
@@ -157,7 +157,7 @@ export default function CurtailmentTrend() {
               value={
                 start ||
                 new Date(
-                  Date.now() - 86400000 - new Date().getTimezoneOffset() * 36000
+                  Date.now() - 21600000 - new Date().getTimezoneOffset() * 36000
                 )
                   .toISOString()
                   .slice(0, 16)
@@ -243,7 +243,7 @@ const Tooltip = ({ payload, active, label }) => {
               </span>
               <div className="flex items-center space-x-1">
                 <span className="text-gray-900 dark:text-gray-50 font-medium">
-                  {item.value.toFixed(2)} kW
+                  {parseFloat(item.value).toFixed(2)} kW
                 </span>
               </div>
             </div>
