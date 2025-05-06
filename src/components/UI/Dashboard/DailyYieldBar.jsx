@@ -94,7 +94,7 @@ export default function DailyYieldBar() {
           value:
             data.generator1[data.generator1.length - 1]["Daily Power Yield"],
           percentage:
-            data.generator1[data.generator1.length - 3]["Daily Power Yield"] >
+          data.generator1[data.generator1.length - 3] && data.generator1[data.generator1.length - 3]["Daily Power Yield"] >
             0
               ? Math.abs(
                   (data.generator1[data.generator1.length - 2][
@@ -109,12 +109,12 @@ export default function DailyYieldBar() {
                     100
                 ).toFixed(2)
               : 0,
-            notSigned:
-            data.generator1[data.generator1.length - 2][
-              "Daily Power Yield"
-            ] - data.generator1[data.generator1.length - 3][
-              "Daily Power Yield"
-            ] > 0
+            // notSigned:
+            // data.generator1[data.generator1.length - 2][
+            //   "Daily Power Yield"
+            // ] - data.generator1[data.generator1.length - 3][
+            //   "Daily Power Yield"
+            // ] > 0
         },
       ],
     },
@@ -127,7 +127,7 @@ export default function DailyYieldBar() {
           value:
             data.generator2[data.generator2.length - 1]["Daily Power Yield"],
             percentage:
-            data.generator2[data.generator2.length - 3]["Daily Power Yield"] >
+            data.generator1[data.generator2.length - 3] && data.generator2[data.generator2.length - 3]["Daily Power Yield"] >
             0
               ? Math.abs(
                   (data.generator2[data.generator2.length - 2][
@@ -142,12 +142,12 @@ export default function DailyYieldBar() {
                     100
                 ).toFixed(2)
               : 0,
-          notSigned:
-            data.generator2[data.generator2.length - 2][
-              "Daily Power Yield"
-            ] - data.generator2[data.generator2.length - 3][
-              "Daily Power Yield"
-            ] > 0,
+          // notSigned:
+          //   data.generator2[data.generator2.length - 2][
+          //     "Daily Power Yield"
+          //   ] - data.generator2[data.generator2.length - 3][
+          //     "Daily Power Yield"
+          //   ] > 0,
         },
       ],
     },
@@ -159,7 +159,7 @@ export default function DailyYieldBar() {
           name: "Daily Power Yield",
           value: data.generator3[data.generator3.length - 1]["Daily Power Yield"],
           percentage:
-            data.generator3[data.generator3.length - 3]["Daily Power Yield"] >
+          data.generator1[data.generator3.length - 3] && data.generator3[data.generator3.length - 3]["Daily Power Yield"] >
             0
               ? Math.abs(
                   (data.generator3[data.generator3.length - 2][
@@ -174,12 +174,12 @@ export default function DailyYieldBar() {
                     100
                 ).toFixed(2)
               : 0,
-          notSigned:
-            data.generator3[data.generator3.length - 2][
-              "Daily Power Yield"
-            ] - data.generator3[data.generator3.length - 3][
-              "Daily Power Yield"
-            ] > 0,
+          // notSigned:
+          //   data.generator3[data.generator3.length - 2][
+          //     "Daily Power Yield"
+          //   ] - data.generator3[data.generator3.length - 3][
+          //     "Daily Power Yield"
+          //   ] > 0,
         },
       ],
     },
@@ -191,7 +191,7 @@ export default function DailyYieldBar() {
           name: "Daily Power Yield",
           value: data.pv[data.pv.length - 1]["Daily Power Yield"],
           percentage:
-            data.pv[data.pv.length - 3]["Daily Power Yield"] > 0
+            data.pv[data.pv.length - 3] && data.pv[data.pv.length - 3]["Daily Power Yield"] > 0
               ? Math.abs(
                   (data.pv[data.pv.length - 2]["Daily Power Yield"] -
                     data.pv[data.pv.length - 3]["Daily Power Yield"]) /
@@ -199,9 +199,9 @@ export default function DailyYieldBar() {
                     100
                 ).toFixed(2)
               : 0,
-          notSigned:
-            data.pv[data.pv.length - 2]["Daily Power Yield"] -
-            data.pv[data.pv.length - 3]["Daily Power Yield"] > 0,
+          // notSigned:
+          //   data.pv[data.pv.length - 2]["Daily Power Yield"] -
+          //   data.pv[data.pv.length - 3]["Daily Power Yield"] > 0,
         },
       ],
     },
