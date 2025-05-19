@@ -12,13 +12,13 @@ const CustomNode = ({ data }) => {
       <div className="node-label">{data.label}</div>
       <div className="node-info">
         <p>
-          <strong>Active Power:</strong> {data.activePower} kW
+          <strong>Active Power:</strong> {data.activePower?.toFixed(2)} kW
         </p>
         <p>
-          <strong>Reactive Power:</strong> {data.reactivePower} kVAR
+          <strong>Reactive Power:</strong> {data.reactivePower?.toFixed(2)} kVAR
         </p>
         <p>
-          <strong>Performance:</strong> {data.performanceRatio} %
+          <strong>Performance:</strong> {data.performanceRatio?.toFixed(2)} %
         </p>
       </div>
       <Handle type="source" position={Position.Right} />
@@ -83,7 +83,7 @@ export default function SLD() {
             activePower: latestData[0].TotalActivePower_I,
             reactivePower: latestData[0].TotalReactivePower_I,
             performanceRatio: latestData[0].PVOutput,
-            imageSrc: "/images/pv.png",
+            imageSrc: "/images/PV.png",
           },
         },
         {
@@ -144,8 +144,6 @@ export default function SLD() {
         fitView={true}
         fitViewOptions={{ minZoom: 0.05 }}
         minZoom={0.3}
-        zoomOnScroll={true}
-        zoomOnPinch={true}
         zoomOnDoubleClick={false}
         draggable={true}
         panOnDrag={true}
