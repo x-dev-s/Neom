@@ -21,7 +21,7 @@ const CustomNode = ({ data }) => {
           <strong>Performance:</strong> {data.performanceRatio?.toFixed(2)} %
         </p>
       </div>
-      <Handle type="source" position={Position.Right} />
+      <Handle type="source" position={data.label === "PV" ? Position.Left : Position.Right}/>
       <Handle type="target" position={Position.Left} />
     </div>
   );
@@ -77,9 +77,9 @@ export default function SLD() {
         {
           id: "pv",
           type: "customNode",
-          position: { x: 300, y: 150 },
+          position: { x: 500, y: 50 },
           data: {
-            label: "PV Generator",
+            label: "PV",
             activePower: latestData[0].TotalActivePower_I,
             reactivePower: latestData[0].TotalReactivePower_I,
             performanceRatio: latestData[0].PVOutput,
