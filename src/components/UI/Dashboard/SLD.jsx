@@ -77,7 +77,7 @@ export default function SLD() {
         {
           id: "pv",
           type: "customNode",
-          position: { x: 270, y: 230 },
+          position: { x: 300, y: 150 },
           data: {
             label: "PV Generator",
             activePower: latestData[0].TotalActivePower_I,
@@ -89,7 +89,7 @@ export default function SLD() {
         {
           id: "load",
           type: "customNode",
-          position: { x: 500, y: 250 },
+          position: { x: 500, y: 400 },
           data: {
             label: "Load",
             activePower: latestData[0].TotalLoad,
