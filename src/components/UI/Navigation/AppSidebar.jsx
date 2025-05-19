@@ -114,14 +114,14 @@ export default function AppSidebar({ ...props }) {
         <div className="flex items-center gap-3">
           <span className="flex size-9 items-center justify-center rounded-md bg-green-100 p-1.5 shadow-sm ring-1 ring-gray-200 dark:bg-green-100 dark:ring-gray-800">
             {/* <Logo className="size-6 text-blue-500 dark:text-blue-500" /> */}
-            <img src="/images/logo.png" alt="Logo" className="h-10 object-contain" />
+            <img src="/images/logo1.png" alt="Logo" className="h-10 object-contain" />
           </span>
           <div>
             <span className="block text-sm font-semibold text-gray-900 dark:text-gray-50">
-              Power Matix
+              Enerco
             </span>
             <span className="block text-xs text-gray-900 dark:text-gray-300">
-              Technology Value Creation
+              {/* Technology Value Creation */}
             </span>
           </div>
         </div>

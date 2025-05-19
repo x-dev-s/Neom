@@ -81,6 +81,9 @@ export default function CurtailmentBar_SingleInverter({ id }) {
     "Last 7 days",
     "Last 14 days",
     "Last 30 days",
+    "Last 60 days",
+    "Last 90 days",
+    "Last 365 days",
   ];
 
   return (
@@ -92,7 +95,7 @@ export default function CurtailmentBar_SingleInverter({ id }) {
           </h3>
           <div className="flex justify-center text-gray-700 text-xs dark:text-gray-400 gap-[6px] items-center relative">
             <span className="text-xs dark:text-dark-tremor-content font-medium tremor-content tremor-default">
-              {span}
+            {span !== "Last 365 days" ? span : "Last Year"}
             </span>
             <span
               className="flex flex-1 h-full justify-center cursor-pointer items-center sm:flex-none"
@@ -133,7 +136,7 @@ export default function CurtailmentBar_SingleInverter({ id }) {
                       setShowSpanSelector(false);
                     }}
                   >
-                    {span}
+                    {span !== "Last 365 days" ? span : "Last Year"}
                   </li>
                 ))}
               </ul>
