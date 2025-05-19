@@ -72,7 +72,7 @@ export default function OutputKpi() {
                 startEndOnly={true}
                 valueFormatter={(value) => item.valueFormatter(value)}
                 className="h-24 -mb-2 dark:text-dark-tremor-content mt-3"
-                showTooltip={true}
+                showTooltip={false}
                 customTooltip={Tooltip}
               />
             </Card>
