@@ -9,6 +9,7 @@
     "@next/next/no-img-element": "off",
     "react/no-unescaped-entities": "off",
     "@typescript-eslint/no-unused-expressions": "off",
-    "react-hooks/exhaustive-deps": "off"
+    "react-hooks/exhaustive-deps": "off",
+    "no-var": "off"
   }
 }

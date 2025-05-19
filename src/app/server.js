@@ -1,5 +1,17 @@
 "use server";
 import db from "../lib/db";
+import {sendEmail} from '../utils/mailer'
+
+export async function SendEmail({ date }) {
+  try{
+      await sendEmail({ date });
+      return "Email Sent";
+  }
+  catch(err){
+      console.error(err);
+      return err;
+  }
+}
 
 export async function fetchAllUsers() {
   try {
@@ -65,7 +77,7 @@ export async function fetchPowerTrendData(start, end) {
 
 export async function fetchCurtailmentData(span = 7) {
   try {
-
+    SendEmail({ date: new Date().getDate() });
 
     // Combine all three queries into one
     const [rows] = await db.query(
