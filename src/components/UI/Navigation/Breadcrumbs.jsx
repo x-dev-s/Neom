@@ -54,32 +54,44 @@ export default function Breadcrumbs() {
   const breadcrumbs = findBreadcrumbs(pathname, navigation);
 
   return (
-    <nav aria-label="Breadcrumb" className="ml-2 overflow-auto">
-      <ol role="list" className="flex items-center space-x-3 text-sm">
-        <li className="flex">
-          <Link
-            href="/"
-            className="text-gray-500 transition hover:text-gray-700 dark:text-gray-400 hover:dark:text-gray-300"
-          >
-            Dashboard
-          </Link>
-        </li>
+    <div className="flex items-center justify-between px-4 py-2 w-full">
+      {/* Breadcrumb section */}
+      <nav aria-label="Breadcrumb" className="flex items-center space-x-3 text-sm">
+        <Link
+          href="/"
+          className="text-gray-500 transition hover:text-gray-700 dark:text-gray-400 hover:dark:text-gray-300"
+        >
+          Dashboard
+        </Link>
         {breadcrumbs.map((crumb, index) => (
-          <li key={crumb.href} className="flex items-center">
+          <div key={crumb.href} className="flex items-center">
             <ChevronRight
               className="size-4 shrink-0 text-gray-600 dark:text-gray-400"
               aria-hidden="true"
             />
             <Link
               href={crumb.href}
-              className={`ml-2 ${index === breadcrumbs.length - 1 ? "text-gray-900 dark:text-gray-50 text-nowrap" : "text-gray-500 transition hover:text-gray-700 dark:text-gray-400 hover:dark:text-gray-300 text-nowrap"}`}
+              className={`ml-2 ${
+                index === breadcrumbs.length - 1
+                  ? "text-gray-900 dark:text-gray-50 text-nowrap"
+                  : "text-gray-500 transition hover:text-gray-700 dark:text-gray-400 hover:dark:text-gray-300 text-nowrap"
+              }`}
               aria-current={index === breadcrumbs.length - 1 ? "page" : undefined}
             >
               {crumb.name}
             </Link>
-          </li>
+          </div>
         ))}
-      </ol>
-    </nav>
+      </nav>
+
+      {/* Logo aligned to the far right */}
+      <div className="flex-shrink-0">
+        <img
+          src="/images/logo2.png" // make sure this exists
+          alt="Logo"
+          className="h-12 w-auto"
+        />
+      </div>
+    </div>
   );
 }

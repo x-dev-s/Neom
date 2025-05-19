@@ -4,6 +4,7 @@ import CurtailmentBar from "./CurtailmentBar";
 import PowerTrend from "./PowerTrend";
 import ActivePowerDoughnut from "./ActivePowerDoughnut";
 import MeteoKpi from "./MeteoKpi";
+import SLD from "./SLD";
 
 export default function Dashboard() {
   return (
@@ -29,7 +30,12 @@ export default function Dashboard() {
                 <ActivePowerDoughnut />
               </div>
               <div className="flex bg-white h-auto justify-center rounded-2xl w-full dark:bg-gray-950 items-center lg:h-full lg:w-[65%] overflow-hidden">
-                <PowerTrend />
+              <SLD />
+              </div>
+            </div>
+            <div className="flex flex-wrap h-full w-full gap-3 lg:flex-nowrap">
+              <div className="flex bg-white justify-center rounded-2xl w-full dark:bg-gray-950 items-center lg:w-[100%] overflow-hidden">
+              <PowerTrend />
               </div>
             </div>
 
@@ -37,7 +43,11 @@ export default function Dashboard() {
             <div className="flex flex-col gap-3">
               <MeteoKpi />
             </div>
+            {/* <div className="flex flex-col gap-3">
+              <SLD />
+            </div> */}
           </div>
+
 
           {/* Right Section - 35% */}
           {/* <div className="flex flex-col flex-wrap w-dvw gap-3 items-center lg:flex-col lg:w-[35%] md:flex-nowrap md:flex-row">

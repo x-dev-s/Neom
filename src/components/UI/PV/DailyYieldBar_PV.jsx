@@ -65,6 +65,7 @@ export default function DailyYieldBar_PV() {
     "Last 30 days",
     "Last 60 days",
     "Last 90 days",
+    "Last 365 days",
   ];
 
   return (
@@ -76,7 +77,7 @@ export default function DailyYieldBar_PV() {
           </h3>
           <div className="flex justify-center text-gray-700 text-xs dark:text-gray-400 gap-[6px] items-center relative">
             <span className="text-xs dark:text-dark-tremor-content font-medium tremor-content tremor-default">
-              {span}
+            {span !== "Last 365 days" ? span : "Last Year"}
             </span>
             <span
               className="flex flex-1 h-full justify-center cursor-pointer items-center sm:flex-none"
@@ -117,7 +118,7 @@ export default function DailyYieldBar_PV() {
                       setShowSpanSelector(false);
                     }}
                   >
-                    {span}
+                    {span !== "Last 365 days" ? span : "Last Year"}
                   </li>
                 ))}
               </ul>
