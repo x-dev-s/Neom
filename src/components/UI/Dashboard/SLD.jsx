@@ -120,7 +120,7 @@ export default function SLD() {
   return (
     <div className="overflow-hidden relative w-full h-full">
       <span
-        className="flex flex-1 absolute z-10 top-0 right-0 justify-center cursor-pointer items-center sm:flex-none"
+        className="flex flex-1 absolute z-10 top-3 right-3 justify-center cursor-pointer items-center sm:flex-none"
         onClick={fetchSLDData}
       >
         <TfiReload className="h-[18px] w-[18px]" />
