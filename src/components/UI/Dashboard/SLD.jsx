@@ -118,7 +118,7 @@ export default function SLD() {
   }
 
   return (
-    <div className="overflow-hidden relative w-full h-full">
+    <div className="overflow-hidden relative w-full h-full min-h-[470px]">
       <span
         className="flex flex-1 absolute z-10 top-3 right-3 justify-center cursor-pointer items-center sm:flex-none"
         onClick={fetchSLDData}
@@ -145,8 +145,8 @@ export default function SLD() {
         fitViewOptions={{ minZoom: 0.05 }}
         minZoom={0.3}
         zoomOnDoubleClick={false}
-        draggable={true}
-        panOnDrag={true}
+        zoomOnScroll={false}
+        zoomOnPinch={false}
       />
     </div>
   );
