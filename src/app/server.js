@@ -33,7 +33,7 @@ export async function fetchAllData() {
 export async function fetchDailyYieldData(span) {
   try {
     const [rows] = await db.query(
-      `SELECT DATE(Timestamp) AS Day, SUM(TotalActivePower_G1 * (5 / 60)) AS "Generator 1", SUM(TotalActivePower_G2 * (5 / 60)) AS "Generator 2", SUM(TotalActivePower_G3 * (5 / 60)) AS "Generator 3" FROM All_Data WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL ${parseInt(span)-1} DAY) GROUP BY Day`
+      `SELECT Day, ROUND(SUM(G1_kWh), 3) AS 'Generator 1', ROUND(SUM(G2_kWh), 3) AS 'Generator 2', ROUND(SUM(G3_kWh), 3) AS 'Generator 3' FROM (SELECT DATE(Timestamp) AS Day, ((TotalActivePower_G1 + LEAD(TotalActivePower_G1) OVER (PARTITION BY DATE(Timestamp) ORDER BY Timestamp)) / 2) * (2.5 / 60) AS G1_kWh, ((TotalActivePower_G2 + LEAD(TotalActivePower_G2) OVER (PARTITION BY DATE(Timestamp) ORDER BY Timestamp)) / 2) * (2.5 / 60) AS G2_kWh, ((TotalActivePower_G3 + LEAD(TotalActivePower_G3) OVER (PARTITION BY DATE(Timestamp) ORDER BY Timestamp)) / 2) * (2.5 / 60) AS G3_kWh FROM All_Data WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL ${parseInt(span)-1} DAY)) AS PowerPairs GROUP BY Day ORDER BY Day`
     );
     const [pv] = await db.query(
       `SELECT DATE(Timestamp) AS Day, DailyPowerYield_I AS PV FROM All_Data WHERE HOUR(Timestamp) = 23 AND Timestamp >= DATE_SUB(CURDATE(), INTERVAL ${parseInt(span)-1} DAY) GROUP BY Day`
@@ -77,11 +77,11 @@ export async function fetchPowerTrendData(start, end) {
 
 export async function fetchCurtailmentData(span = 7) {
   try {
-    SendEmail({ date: new Date().getDate() });
+    // SendEmail({ date: new Date().getDate() });
 
     // Combine all three queries into one
     const [rows] = await db.query(
-      `SELECT DATE(Timestamp) AS Day, SUM(TotalCurrentCapacity * (5 / 60)) AS "Max. Power Yield", SUM(TotalCurtailedPower * (5 / 60)) AS "Curtailed Power Yield", (SELECT DailyPowerYield_I FROM All_Data WHERE HOUR(Timestamp) = 23 AND DATE(Timestamp) = DATE(AD.Timestamp) LIMIT 1) AS "Actual Power Yield" FROM All_Data AD WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL ${parseInt(span)-1} DAY) GROUP BY Day`
+      `SELECT Day, ROUND(SUM(MaxYield_kWh), 3) AS "Max. Power Yield", ROUND(SUM(CurtailedYield_kWh), 3) AS "Curtailed Power Yield", (SELECT DailyPowerYield_I FROM All_Data WHERE HOUR(Timestamp) = 23 AND DATE(Timestamp) = DATE(AD.Timestamp) LIMIT 1) AS "Actual Power Yield" FROM (SELECT DATE(Timestamp) AS Day, ((TotalCurrentCapacity + LEAD(TotalCurrentCapacity) OVER (PARTITION BY DATE(Timestamp) ORDER BY Timestamp)) / 2) * (2.5 / 60) AS MaxYield_kWh, ((TotalCurtailedPower + LEAD(TotalCurtailedPower) OVER (PARTITION BY DATE(Timestamp) ORDER BY Timestamp)) / 2) * (2.5 / 60) AS CurtailedYield_kWh, Timestamp FROM All_Data WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL ${parseInt(span)-1} DAY)) AS AD GROUP BY Day`
     );
     const [latestPV] = await db.query(
       `SELECT Timestamp AS Day, DailyPowerYield_I AS "Actual Power Yield" FROM All_Data WHERE 1 ORDER BY Timestamp DESC LIMIT 1`
@@ -167,7 +167,7 @@ export async function fetchInverterCurtailmentData(inverterId = 1, span = 7) {
   try {
 
     const [rows] = await db.query(
-      `SELECT DATE(Timestamp) AS Day, SUM(CurrentCapacity_I${inverterId} * (5 / 60)) AS "Max. Power Yield", SUM(CurtailedPower_I${inverterId} * (5 / 60)) AS "Curtailed Power Yield", (SELECT DailyYield_I${inverterId} FROM All_Data WHERE HOUR(Timestamp) = 23 AND DATE(Timestamp) = DATE(AD.Timestamp) LIMIT 1) AS "Actual Power Yield" FROM All_Data AD WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL ${parseInt(span)-1} DAY) GROUP BY Day`
+      `SELECT Day, ROUND(SUM(MaxYield_kWh), 3) AS "Max. Power Yield", ROUND(SUM(CurtailedYield_kWh), 3) AS "Curtailed Power Yield", (SELECT DailyYield_I${inverterId} FROM All_Data WHERE HOUR(Timestamp) = 23 AND DATE(Timestamp) = DATE(AD.Timestamp) LIMIT 1) AS "Actual Power Yield" FROM (SELECT DATE(Timestamp) AS Day, ((CurrentCapacity_I${inverterId} + LEAD(CurrentCapacity_I${inverterId}) OVER (PARTITION BY DATE(Timestamp) ORDER BY Timestamp)) / 2) * (2.5 / 60) AS MaxYield_kWh, ((CurtailedPower_I${inverterId} + LEAD(CurtailedPower_I${inverterId}) OVER (PARTITION BY DATE(Timestamp) ORDER BY Timestamp)) / 2) * (2.5 / 60) AS CurtailedYield_kWh, Timestamp FROM All_Data WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL ${parseInt(span)-1} DAY)) AS AD GROUP BY Day`
     );
     const [latestPV] = await db.query(
       `SELECT Timestamp AS Day, DailyYield_I${inverterId} AS "Actual Power Yield" FROM All_Data WHERE 1 ORDER BY Timestamp DESC LIMIT 1`
@@ -232,7 +232,7 @@ export async function fetchGeneratorDailyYieldData(generatorId = 1, span=7) {
   try {
 
     const [rows] = await db.query(
-      `SELECT DATE(Timestamp) AS Day, SUM(TotalActivePower_G${generatorId} * (5 / 60)) AS "Daily Power Yield" FROM All_Data WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL ${parseInt(span)-1} DAY) GROUP BY Day`
+      `SELECT Day, ROUND(SUM(kWh), 3) AS "Daily Power Yield" FROM (SELECT DATE(Timestamp) AS Day, ((TotalActivePower_G${generatorId} + LEAD(TotalActivePower_G${generatorId}) OVER (PARTITION BY DATE(Timestamp) ORDER BY Timestamp)) / 2) * (2.5 / 60) AS kWh FROM All_Data WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL ${parseInt(span)-1} DAY)) AS Sub GROUP BY Day;`
     );
     return Response.json(rows);
   }
@@ -358,7 +358,7 @@ export async function fetchGensetPowerYieldData(span){
   try {
 
     const [rows] = await db.query(
-      `SELECT DATE(Timestamp) AS Day, SUM(TotalActivePower_G * (5 / 60)) AS "Daily Power Yield" FROM All_Data WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL ${parseInt(span)-1} DAY) GROUP BY Day`
+      `SELECT Day, ROUND(SUM(kWh), 3) AS "Daily Power Yield" FROM (SELECT DATE(Timestamp) AS Day, ((TotalActivePower_G + LEAD(TotalActivePower_G) OVER (PARTITION BY DATE(Timestamp) ORDER BY Timestamp)) / 2) * (2.5 / 60) AS kWh FROM All_Data WHERE Timestamp >= DATE_SUB(CURDATE(), INTERVAL ${parseInt(span)-1} DAY)) AS Sub GROUP BY Day;`
     );
     return Response.json(rows);
   }
