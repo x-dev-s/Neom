@@ -115,7 +115,7 @@ export default function CurtailmentTrend() {
                   </p>
                 </div>
                 <p className="text-md text-tremor-content text-tremor-default dark:text-dark-tremor-content font-medium">
-                  {parseFloat(data ? [data.length - 1][item.name] : 0)?.toFixed(2)} kW
+                  {parseFloat(data[data.length - 1][item.name])?.toFixed(2)} kW
                 </p>
               </li>
             ))}
