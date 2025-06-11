@@ -20,14 +20,14 @@ export default function CurtailmentTrend() {
       let s, e;
       if (!start) {
         s = new Date(
-          Date.now() - 21600000 - new Date().getTimezoneOffset() * 24000
+          Date.now() - 21600000 - new Date().getTimezoneOffset() * 36000
         )
           .toISOString()
           .slice(0, 16)
           .replace("T", " ");
       }
       if (!end) {
-        e = new Date(Date.now() - new Date().getTimezoneOffset() * 24000)
+        e = new Date(Date.now() - new Date().getTimezoneOffset() * 36000)
           .toISOString()
           .slice(0, 16)
           .replace("T", " ");
@@ -40,6 +40,7 @@ export default function CurtailmentTrend() {
         throw new Error("Failed to fetch data");
       }
       const result = await response.json();
+      console.log(result);
       setData(result);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -48,13 +49,13 @@ export default function CurtailmentTrend() {
 
   useEffect(() => {
     setStart(
-      new Date(Date.now() - 21600000 - new Date().getTimezoneOffset() * 24000)
+      new Date(Date.now() - 21600000 - new Date().getTimezoneOffset() * 36000)
         .toISOString()
         .slice(0, 16)
         .replace("T", " ")
     );
     setEnd(
-      new Date(Date.now() - new Date().getTimezoneOffset() * 24000)
+      new Date(Date.now() - new Date().getTimezoneOffset() * 36000)
         .toISOString()
         .slice(0, 16)
         .replace("T", " ")
@@ -114,7 +115,7 @@ export default function CurtailmentTrend() {
                   </p>
                 </div>
                 <p className="text-md text-tremor-content text-tremor-default dark:text-dark-tremor-content font-medium">
-                  {parseFloat(data[data.length - 1][item.name])?.toFixed(2)} kW
+                  {parseFloat(data ? [data.length - 1]?.[item.name] : 0)?.toFixed(2)} kW
                 </p>
               </li>
             ))}
@@ -157,7 +158,7 @@ export default function CurtailmentTrend() {
               value={
                 start ||
                 new Date(
-                  Date.now() - 21600000 - new Date().getTimezoneOffset() * 24000
+                  Date.now() - 21600000 - new Date().getTimezoneOffset() * 36000
                 )
                   .toISOString()
                   .slice(0, 16)
@@ -175,7 +176,7 @@ export default function CurtailmentTrend() {
               onChange={(e) => setEnd(e.target.value)}
               value={
                 end ||
-                new Date(Date.now() - new Date().getTimezoneOffset() * 24000)
+                new Date(Date.now() - new Date().getTimezoneOffset() * 36000)
                   .toISOString()
                   .slice(0, 16)
                   .replace("T", " ")
@@ -243,7 +244,7 @@ const Tooltip = ({ payload, active, label }) => {
               </span>
               <div className="flex items-center space-x-1">
                 <span className="text-gray-900 dark:text-gray-50 font-medium">
-                  {parseFloat(item.value).toFixed(2)} kW
+                  {parseFloat(item.value)?.toFixed(2)} kW
                 </span>
               </div>
             </div>
