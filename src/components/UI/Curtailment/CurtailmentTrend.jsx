@@ -20,14 +20,14 @@ export default function CurtailmentTrend() {
       let s, e;
       if (!start) {
         s = new Date(
-          Date.now() - 21600000 - new Date().getTimezoneOffset() * 36000
+          Date.now() - 21600000 - new Date().getTimezoneOffset() * 24000
         )
           .toISOString()
           .slice(0, 16)
           .replace("T", " ");
       }
       if (!end) {
-        e = new Date(Date.now() - new Date().getTimezoneOffset() * 36000)
+        e = new Date(Date.now() - new Date().getTimezoneOffset() * 24000)
           .toISOString()
           .slice(0, 16)
           .replace("T", " ");
@@ -48,13 +48,13 @@ export default function CurtailmentTrend() {
 
   useEffect(() => {
     setStart(
-      new Date(Date.now() - 21600000 - new Date().getTimezoneOffset() * 36000)
+      new Date(Date.now() - 21600000 - new Date().getTimezoneOffset() * 24000)
         .toISOString()
         .slice(0, 16)
         .replace("T", " ")
     );
     setEnd(
-      new Date(Date.now() - new Date().getTimezoneOffset() * 36000)
+      new Date(Date.now() - new Date().getTimezoneOffset() * 24000)
         .toISOString()
         .slice(0, 16)
         .replace("T", " ")
@@ -157,7 +157,7 @@ export default function CurtailmentTrend() {
               value={
                 start ||
                 new Date(
-                  Date.now() - 21600000 - new Date().getTimezoneOffset() * 36000
+                  Date.now() - 21600000 - new Date().getTimezoneOffset() * 24000
                 )
                   .toISOString()
                   .slice(0, 16)
@@ -175,7 +175,7 @@ export default function CurtailmentTrend() {
               onChange={(e) => setEnd(e.target.value)}
               value={
                 end ||
-                new Date(Date.now() - new Date().getTimezoneOffset() * 36000)
+                new Date(Date.now() - new Date().getTimezoneOffset() * 24000)
                   .toISOString()
                   .slice(0, 16)
                   .replace("T", " ")
